@@ -197,7 +197,9 @@ class _CoursesState extends State<Courses> {
                 padding: EdgeInsets.symmetric(horizontal: 40),
                 color: Colors.red,
                 textColor: Colors.white,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed("addordercourse") ; 
+                },
                 child: Text("طلب مشاركة"),
               )
             ],
