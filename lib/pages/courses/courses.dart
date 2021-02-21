@@ -1,17 +1,15 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
 
-class Service extends StatefulWidget {
-  Service({Key key}) : super(key: key);
+class Courses extends StatefulWidget {
+  Courses({Key key}) : super(key: key);
 
   @override
-  _ServiceState createState() => _ServiceState();
+  _CoursesState createState() => _CoursesState();
 }
 
-class _ServiceState extends State<Service> {
-
+class _CoursesState extends State<Courses> {
   Icon icon1 = Icon(Icons.add);
   Icon icon2 = Icon(Icons.add);
   Icon icon3 = Icon(Icons.add);
@@ -51,7 +49,7 @@ class _ServiceState extends State<Service> {
             width: double.infinity,
             padding: EdgeInsets.all(15),
             child: Text(
-              "اسم الخدمة",
+              "اسم السوال",
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -63,7 +61,7 @@ class _ServiceState extends State<Service> {
             children: [
               ListTile(
                   title: Text(
-                    "رمز الخدمة",
+                    "رمز السوأل",
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.grey[800]),
                   ),
@@ -71,36 +69,6 @@ class _ServiceState extends State<Service> {
                     "9",
                     style: TextStyle(color: Colors.red),
                   )),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Divider(color: Colors.grey),
-              ),
-              ExpansionTile(
-                onExpansionChanged: (status) {
-                  if (status) {
-                    setState(() {
-                      icon1 = Icon(Icons.remove);
-                    });
-                  } else {
-                    setState(() {
-                      icon1 = Icon(Icons.add);
-                    });
-                  }
-                },
-                trailing: icon1,
-                title: Text(
-                  "تفاصيل الخدمة",
-                  style: liststyleservice,
-                ),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Text(
-                      "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
-                    ),
-                  )
-                ],
-              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Divider(color: Colors.grey),
@@ -119,7 +87,7 @@ class _ServiceState extends State<Service> {
                 },
                 trailing: icon2,
                 title: Text(
-                  "اجراءات الخدمة",
+                  "الجواب",
                   style: liststyleservice,
                 ),
                 children: [
@@ -149,7 +117,7 @@ class _ServiceState extends State<Service> {
                 },
                 trailing: icon3,
                 title: Text(
-                  "مستندات",
+                  "المستندات المطلوبة",
                   style: liststyleservice,
                 ),
                 children: [
@@ -179,7 +147,7 @@ class _ServiceState extends State<Service> {
                 },
                 trailing: icon4,
                 title: Text(
-                  "رسوم الخدمة",
+                  "الوقت اللازم لتنفيذ الحكم",
                   style: liststyleservice,
                 ),
                 children: [
@@ -195,13 +163,13 @@ class _ServiceState extends State<Service> {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Divider(color: Colors.grey),
               ),
-              RaisedButton(
-                padding: EdgeInsets.symmetric(horizontal: 40),
-                color: Colors.red,
-                textColor: Colors.white,
-                onPressed: () {},
-                child: Text("طلب مذكرة"),
-              )
+              // RaisedButton(
+              //   padding: EdgeInsets.symmetric(horizontal: 40),
+              //   color: Colors.red,
+              //   textColor: Colors.white,
+              //   onPressed: () {},
+              //   child: Text("طلب مذكرة"),
+              // )
             ],
           ),
         ],

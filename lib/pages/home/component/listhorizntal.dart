@@ -21,7 +21,11 @@ class ListHorzintal extends StatelessWidget {
               onTap: () {
                 if (type == "service") {
                   Navigator.of(context).pushNamed("service");
-                } else {}
+                } else if (type == "questions") {
+                  Navigator.of(context).pushNamed("questions");
+                } else {
+                  Navigator.of(context).pushNamed("courses");
+                }
               },
               child: Container(
                 width: mdw / 3,

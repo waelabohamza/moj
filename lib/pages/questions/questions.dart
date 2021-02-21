@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
 
@@ -34,12 +33,12 @@ class _QuestionsState extends State<Questions> {
           "اجراءات",
           style: TextStyle(fontSize: 16),
         ),
-        leading: IconButton(
-          icon: Icon(Icons.segment),
-          onPressed: () {
-            scaffoldkey.currentState.openDrawer();
-          },
-        ),
+        // leading: IconButton(
+        //   icon: Icon(Icons.segment),
+        //   onPressed: () {
+        //     scaffoldkey.currentState.openDrawer();
+        //   },
+        // ),
         actions: [
           IconButton(icon: Icon(Icons.exit_to_app_outlined), onPressed: () {}),
         ],
@@ -50,7 +49,7 @@ class _QuestionsState extends State<Questions> {
             width: double.infinity,
             padding: EdgeInsets.all(15),
             child: Text(
-              "اسم الخدمة",
+              "اسم السوال",
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -62,7 +61,7 @@ class _QuestionsState extends State<Questions> {
             children: [
               ListTile(
                   title: Text(
-                    "رمز الخدمة",
+                    "رمز السوأل",
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.grey[800]),
                   ),
@@ -70,36 +69,6 @@ class _QuestionsState extends State<Questions> {
                     "9",
                     style: TextStyle(color: Colors.red),
                   )),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Divider(color: Colors.grey),
-              ),
-              ExpansionTile(
-                onExpansionChanged: (status) {
-                  if (status) {
-                    setState(() {
-                      icon1 = Icon(Icons.remove);
-                    });
-                  } else {
-                    setState(() {
-                      icon1 = Icon(Icons.add);
-                    });
-                  }
-                },
-                trailing: icon1,
-                title: Text(
-                  "تفاصيل الخدمة",
-                  style: liststyleservice,
-                ),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Text(
-                      "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
-                    ),
-                  )
-                ],
-              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Divider(color: Colors.grey),
@@ -118,7 +87,7 @@ class _QuestionsState extends State<Questions> {
                 },
                 trailing: icon2,
                 title: Text(
-                  "اجراءات الخدمة",
+                  "الجواب",
                   style: liststyleservice,
                 ),
                 children: [
@@ -148,7 +117,7 @@ class _QuestionsState extends State<Questions> {
                 },
                 trailing: icon3,
                 title: Text(
-                  "مستندات",
+                  "المستندات المطلوبة",
                   style: liststyleservice,
                 ),
                 children: [
@@ -178,7 +147,7 @@ class _QuestionsState extends State<Questions> {
                 },
                 trailing: icon4,
                 title: Text(
-                  "رسوم الخدمة",
+                  "الوقت اللازم لتنفيذ الحكم",
                   style: liststyleservice,
                 ),
                 children: [
@@ -194,13 +163,13 @@ class _QuestionsState extends State<Questions> {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Divider(color: Colors.grey),
               ),
-              RaisedButton(
-                padding: EdgeInsets.symmetric(horizontal: 40),
-                color: Colors.red,
-                textColor: Colors.white,
-                onPressed: () {},
-                child: Text("طلب مذكرة"),
-              )
+              // RaisedButton(
+              //   padding: EdgeInsets.symmetric(horizontal: 40),
+              //   color: Colors.red,
+              //   textColor: Colors.white,
+              //   onPressed: () {},
+              //   child: Text("طلب مذكرة"),
+              // )
             ],
           ),
         ],
