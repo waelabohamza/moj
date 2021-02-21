@@ -3,14 +3,14 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
 
-class Service extends StatefulWidget {
-  Service({Key key}) : super(key: key);
+class Questions extends StatefulWidget {
+  Questions({Key key}) : super(key: key);
 
   @override
-  _ServiceState createState() => _ServiceState();
+  _QuestionsState createState() => _QuestionsState();
 }
 
-class _ServiceState extends State<Service> {
+class _QuestionsState extends State<Questions> {
   Icon icon1 = Icon(Icons.add);
   Icon icon2 = Icon(Icons.add);
   Icon icon3 = Icon(Icons.add);

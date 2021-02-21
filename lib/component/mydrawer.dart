@@ -16,8 +16,29 @@ class _MyDrawerState extends State<MyDrawer> {
         children: [
           Padding(
             padding: const EdgeInsets.all(10),
-            child: Text("القائمة" , style: TextStyle(fontSize: 22) , ),
-          ) , 
+            child: Text(
+              "القائمة",
+              style: TextStyle(fontSize: 22),
+            ),
+          ),
+
+          Container(
+            padding: EdgeInsets.all(20),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: 30,
+                  child: Text(
+                    "w",
+                    style: TextStyle(color: Colors.white , fontSize: 30),
+                  ),
+                  backgroundColor: mainColor,
+                ) , 
+                SizedBox(width: 10) , 
+                Text("wael@gmail.com")
+              ],
+            ),
+          ),
           ListTile(
             onTap: () {},
             title: Text("الخدمات"),
@@ -59,7 +80,7 @@ class _MyDrawerState extends State<MyDrawer> {
             title: Text("الاعدادات"),
             leading: Icon(Icons.settings),
           ),
-           ListTile(
+          ListTile(
             onTap: () {},
             title: Text("تسجيل الخروج"),
             leading: Icon(Icons.exit_to_app),

@@ -92,13 +92,17 @@ class _AddOrdersState extends State<AddOrders> {
                         textColor: Colors.white,
                         padding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                        onPressed: () {},
+                        onPressed: () {
+
+                        },
                         child: Text("صورة الهوية")),
                   ],
                 ),
                 SizedBox(height: 20),
                 RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                   child: Text("اضافة الطلب"),
                   color: mainColor,
                   textColor: Colors.white,
@@ -125,4 +129,5 @@ class _AddOrdersState extends State<AddOrders> {
           fillColor: Colors.white),
     );
   }
+  
 }
