@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moj/pages/courses/courses.dart';
 // My Page 
 import 'package:moj/pages/home/home.dart';
 import 'package:moj/pages/orders/addorders.dart';
@@ -12,4 +13,5 @@ Map<String, Widget Function(BuildContext)> routes  = {
   "service" : (context) => Service() , 
   "addorders" : (context) => AddOrders()  ,
   "questions" : (context) => Questions()  ,
+  "courses"   :(context) => Courses()
 } ;

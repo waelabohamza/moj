@@ -11,12 +11,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   List services = [
     {"name": "القضايا التجارية"},
     {"name": "التنفيذ"},
     {"name": "القضايا الجزائية"},
     {"name": "القضايا الادارية"},
   ];
+
   List questions = [
     {"name": "رفع الدعاوي الالكترونية"},
     {"name": "الكاتب العدل الالكتروني "},
@@ -40,10 +42,11 @@ class _HomeScreenState extends State<HomeScreen> {
           "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل"
     }
   ];
+
   @override
   Widget build(BuildContext context) {
     double mdw = MediaQuery.of(context).size.width;
-    
+
     return ListView(
       // controller: scrollController,
       children: [
@@ -55,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
               "الخدمات الشائعة",
               style: TextStyle(fontSize: 18, color: Colors.black),
             )),
-        ListHorzintal(mdw: mdw, list: services , type : "service"),
+        ListHorzintal(mdw: mdw, list: services, type: "service"),
         Container(
             margin: EdgeInsets.only(top: 10),
             padding: EdgeInsets.only(right: mdw / 14),
@@ -63,7 +66,23 @@ class _HomeScreenState extends State<HomeScreen> {
               "الاسئلة الشائعة",
               style: TextStyle(fontSize: 18, color: Colors.black),
             )),
-        ListHorzintal(mdw: mdw, list: questions  , type: "questions",),
+        ListHorzintal(
+          mdw: mdw,
+          list: questions,
+          type: "questions",
+        ),
+        Container(
+            margin: EdgeInsets.only(top: 10),
+            padding: EdgeInsets.only(right: mdw / 14),
+            child: Text(
+              "الدورات",
+              style: TextStyle(fontSize: 18, color: Colors.black),
+            )),
+        ListHorzintal(
+          mdw: mdw,
+          list: questions,
+          type: "courses",
+        ),
         Container(
             margin: EdgeInsets.only(top: 20),
             padding: EdgeInsets.only(right: mdw / 14),

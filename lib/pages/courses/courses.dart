@@ -49,7 +49,7 @@ class _CoursesState extends State<Courses> {
             width: double.infinity,
             padding: EdgeInsets.all(15),
             child: Text(
-              "اسم السوال",
+              "اسم الدورة",
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -61,7 +61,7 @@ class _CoursesState extends State<Courses> {
             children: [
               ListTile(
                   title: Text(
-                    "رمز السوأل",
+                    "رمز الدورة",
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.grey[800]),
                   ),
@@ -87,7 +87,37 @@ class _CoursesState extends State<Courses> {
                 },
                 trailing: icon2,
                 title: Text(
-                  "الجواب",
+                  "تفاصيل الدورة",
+                  style: liststyleservice,
+                ),
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Text(
+                      "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
+                    ),
+                  )
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Divider(color: Colors.grey),
+              ),
+              ExpansionTile(
+                onExpansionChanged: (status) {
+                  if (status) {
+                    setState(() {
+                      icon3 = Icon(Icons.remove);
+                    });
+                  } else {
+                    setState(() {
+                      icon3 = Icon(Icons.add);
+                    });
+                  }
+                },
+                trailing: icon3,
+                title: Text(
+                  "عدد الساعات",
                   style: liststyleservice,
                 ),
                 children: [
@@ -137,17 +167,17 @@ class _CoursesState extends State<Courses> {
                 onExpansionChanged: (status) {
                   if (status) {
                     setState(() {
-                      icon4 = Icon(Icons.remove);
+                      icon3 = Icon(Icons.remove);
                     });
                   } else {
                     setState(() {
-                      icon4 = Icon(Icons.add);
+                      icon3 = Icon(Icons.add);
                     });
                   }
                 },
-                trailing: icon4,
+                trailing: icon3,
                 title: Text(
-                  "الوقت اللازم لتنفيذ الحكم",
+                  "رسوم الدورة",
                   style: liststyleservice,
                 ),
                 children: [
@@ -163,13 +193,13 @@ class _CoursesState extends State<Courses> {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Divider(color: Colors.grey),
               ),
-              // RaisedButton(
-              //   padding: EdgeInsets.symmetric(horizontal: 40),
-              //   color: Colors.red,
-              //   textColor: Colors.white,
-              //   onPressed: () {},
-              //   child: Text("طلب مذكرة"),
-              // )
+              RaisedButton(
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                color: Colors.red,
+                textColor: Colors.white,
+                onPressed: () {},
+                child: Text("طلب مشاركة"),
+              )
             ],
           ),
         ],
