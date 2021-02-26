@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
 
-class ListHorzintal extends StatelessWidget {
-  final type;
+class ListExperts extends StatelessWidget {
   final mdw;
   final list;
-  const ListHorzintal({Key key, this.mdw, this.list, this.type})
+  const ListExperts({Key key, this.mdw, this.list})
       : super(key: key);
 
   @override
@@ -19,13 +18,7 @@ class ListHorzintal extends StatelessWidget {
           itemBuilder: (context, i) {
             return InkWell(
               onTap: () {
-                if (type == "service") {
-                  Navigator.of(context).pushNamed("service");
-                } else if (type == "questions") {
-                  Navigator.of(context).pushNamed("questions");
-                } else {
-                  Navigator.of(context).pushNamed("courses");
-                }
+               
               },
               child: Container(
                 width: mdw / 3,
@@ -40,19 +33,18 @@ class ListHorzintal extends StatelessWidget {
                         Container(
                             height: 60,
                             padding: EdgeInsets.all(10),
-                            child: Icon(
-                              Icons.image_search_sharp,
-                              color: mainColor,
-                              size: 40,
-                            )),
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: Text(
-                            list[i]['name'],
-                            style: TextStyle(fontSize: 12),
-                            textAlign: TextAlign.center,
-                          ),
-                        )
+                            child:  Image.asset("${list[i]['image']}")
+                            ),
+                        Text(
+                         "${list[i]['name']}",
+                          style: TextStyle(fontSize: 12),
+                          textAlign: TextAlign.center,
+                        ) , 
+                           Text(
+                          list[i]['job'],
+                          style: TextStyle(fontSize: 12),
+                          textAlign: TextAlign.center,
+                        ) , 
                       ],
                     )),
               ),

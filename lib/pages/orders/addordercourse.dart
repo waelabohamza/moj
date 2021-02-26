@@ -9,22 +9,23 @@ class AddOrderCourse extends StatefulWidget {
 }
 
 class _AddOrderCourseState extends State<AddOrderCourse> {
+  bool course;
   List<String> datadropdowncatname = [
-      "القسم 1"  , 
-      "القسم 2"  , 
-      "القسم 3 "  , 
-      "القسم 4"  , 
-      "القسم 5"  , 
-  ] ; 
-    List<String> datadropdownservicename = [
-      "الخدمة 1"  , 
-      "الخدمة 2"  , 
-      "الخدمة 3 "  , 
-      "الخدمة 4"  , 
-      "الخدمة 5"  , 
-  ] ; 
-  var servicename ; 
-  var catname ; 
+    "القسم 1",
+    "القسم 2",
+    "القسم 3 ",
+    "القسم 4",
+    "القسم 5",
+  ];
+  List<String> datadropdownservicename = [
+    "الخدمة 1",
+    "الخدمة 2",
+    "الخدمة 3 ",
+    "الخدمة 4",
+    "الخدمة 5",
+  ];
+  var servicename;
+  var catname;
   TextEditingController username = new TextEditingController();
 
   @override
@@ -45,63 +46,44 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
                     "ادخل البريد الالكتروني", Icons.mail_outline, username),
                 buildTextForm("ادخل رقم الهاتف",
                     Icons.phone_bluetooth_speaker_outlined, username),
-                buildTextForm(
-                    "ادخل العنوان ", Icons.location_city_outlined, username),
-                      DropdownSearch(
-                    items: datadropdowncatname,
-                    label: "ادخل هنا اسم القسم  الذي تريد",
-                    mode: Mode.BOTTOM_SHEET,
-                    onChanged: (val) async {
-                      setState(() {
-                        catname = val;
-                      });
-
-                      
-                      // setState(() {});
-                    },
-                    selectedItem: "اسم الخدمة",
-                  ),
-                    DropdownSearch(
-                    items: datadropdownservicename,
-                    label: "ادخل هنا اسم الخدمة  الذي تريد",
-                    mode: Mode.BOTTOM_SHEET,
-                    onChanged: (val) async {
-                      setState(() {
-                        servicename = val;
-                      });
-                      
-
-                      
-                      // setState(() {});
-                    },
-                    selectedItem: "اسم القسم",
-                  ),
+                Text("هل سبق ان دخلت مثل هذه الدورة "),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    RaisedButton(
-                      onPressed: () {},
-                      child: Text("صورة الرخصة"),
-                      color: mainColor,
-                      textColor: Colors.white,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    Expanded(
+                      child: RadioListTile(
+                          title: Text("نعم"),
+                          value: true,
+                          groupValue: course,
+                          onChanged: (val) {
+                            setState(() {
+                              course = val;
+                            });
+                          }),
                     ),
-                    RaisedButton(
-                        color: mainColor,
-                        textColor: Colors.white,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                        onPressed: () {
-
-                        },
-                        child: Text("صورة الهوية")),
+                    Expanded(
+                      child: RadioListTile(
+                          title: Text("لا"),
+                          value: false,
+                          groupValue: course,
+                          onChanged: (val) {
+                            setState(() {
+                              course = val;
+                            });
+                          }),
+                    ),
                   ],
+                ),
+                RaisedButton(
+                  onPressed: () {},
+                  child: Text("صورة الرخصة"),
+                  color: mainColor,
+                  textColor: Colors.white,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 ),
                 SizedBox(height: 20),
                 RaisedButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed("addordercourse") ; 
+                    Navigator.of(context).pushNamed("addordercourse");
                   },
                   child: Text("اضافة الطلب"),
                   color: mainColor,
@@ -129,5 +111,4 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
           fillColor: Colors.white),
     );
   }
-  
 }
