@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
-
 class ListExperts extends StatelessWidget {
   final mdw;
   final list;
-  const ListExperts({Key key, this.mdw, this.list})
-      : super(key: key);
-
+  const ListExperts({Key key, this.mdw, this.list}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,9 +14,7 @@ class ListExperts extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, i) {
             return InkWell(
-              onTap: () {
-               
-              },
+              onTap: () {},
               child: Container(
                 width: mdw / 3,
                 child: Card(
@@ -33,18 +28,22 @@ class ListExperts extends StatelessWidget {
                         Container(
                             height: 60,
                             padding: EdgeInsets.all(10),
-                            child:  Image.asset("${list[i]['image']}")
-                            ),
+                            child: Image.asset(
+                              "${list[i]['image']}",
+                              fit: BoxFit.fill,
+                              width: 75,
+                              height: 75,
+                            )),
                         Text(
-                         "${list[i]['name']}",
+                          "${list[i]['name']}",
                           style: TextStyle(fontSize: 12),
                           textAlign: TextAlign.center,
-                        ) , 
-                           Text(
+                        ),
+                        Text(
                           list[i]['job'],
                           style: TextStyle(fontSize: 12),
                           textAlign: TextAlign.center,
-                        ) , 
+                        ),
                       ],
                     )),
               ),
