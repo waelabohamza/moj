@@ -55,7 +55,7 @@ class _VerfiyCodeState extends State<VerfiyCode> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("انشاء الحساب"),
+        title: Text("رمز التاكيد"),
         centerTitle: true,
         backgroundColor: mainColor,
       ),

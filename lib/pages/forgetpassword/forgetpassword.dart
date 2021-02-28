@@ -56,7 +56,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("انشاء الحساب"),
+        title: Text("التحقق من البريد الالكتروني"),
         centerTitle: true,
         backgroundColor: mainColor,
       ),
