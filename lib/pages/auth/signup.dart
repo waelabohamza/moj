@@ -24,7 +24,7 @@ class _SignUpState extends State<SignUp> {
 
   signUp() async {
     var formdata = formstate.currentState;
-    if (formdata.validate()) {
+    if(formdata.validate()){
        
     }
   }
