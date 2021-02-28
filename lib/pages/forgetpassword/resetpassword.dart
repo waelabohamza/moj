@@ -3,53 +3,44 @@ import 'package:moj/component/alert.dart';
 import 'package:moj/component/crud.dart';
 import 'package:moj/component/valid.dart';
 import 'package:moj/const.dart';
-import 'package:moj/pages/auth/approveuser.dart';
 import 'package:moj/pages/linkapi.dart';
 
-class SignUp extends StatefulWidget {
-  SignUp({Key key}) : super(key: key);
+class ResetPassword extends StatefulWidget {
+  final email;
+  ResetPassword({Key key, this.email}) : super(key: key);
 
   @override
-  _SignUpState createState() => _SignUpState();
+  _ResetPasswordState createState() => _ResetPasswordState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _ResetPasswordState extends State<ResetPassword> {
   //
   Crud crud = new Crud();
   bool isShowPass = true;
   // Key
   GlobalKey<FormState> formstate = new GlobalKey<FormState>();
   //  Start Controller
-  TextEditingController email = new TextEditingController();
-  TextEditingController username = new TextEditingController();
-  TextEditingController phone = new TextEditingController();
+
   TextEditingController password = new TextEditingController();
-  TextEditingController repassword = new TextEditingController();
+
   // Method
-  signUp() async {
+
+  resetPassword() async {
     var formdata = formstate.currentState;
     if (formdata.validate()) {
-      var data = {
-        "email": email.text,
-        "username": username.text,
-        "password": password.text,
-        "phone": phone.text
-      };
+      var data = {"email": widget.email, "password": password.text};
       showLoading(context);
-      var responsebody = await crud.writeData(linkSignUp, data);
-      if (responsebody['status'] == "success") {
+      var responsebody = await crud.writeData(linkResetPassword, data);
+      if (responsebody['status'] == "success"){
         if (Navigator.of(context).canPop()) {
           Navigator.of(context).pop();
         }
-        Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (context) {
-          return ApproveUser(email: email.text);
-        }));
+        Navigator.of(context).pushReplacementNamed("home");
       } else {
         if (Navigator.of(context).canPop()) {
           Navigator.of(context).pop();
         }
-        showAlertOneChoose(context, "error", "خطا", responsebody['cause']);
+        showAlertOneChoose(context, "error", "خطأ", "الرجاء المحاولة مره اخرى");
       }
     }
   }
@@ -58,7 +49,7 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("انشاء الحساب"),
+        title: Text("اعادة تعيين كلمة المرور"),
         centerTitle: true,
         backgroundColor: mainColor,
       ),
@@ -70,17 +61,8 @@ class _SignUpState extends State<SignUp> {
             Form(
                 key: formstate,
                 child: Column(children: [
-                  bulidTextForm("البريد الالكتروني", Icons.email_outlined,
-                      email, "email"),
-                  SizedBox(height: 10),
-                  bulidTextForm("اسم المستخدم", Icons.person_outline, username,
-                      "username"),
-                  SizedBox(height: 10),
-                  bulidTextForm("رقم الهاتف", Icons.phone_android_outlined,
-                      phone, "phone"),
-                  SizedBox(height: 10),
-                  bulidTextForm(
-                      "كلمة المرور", Icons.lock_open, password, "password"),
+                  bulidTextForm("ادخل كلمة المرور الجديدة هنا", Icons.lock_open_outlined,
+                      password, "password"),
                   SizedBox(height: 40),
                   FlatButton(
                     color: Colors.grey[50],
@@ -89,9 +71,9 @@ class _SignUpState extends State<SignUp> {
                         borderRadius: BorderRadius.circular(50),
                         side: BorderSide(color: mainColor, width: 2)),
                     onPressed: () {
-                      signUp();
+                      resetPassword();
                     },
-                    child: Text("انشاء الحساب"),
+                    child: Text("تم"),
                   ),
                   SizedBox(height: 20),
                 ]))
@@ -103,18 +85,9 @@ class _SignUpState extends State<SignUp> {
 
   TextFormField bulidTextForm(hint, IconData icon, control, type) {
     return TextFormField(
-      obscureText: type == "password" ? isShowPass : false,
+      obscureText: isShowPass,
       controller: control,
       validator: (val) {
-        if (type == "email") {
-          return validInput(val, 2, 60, "يكون البريد الالكتروني");
-        }
-        if (type == "username") {
-          return validInput(val, 2, 60, "يكون اسم المستخدم");
-        }
-        if (type == "phone") {
-          return validInput(val, 2, 60, "يكون رقم الهاتف");
-        }
         if (type == "password") {
           return validInput(val, 2, 60, "تكون كلمة المرور");
         }
@@ -123,9 +96,6 @@ class _SignUpState extends State<SignUp> {
       decoration: InputDecoration(
           contentPadding: EdgeInsets.all(1),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-          suffixIcon: type == "password"
-              ? Icon(Icons.remove_red_eye_outlined)
-              : SizedBox(),
           prefixIcon: Icon(icon),
           hintText: hint,
           hintStyle: TextStyle(fontSize: 14)),

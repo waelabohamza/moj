@@ -3,53 +3,50 @@ import 'package:moj/component/alert.dart';
 import 'package:moj/component/crud.dart';
 import 'package:moj/component/valid.dart';
 import 'package:moj/const.dart';
-import 'package:moj/pages/auth/approveuser.dart';
+import 'package:moj/pages/forgetpassword/resetpassword.dart';
 import 'package:moj/pages/linkapi.dart';
 
-class SignUp extends StatefulWidget {
-  SignUp({Key key}) : super(key: key);
+class VerfiyCode extends StatefulWidget {
+  final email;
+  VerfiyCode({Key key, this.email}) : super(key: key);
 
   @override
-  _SignUpState createState() => _SignUpState();
+  _VerfiyCodeState createState() => _VerfiyCodeState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _VerfiyCodeState extends State<VerfiyCode> {
   //
   Crud crud = new Crud();
   bool isShowPass = true;
   // Key
   GlobalKey<FormState> formstate = new GlobalKey<FormState>();
   //  Start Controller
-  TextEditingController email = new TextEditingController();
-  TextEditingController username = new TextEditingController();
-  TextEditingController phone = new TextEditingController();
-  TextEditingController password = new TextEditingController();
-  TextEditingController repassword = new TextEditingController();
+
+  TextEditingController code = new TextEditingController();
+
   // Method
-  signUp() async {
+
+  verfiyCode() async {
     var formdata = formstate.currentState;
     if (formdata.validate()) {
       var data = {
-        "email": email.text,
-        "username": username.text,
-        "password": password.text,
-        "phone": phone.text
+        "email": widget.email,
+        "code": code.text,
       };
       showLoading(context);
-      var responsebody = await crud.writeData(linkSignUp, data);
+      var responsebody = await crud.writeData(linkVerfiyCode, data);
       if (responsebody['status'] == "success") {
         if (Navigator.of(context).canPop()) {
           Navigator.of(context).pop();
         }
-        Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (context) {
-          return ApproveUser(email: email.text);
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context){
+          return ResetPassword(email: widget.email) ;
         }));
       } else {
         if (Navigator.of(context).canPop()) {
           Navigator.of(context).pop();
         }
-        showAlertOneChoose(context, "error", "خطا", responsebody['cause']);
+        showAlertOneChoose(context, "error", "خطأ", "الرجاء المحاولة مره اخرى");
       }
     }
   }
@@ -70,17 +67,8 @@ class _SignUpState extends State<SignUp> {
             Form(
                 key: formstate,
                 child: Column(children: [
-                  bulidTextForm("البريد الالكتروني", Icons.email_outlined,
-                      email, "email"),
-                  SizedBox(height: 10),
-                  bulidTextForm("اسم المستخدم", Icons.person_outline, username,
-                      "username"),
-                  SizedBox(height: 10),
-                  bulidTextForm("رقم الهاتف", Icons.phone_android_outlined,
-                      phone, "phone"),
-                  SizedBox(height: 10),
                   bulidTextForm(
-                      "كلمة المرور", Icons.lock_open, password, "password"),
+                      "كود التفعيل", Icons.qr_code_sharp, code, "code"),
                   SizedBox(height: 40),
                   FlatButton(
                     color: Colors.grey[50],
@@ -89,11 +77,12 @@ class _SignUpState extends State<SignUp> {
                         borderRadius: BorderRadius.circular(50),
                         side: BorderSide(color: mainColor, width: 2)),
                     onPressed: () {
-                      signUp();
+                      verfiyCode();
                     },
-                    child: Text("انشاء الحساب"),
+                    child: Text("تم"),
                   ),
                   SizedBox(height: 20),
+                  
                 ]))
           ],
         ),
@@ -103,29 +92,17 @@ class _SignUpState extends State<SignUp> {
 
   TextFormField bulidTextForm(hint, IconData icon, control, type) {
     return TextFormField(
-      obscureText: type == "password" ? isShowPass : false,
       controller: control,
       validator: (val) {
-        if (type == "email") {
-          return validInput(val, 2, 60, "يكون البريد الالكتروني");
-        }
-        if (type == "username") {
-          return validInput(val, 2, 60, "يكون اسم المستخدم");
-        }
-        if (type == "phone") {
-          return validInput(val, 2, 60, "يكون رقم الهاتف");
-        }
-        if (type == "password") {
-          return validInput(val, 2, 60, "تكون كلمة المرور");
+        if (type == "code") {
+          return validInput(val, 4, 6, "يكون كود التفعيل");
         }
         return null;
       },
+      maxLength: 5,
       decoration: InputDecoration(
           contentPadding: EdgeInsets.all(1),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-          suffixIcon: type == "password"
-              ? Icon(Icons.remove_red_eye_outlined)
-              : SizedBox(),
           prefixIcon: Icon(icon),
           hintText: hint,
           hintStyle: TextStyle(fontSize: 14)),
