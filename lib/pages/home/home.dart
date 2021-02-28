@@ -2,6 +2,7 @@ import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:moj/component/mydrawer.dart';
 import 'package:moj/const.dart';
+import 'package:moj/main.dart';
 import 'package:moj/pages/home/homescreen.dart';
 import 'package:moj/pages/services/service.dart';
  
@@ -68,7 +69,10 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         actions: [
-          IconButton(icon: Icon(Icons.exit_to_app_outlined), onPressed: () {}),
+          IconButton(icon: Icon(Icons.exit_to_app_outlined), onPressed: (){
+            sharedPrefs.clear() ; 
+            Navigator.of(context).pushReplacementNamed("login") ; 
+          }),
         ],
       ),
       floatingActionButton: FloatingActionButton(

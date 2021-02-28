@@ -1,6 +1,11 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:moj/component/alert.dart';
+import 'package:moj/component/crud.dart';
 import 'package:moj/component/valid.dart';
 import 'package:moj/const.dart';
+import 'package:moj/main.dart';
+import 'package:moj/pages/linkapi.dart';
 
 class Login extends StatefulWidget {
   Login({Key key}) : super(key: key);
@@ -9,13 +14,38 @@ class Login extends StatefulWidget {
   _LoginState createState() => _LoginState();
 }
 
-class _LoginState extends State<Login>{
+class _LoginState extends State<Login> {
+  Crud crud = new Crud();
+
+  bool isShowPass = true;
 
   // KEY FORM
   GlobalKey<FormState> formstate = new GlobalKey<FormState>();
-  // Controller 
-  TextEditingController email    = new TextEditingController();
+  // Controller
+  TextEditingController email = new TextEditingController();
   TextEditingController password = new TextEditingController();
+
+  signIn() async {
+    var formdata = formstate.currentState;
+    if (formdata.validate()) {
+      var data = {"password": password.text, "email": email.text};
+      showLoading(context);
+      var responsebody = await crud.writeData(linkSignIn, data);
+      if (responsebody['status'] == "success") {
+        Navigator.of(context).pop();
+        sharedPrefs.setString("id", responsebody['users']['users_id']);
+        sharedPrefs.setString("username", responsebody['users']['users_name']);
+        sharedPrefs.setString("email", responsebody['users']['users_email']);
+        Navigator.of(context).pushReplacementNamed("home");
+      } else {
+        if (Navigator.of(context).canPop()) {
+          Navigator.of(context).pop();
+        }
+        showAlertOneChoose(context, "error", "خطأ",
+            "كلمة المرور او البريد الالكتروني غير صحيح");
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,15 +88,8 @@ class _LoginState extends State<Login>{
                   bulidTextForm("البريد الالكتروني", Icons.email_outlined,
                       email, "email"),
                   SizedBox(height: 10),
-                  TextFormField(
-                    controller: password,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.lock_outline),
-                        suffixIcon: Icon(Icons.remove_red_eye_outlined),
-                        hintStyle: TextStyle(fontSize: 14),
-                        hintText: "كلمة المرور"),
-                  ),
+                  bulidTextForm("كلمة المرور", Icons.lock_open_outlined,
+                      password, "password"),
                   SizedBox(height: 30),
                   FlatButton(
                     color: Colors.grey[50],
@@ -74,7 +97,9 @@ class _LoginState extends State<Login>{
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50),
                         side: BorderSide(color: mainColor, width: 2)),
-                    onPressed: () {},
+                    onPressed: () {
+                      signIn();
+                    },
                     child: Text("تسجيل الدخول"),
                   ),
                   SizedBox(height: 20),
@@ -98,6 +123,7 @@ class _LoginState extends State<Login>{
 
   TextFormField bulidTextForm(hint, IconData icon, control, type) {
     return TextFormField(
+      obscureText: type == "password" ? isShowPass : false,
       controller: control,
       validator: (val) {
         if (type == "email") {
@@ -106,6 +132,9 @@ class _LoginState extends State<Login>{
         return null;
       },
       decoration: InputDecoration(
+          suffixIcon: type == "password"
+              ? Icon(Icons.remove_red_eye_outlined)
+              : SizedBox(),
           prefixIcon: Icon(icon),
           hintText: hint,
           hintStyle: TextStyle(fontSize: 14)),

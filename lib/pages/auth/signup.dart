@@ -10,7 +10,15 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  bool isShowPass = true;
+
   TextEditingController email = new TextEditingController();
+  TextEditingController username = new TextEditingController();
+
+  TextEditingController phone = new TextEditingController();
+
+  TextEditingController password = new TextEditingController();
+  TextEditingController repassword = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,29 +44,8 @@ class _SignUpState extends State<SignUp> {
               bulidTextForm("رقم الهاتف", Icons.phone_android_outlined, email,
                   "username"),
               SizedBox(height: 10),
-              TextFormField(
-                obscureText: true,
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(1),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30)),
-                    prefixIcon: Icon(Icons.lock_outline),
-                    suffixIcon: Icon(Icons.remove_red_eye_outlined),
-                    hintStyle: TextStyle(fontSize: 14),
-                    hintText: "كلمة المرور"),
-              ),
-              SizedBox(height: 10),
-              TextFormField(
-                obscureText: true,
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(1),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30)),
-                    prefixIcon: Icon(Icons.lock_outline),
-                    suffixIcon: Icon(Icons.remove_red_eye_outlined),
-                    hintStyle: TextStyle(fontSize: 14),
-                    hintText: "اعد كتابة كلمة المرور"),
-              ),
+              bulidTextForm("كلمة المرور", Icons.phone_android_outlined, email,
+                  "password"),
               SizedBox(height: 40),
               FlatButton(
                 color: Colors.grey[50],
@@ -79,6 +66,7 @@ class _SignUpState extends State<SignUp> {
 
   TextFormField bulidTextForm(hint, IconData icon, control, type) {
     return TextFormField(
+      obscureText: type == "password" ? isShowPass : false,
       controller: control,
       validator: (val) {
         if (type == "email") {
@@ -87,11 +75,20 @@ class _SignUpState extends State<SignUp> {
         if (type == "username") {
           return validInput(val, 2, 60, "يكون اسم المستخدم");
         }
+        if (type == "phone") {
+          return validInput(val, 2, 60, "يكون رقم الهاتف");
+        }
+        if (type == "password") {
+          return validInput(val, 2, 60, "تكون كلمة المرور");
+        }
         return null;
       },
       decoration: InputDecoration(
           contentPadding: EdgeInsets.all(1),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+          suffixIcon: type == "password"
+              ? Icon(Icons.remove_red_eye_outlined)
+              : SizedBox(),
           prefixIcon: Icon(icon),
           hintText: hint,
           hintStyle: TextStyle(fontSize: 14)),
