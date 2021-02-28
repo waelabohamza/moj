@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:moj/pages/auth/login.dart';
+import 'package:moj/pages/auth/signup.dart';
 import 'package:moj/pages/courses/courses.dart';
 // My Page 
 import 'package:moj/pages/home/home.dart';
@@ -15,5 +17,7 @@ Map<String, Widget Function(BuildContext)> routes  = {
   "addorders" : (context) => AddOrders()  ,
   "addordercourse" : (context) =>  AddOrderCourse()  , 
   "questions" : (context) => Questions()  ,
-  "courses"   :(context) => Courses()
+  "courses"   :(context) => Courses() , 
+  "login"   : (context) => Login() , 
+  "signup"   : (context) => SignUp() , 
 } ;

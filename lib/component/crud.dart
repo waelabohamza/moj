@@ -64,8 +64,7 @@ class Crud {
     }
   }
 
-  addOrders(var data) async {
-    var url = "https://$serverName/orders/checkout.php";
+  addOrders(var data, url)async{
     var response =
         await http.post(url, body: json.encode(data), headers: myheaders);
     if (response.statusCode == 200) {
