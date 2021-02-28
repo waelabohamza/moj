@@ -11,14 +11,23 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   bool isShowPass = true;
-
+  // Key
+  GlobalKey<FormState> formstate = new GlobalKey<FormState>();
+  //  Start Controller
   TextEditingController email = new TextEditingController();
   TextEditingController username = new TextEditingController();
-
   TextEditingController phone = new TextEditingController();
-
   TextEditingController password = new TextEditingController();
   TextEditingController repassword = new TextEditingController();
+
+  // Method
+
+  signUp() async {
+    var formdata = formstate.currentState;
+    if (formdata.validate()) {
+       
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +53,7 @@ class _SignUpState extends State<SignUp> {
               bulidTextForm("رقم الهاتف", Icons.phone_android_outlined, email,
                   "username"),
               SizedBox(height: 10),
-              bulidTextForm("كلمة المرور", Icons.phone_android_outlined, email,
-                  "password"),
+              bulidTextForm("كلمة المرور", Icons.lock_open, email, "password"),
               SizedBox(height: 40),
               FlatButton(
                 color: Colors.grey[50],
@@ -53,7 +61,9 @@ class _SignUpState extends State<SignUp> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50),
                     side: BorderSide(color: mainColor, width: 2)),
-                onPressed: () {},
+                onPressed: () {
+                  signUp();
+                },
                 child: Text("انشاء الحساب"),
               ),
               SizedBox(height: 20),
