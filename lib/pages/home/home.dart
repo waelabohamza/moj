@@ -17,26 +17,22 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+
+
+
+
+
+
  
   int selectedindex = 0;
   int countcode = 40;
-  ScrollController scrollController;
+  // ScrollController scrollController;
   double sc = 0;
 
   GlobalKey<ScaffoldState> scaffoldkey = new GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
-    // scrollController  = new ScrollController() ;
-    // scrollController.addListener(() {
-    //     print("==================") ;
-    //     print(scrollController.offset) ;
-    //      setState(() {
-    //         sc = scrollController.offset ;
-    //      });
-    //     print("==================") ;
-
-    // }) ;
     super.initState();
   }
 
@@ -145,7 +141,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       drawer: MyDrawer(),
-      body: widgetsBottombar.elementAt(selectedindex),
+      body:widgetsBottombar.elementAt(selectedindex),
     );
   }
 }

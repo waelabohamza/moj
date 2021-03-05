@@ -83,7 +83,7 @@ class _ResetPasswordState extends State<ResetPassword> {
     );
   }
 
-  TextFormField bulidTextForm(hint, IconData icon, control, type) {
+  TextFormField bulidTextForm(hint, IconData icon, control, type){
     return TextFormField(
       obscureText: isShowPass,
       controller: control,

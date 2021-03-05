@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
 
 class TopCardCenter extends StatelessWidget {
+  final list ; 
   final mdw;
-  const TopCardCenter({Key key, this.mdw}) : super(key: key);
+  const TopCardCenter({Key key, this.mdw , this.list}) : super(key: key);
+  
 
   @override
   Widget build(BuildContext context) {

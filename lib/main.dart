@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:moj/component/applocal.dart';
 import 'package:moj/pages/auth/login.dart';
+import 'package:moj/pages/home/home.dart';
 import 'package:moj/routes.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Cairo',
       ),
-      home: Login(),
+      home:userid == null ?  Login() : HomePage(),
       routes: routes,
       localizationsDelegates: [
         AppLocale.delegate,

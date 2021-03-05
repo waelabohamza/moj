@@ -4,6 +4,7 @@ import 'package:moj/pages/home/component/listbottom.dart';
 import 'package:moj/pages/home/component/listexperts.dart';
 import 'package:moj/pages/home/component/listhorizntal.dart';
 import 'package:moj/pages/home/component/topcardcenter.dart';
+import 'package:moj/pages/home/data/getdata.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -13,6 +14,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List listHomeData = [];
+
   List services = [
     {"name": "القضايا التجارية"},
     {"name": "التنفيذ"},
@@ -55,6 +58,23 @@ class _HomeScreenState extends State<HomeScreen> {
     {"image": "images/avatar.png", "name": "خالد", "job": "عقود"},
   ];
 
+  _getData() async {
+    var responsebody = await getDataHome();
+    listHomeData.addAll(responsebody['servicesfavorite']);
+    listHomeData.addAll(responsebody['servicescommon']);
+    listHomeData.addAll(responsebody['expertscommon']);
+    listHomeData.addAll(responsebody['questionscommon']);
+    listHomeData.addAll(responsebody['coursescommon']);
+    listHomeData.addAll(responsebody['categories']);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    _getData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double mdw = MediaQuery.of(context).size.width;
@@ -62,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListView(
       // controller: scrollController,
       children: [
-        TopCardCenter(mdw: mdw),
+        TopCardCenter(mdw: mdw , list: listHomeData),
         Container(
             margin: EdgeInsets.only(top: 30),
             padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
@@ -99,8 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     onTap: () {})
               ],
-            )
-            ),
+            )),
         ListHorzintal(
           mdw: mdw,
           list: questions,
@@ -122,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Container(
             margin: EdgeInsets.only(top: 10),
             padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
-            child:  Row(
+            child: Row(
               children: [
                 Text(
                   "الخبراء",
