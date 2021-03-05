@@ -29,11 +29,11 @@ class ListBottom extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "${list['name']}",
+                        "${list['categories_name_ar']}",
                         style: TextStyle(fontSize: 16, color: mainColor),
                       ),
                       Text(
-                        "${list['desc']}",
+                        "${list['categories_desc_ar']}",
                         style: TextStyle(fontSize: 12, color: Colors.black),
                       ),
                     ],

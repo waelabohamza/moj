@@ -187,9 +187,9 @@ Crud crud = new Crud();
               ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: issues.length,
+                  itemCount: listHomeDataCategories.length,
                   itemBuilder: (context, i) {
-                    return ListBottom(mdw: mdw, list: issues[i]);
+                    return ListBottom(mdw: mdw, list: listHomeDataCategories[i]);
                   }),
               SizedBox(height: 30),
             ],
