@@ -50,6 +50,7 @@ class ListHorzintal extends StatelessWidget {
                           child: Text(
                            type == "services" ?  list[i]['services_name']
                            : type == "questions" ? list[i]['questions_name'] : 
+                           type == "courses" ? list[i]['courses_name'] : 
                            "sew"
                            ,
                             style: TextStyle(fontSize: 12),

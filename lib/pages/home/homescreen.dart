@@ -165,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )),
               ListHorzintal(
                 mdw: mdw,
-                list: courses,
+                list: listHomeDataCourses,
                 type: "courses",
               ),
               SizedBox(height: 10),
