@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
 
 class TopCardCenter extends StatelessWidget {
-  final list ; 
+  final list;
   final mdw;
-  const TopCardCenter({Key key, this.mdw , this.list}) : super(key: key);
-  
+  const TopCardCenter({Key key, this.mdw, this.list}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +38,10 @@ class TopCardCenter extends StatelessWidget {
                       children: [
                         Expanded(
                           child: InkWell(
-                             onTap: () {       
-                                   Navigator.of(context).pushNamed("services") ; 
+                            onTap: () {
+                              Navigator.of(context).pushNamed("services");
                             },
-                                                      child: Container(
+                            child: Container(
                                 padding: EdgeInsets.all(mdw / 15),
                                 alignment: Alignment.center,
                                 child: Column(
@@ -53,7 +52,7 @@ class TopCardCenter extends StatelessWidget {
                                       size: 40,
                                     ),
                                     Text(
-                                      "القضايا العمالية",
+                                      "${list[0]['services_name']}",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(fontSize: 12),
                                     )
@@ -68,10 +67,10 @@ class TopCardCenter extends StatelessWidget {
                         ),
                         Expanded(
                           child: InkWell(
-                             onTap: () {       
-                                   Navigator.of(context).pushNamed("services") ; 
+                            onTap: () {
+                              Navigator.of(context).pushNamed("services");
                             },
-                                                      child: Container(
+                            child: Container(
                                 padding: EdgeInsets.all(mdw / 15),
                                 alignment: Alignment.center,
                                 child: Column(
@@ -82,7 +81,7 @@ class TopCardCenter extends StatelessWidget {
                                       size: 40,
                                     ),
                                     Text(
-                                      "القضايا الاسرية",
+                                      "${list[1]['services_name']}",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(fontSize: 12),
                                     )
@@ -114,7 +113,7 @@ class TopCardCenter extends StatelessWidget {
                                     size: 40,
                                   ),
                                   Text(
-                                    "القضايا الايجارية ",
+                                    "${list[2]['services_name']}",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(fontSize: 12),
                                   )
@@ -128,10 +127,10 @@ class TopCardCenter extends StatelessWidget {
                         ),
                         Expanded(
                           child: InkWell(
-                             onTap: () {       
-                                   Navigator.of(context).pushNamed("services") ; 
+                            onTap: () {
+                              Navigator.of(context).pushNamed("services");
                             },
-                                                      child: Container(
+                            child: Container(
                                 padding: EdgeInsets.all(mdw / 15),
                                 alignment: Alignment.center,
                                 child: Column(
@@ -142,7 +141,7 @@ class TopCardCenter extends StatelessWidget {
                                       size: 40,
                                     ),
                                     Text(
-                                      "الامور المستعجلة",
+                                      "${list[3]['services_name']}",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(fontSize: 12),
                                     )
@@ -164,8 +163,8 @@ class TopCardCenter extends StatelessWidget {
                       children: [
                         Expanded(
                           child: InkWell(
-                            onTap: () {       
-                                   Navigator.of(context).pushNamed("services") ; 
+                            onTap: () {
+                              Navigator.of(context).pushNamed("services");
                             },
                             child: Container(
                                 padding: EdgeInsets.all(mdw / 15),
@@ -185,7 +184,7 @@ class TopCardCenter extends StatelessWidget {
                                       size: 40,
                                     ),
                                     Text(
-                                      "القضايا المدنية",
+                                      "${list[4]['services_name']}",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(fontSize: 12),
                                     )
@@ -212,7 +211,7 @@ class TopCardCenter extends StatelessWidget {
                                     size: 40,
                                   ),
                                   Text(
-                                    "القضايا التجارية",
+                                    "${list[5]['services_name']}",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(fontSize: 12),
                                   )

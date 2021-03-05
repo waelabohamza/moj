@@ -5,8 +5,6 @@ import 'package:moj/const.dart';
 import 'package:moj/main.dart';
 import 'package:moj/pages/home/homescreen.dart';
 import 'package:moj/pages/services/service.dart';
- 
- 
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -16,14 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-
-
-
-
-
-
- 
   int selectedindex = 0;
   int countcode = 40;
   // ScrollController scrollController;
@@ -36,14 +26,13 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-
-  List<Widget> widgetsBottombar = [ 
-         HomeScreen() , 
-        //  Service() , 
-        Text("Test") , 
-        Text("Test") , 
-        //  Services()
-  ] ; 
+  List<Widget> widgetsBottombar = [
+    HomeScreen(),
+    //  Service() ,
+    Text("Test"),
+    Text("Test"),
+    //  Services()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -65,15 +54,17 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         actions: [
-          IconButton(icon: Icon(Icons.exit_to_app_outlined), onPressed: (){
-            sharedPrefs.clear() ; 
-            Navigator.of(context).pushReplacementNamed("login") ; 
-          }),
+          IconButton(
+              icon: Icon(Icons.exit_to_app_outlined),
+              onPressed: () {
+                sharedPrefs.clear();
+                Navigator.of(context).pushReplacementNamed("login");
+              }),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed("addorders") ; 
+          Navigator.of(context).pushNamed("addorders");
         },
         child: Icon(Icons.add),
         backgroundColor: Colors.red,
@@ -108,7 +99,7 @@ class _HomePageState extends State<HomePage> {
           BubbleBottomBarItem(
               backgroundColor: Colors.red,
               icon: Icon(
-           Icons.theater_comedy,
+                Icons.theater_comedy,
                 color: Colors.black,
               ),
               activeIcon: Icon(
@@ -130,7 +121,7 @@ class _HomePageState extends State<HomePage> {
           BubbleBottomBarItem(
               backgroundColor: Colors.red,
               icon: Icon(
-                 Icons.addchart_sharp,
+                Icons.addchart_sharp,
                 color: Colors.black,
               ),
               activeIcon: Icon(
@@ -141,11 +132,10 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       drawer: MyDrawer(),
-      body:widgetsBottombar.elementAt(selectedindex),
+      body: widgetsBottombar.elementAt(selectedindex),
     );
   }
 }
-
 
 /*
 1 - الاسم 

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:moj/component/crud.dart';
 import 'package:moj/const.dart';
 import 'package:moj/pages/home/component/listbottom.dart';
 import 'package:moj/pages/home/component/listexperts.dart';
 import 'package:moj/pages/home/component/listhorizntal.dart';
 import 'package:moj/pages/home/component/topcardcenter.dart';
-import 'package:moj/pages/home/data/getdata.dart';
+import 'package:moj/pages/linkapi.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -14,7 +15,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List listHomeData = [];
+  Crud crud = new Crud();
+
+ bool  isLoading = true ; 
+
+  List listHomeDataServicesFavorite = [];
+  List listHomeDataServicesCommon = [];
+  List listHomeDataQuestions = [];
+  List listHomeDataCourses = [];
+  List listHomeDataExperts = [];
+  List listHomeDataCategories = [];
 
   List services = [
     {"name": "القضايا التجارية"},
@@ -59,14 +69,22 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   _getData() async {
-    var responsebody = await getDataHome();
-    listHomeData.addAll(responsebody['servicesfavorite']);
-    listHomeData.addAll(responsebody['servicescommon']);
-    listHomeData.addAll(responsebody['expertscommon']);
-    listHomeData.addAll(responsebody['questionscommon']);
-    listHomeData.addAll(responsebody['coursescommon']);
-    listHomeData.addAll(responsebody['categories']);
-    setState(() {});
+    setState(() {
+    isLoading = true ; 
+    });
+    var responsebody = await crud.readData(linkHomeData);
+    listHomeDataServicesFavorite.addAll(responsebody['servicesfavorite']);
+    listHomeDataServicesCommon.addAll(responsebody['servicescommon']);
+    listHomeDataExperts.addAll(responsebody['expertscommon']);
+    listHomeDataQuestions.addAll(responsebody['questionscommon']);
+    listHomeDataCourses.addAll(responsebody['coursescommon']);
+    listHomeDataCategories.addAll(responsebody['categories']);
+    if (this.mounted) {
+      setState(() {
+    isLoading = false ; 
+
+      });
+    }
   }
 
   @override
@@ -76,104 +94,117 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void dispose() {
+    listHomeDataServicesFavorite.clear();
+    listHomeDataCategories.clear();
+    listHomeDataCourses.clear();
+    listHomeDataQuestions.clear();
+    listHomeDataServicesCommon.clear();
+    listHomeDataExperts.clear();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double mdw = MediaQuery.of(context).size.width;
 
-    return ListView(
-      // controller: scrollController,
-      children: [
-        TopCardCenter(mdw: mdw , list: listHomeData),
-        Container(
-            margin: EdgeInsets.only(top: 30),
-            padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
-            child: Row(
-              children: [
-                Text(
-                  "الخدمات الشائعة",
-                  style: TextStyle(fontSize: 16, color: Colors.black),
-                ),
-                Spacer(),
-                InkWell(
-                    child: Text(
-                      "رؤية الجميع",
-                      style: TextStyle(fontSize: 16, color: mainColor),
-                    ),
-                    onTap: () {})
-              ],
-            )),
-        ListHorzintal(mdw: mdw, list: services, type: "service"),
-        Container(
-            margin: EdgeInsets.only(top: 10),
-            padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
-            child: Row(
-              children: [
-                Text(
-                  "الاسئلة الشائعة",
-                  style: TextStyle(fontSize: 16, color: Colors.black),
-                ),
-                Spacer(),
-                InkWell(
-                    child: Text(
-                      "رؤية الجميع",
-                      style: TextStyle(fontSize: 16, color: mainColor),
-                    ),
-                    onTap: () {})
-              ],
-            )),
-        ListHorzintal(
-          mdw: mdw,
-          list: questions,
-          type: "questions",
-        ),
-        Container(
-            margin: EdgeInsets.only(top: 10),
-            padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
-            child: Text(
-              "الدورات",
-              style: TextStyle(fontSize: 16, color: Colors.black),
-            )),
-        ListHorzintal(
-          mdw: mdw,
-          list: courses,
-          type: "courses",
-        ),
-        SizedBox(height: 10),
-        Container(
-            margin: EdgeInsets.only(top: 10),
-            padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
-            child: Row(
-              children: [
-                Text(
-                  "الخبراء",
-                  style: TextStyle(fontSize: 16, color: Colors.black),
-                ),
-                Spacer(),
-                InkWell(
-                    child: Text(
-                      "رؤية الجميع",
-                      style: TextStyle(fontSize: 16, color: mainColor),
-                    ),
-                    onTap: () {})
-              ],
-            )),
-        ListExperts(mdw: mdw, list: experts),
-        SizedBox(height: 10),
-        Container(
-            margin: EdgeInsets.only(top: 20),
-            padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
-            child: Text(
-              "القضايا",
-              style: TextStyle(fontSize: 16, color: Colors.black),
-            )),
-        ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: issues.length,
-            itemBuilder: (context, i) {
-              return ListBottom(mdw: mdw, list: issues[i]);
-            }),
-        SizedBox(height: 30),
-      ],
-    );
+    return isLoading == true 
+        ? Center(child: CircularProgressIndicator())
+        : ListView(
+            // controller: scrollController,
+            children: [
+              TopCardCenter(mdw: mdw, list: listHomeDataServicesFavorite),
+              Container(
+                  margin: EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
+                  child: Row(
+                    children: [
+                      Text(
+                        "الخدمات الشائعة",
+                        style: TextStyle(fontSize: 16, color: Colors.black),
+                      ),
+                      Spacer(),
+                      InkWell(
+                          child: Text(
+                            "رؤية الجميع",
+                            style: TextStyle(fontSize: 16, color: mainColor),
+                          ),
+                          onTap: () {})
+                    ],
+                  )),
+              ListHorzintal(mdw: mdw, list: services, type: "service"),
+              Container(
+                  margin: EdgeInsets.only(top: 10),
+                  padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
+                  child: Row(
+                    children: [
+                      Text(
+                        "الاسئلة الشائعة",
+                        style: TextStyle(fontSize: 16, color: Colors.black),
+                      ),
+                      Spacer(),
+                      InkWell(
+                          child: Text(
+                            "رؤية الجميع",
+                            style: TextStyle(fontSize: 16, color: mainColor),
+                          ),
+                          onTap: () {})
+                    ],
+                  )),
+              ListHorzintal(
+                mdw: mdw,
+                list: questions,
+                type: "questions",
+              ),
+              Container(
+                  margin: EdgeInsets.only(top: 10),
+                  padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
+                  child: Text(
+                    "الدورات",
+                    style: TextStyle(fontSize: 16, color: Colors.black),
+                  )),
+              ListHorzintal(
+                mdw: mdw,
+                list: courses,
+                type: "courses",
+              ),
+              SizedBox(height: 10),
+              Container(
+                  margin: EdgeInsets.only(top: 10),
+                  padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
+                  child: Row(
+                    children: [
+                      Text(
+                        "الخبراء",
+                        style: TextStyle(fontSize: 16, color: Colors.black),
+                      ),
+                      Spacer(),
+                      InkWell(
+                          child: Text(
+                            "رؤية الجميع",
+                            style: TextStyle(fontSize: 16, color: mainColor),
+                          ),
+                          onTap: () {})
+                    ],
+                  )),
+              ListExperts(mdw: mdw, list: experts),
+              SizedBox(height: 10),
+              Container(
+                  margin: EdgeInsets.only(top: 20),
+                  padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
+                  child: Text(
+                    "القضايا",
+                    style: TextStyle(fontSize: 16, color: Colors.black),
+                  )),
+              ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: issues.length,
+                  itemBuilder: (context, i) {
+                    return ListBottom(mdw: mdw, list: issues[i]);
+                  }),
+              SizedBox(height: 30),
+            ],
+          );
   }
 }
