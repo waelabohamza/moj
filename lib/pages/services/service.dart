@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
 
@@ -12,6 +11,7 @@ class Service extends StatefulWidget {
 }
 
 class _ServiceState extends State<Service> {
+  
   Icon icon1 = Icon(Icons.add);
   Icon icon2 = Icon(Icons.add);
   Icon icon3 = Icon(Icons.add);
@@ -207,19 +207,4 @@ class _ServiceState extends State<Service> {
 3 - رقم الهاتف 
 4 - دروب دون للسعر 
 5 - 4 - العنوان
-
-
 */
-
-// AppBar(
-//         toolbarHeight: 50,
-//         elevation: 0,
-//         backgroundColor: mainColor,
-//         title: Text(
-//           "الخدمة",
-//           style: TextStyle(fontSize: 16),
-//         ),
-//         actions: [
-//           IconButton(icon: Icon(Icons.search), onPressed: () {}),
-//         ],
-//       ),
