@@ -120,7 +120,7 @@ Crud crud = new Crud();
                           onTap: () {})
                     ],
                   )),
-              ListHorzintal(mdw: mdw, list: listHomeDataServicesCommon, type: "services"),
+              ListHorzintal(mdw: mdw, list: listHomeDataServicesCommon, type: "service"),
               Container(
                   margin: EdgeInsets.only(top: 10),
                   padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),

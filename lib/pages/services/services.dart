@@ -38,6 +38,7 @@ class _ServicesState extends State<Services>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        shape: Border.all(width: 0 , color: mainColor),
         actions: [
           IconButton(icon: Icon(Icons.exit_to_app), onPressed: (){})
         ],

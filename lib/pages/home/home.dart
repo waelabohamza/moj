@@ -40,6 +40,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       key: scaffoldkey,
       appBar: AppBar(
+      shape: Border.all(width: 0 , color: mainColor),
         toolbarHeight: 50,
         elevation: 0,
         backgroundColor: mainColor,

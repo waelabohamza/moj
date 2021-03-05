@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
 
 class Service extends StatefulWidget {
-  Service({Key key}) : super(key: key);
+  final list ; 
+  Service({Key key , this.list}) : super(key: key);
 
   @override
   _ServiceState createState() => _ServiceState();
@@ -28,6 +29,7 @@ class _ServiceState extends State<Service> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        shape: Border.all(width: 0 , color: mainColor),
         toolbarHeight: 50,
         elevation: 0,
         backgroundColor: mainColor,

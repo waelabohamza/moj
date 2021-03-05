@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
+import 'package:moj/pages/services/service.dart';
 
 class TopCardCenter extends StatelessWidget {
   final list;
   final mdw;
   const TopCardCenter({Key key, this.mdw, this.list}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -34,61 +34,14 @@ class TopCardCenter extends StatelessWidget {
                   ),
                   IntrinsicHeight(
                     child: Row(
-                      // mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Expanded(
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.of(context).pushNamed("services");
-                            },
-                            child: Container(
-                                padding: EdgeInsets.all(mdw / 15),
-                                alignment: Alignment.center,
-                                child: Column(
-                                  children: [
-                                    Icon(
-                                      Icons.home_repair_service_outlined,
-                                      color: mainColor,
-                                      size: 40,
-                                    ),
-                                    Text(
-                                      "${list[0]['services_name']}",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(fontSize: 12),
-                                    )
-                                  ],
-                                )),
-                          ),
-                        ),
+                        buildService(context, list[0]),
                         VerticalDivider(
                           color: Colors.grey,
                           thickness: 1,
                           width: 10,
                         ),
-                        Expanded(
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.of(context).pushNamed("services");
-                            },
-                            child: Container(
-                                padding: EdgeInsets.all(mdw / 15),
-                                alignment: Alignment.center,
-                                child: Column(
-                                  children: [
-                                    Icon(
-                                      Icons.home_repair_service_outlined,
-                                      color: mainColor,
-                                      size: 40,
-                                    ),
-                                    Text(
-                                      "${list[1]['services_name']}",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(fontSize: 12),
-                                    )
-                                  ],
-                                )),
-                          ),
-                        ),
+                        buildService(context, list[1]),
                       ],
                     ),
                   ),
@@ -99,56 +52,14 @@ class TopCardCenter extends StatelessWidget {
                   ),
                   IntrinsicHeight(
                     child: Row(
-                      // mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Expanded(
-                          child: Container(
-                              padding: EdgeInsets.all(mdw / 15),
-                              alignment: Alignment.center,
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    Icons.home_repair_service_outlined,
-                                    color: mainColor,
-                                    size: 40,
-                                  ),
-                                  Text(
-                                    "${list[2]['services_name']}",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: 12),
-                                  )
-                                ],
-                              )),
-                        ),
+                        buildService(context, list[2]),
                         VerticalDivider(
                           color: Colors.grey,
                           thickness: 1,
                           width: 10,
                         ),
-                        Expanded(
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.of(context).pushNamed("services");
-                            },
-                            child: Container(
-                                padding: EdgeInsets.all(mdw / 15),
-                                alignment: Alignment.center,
-                                child: Column(
-                                  children: [
-                                    Icon(
-                                      Icons.home_repair_service_outlined,
-                                      color: mainColor,
-                                      size: 40,
-                                    ),
-                                    Text(
-                                      "${list[3]['services_name']}",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(fontSize: 12),
-                                    )
-                                  ],
-                                )),
-                          ),
-                        ),
+                        buildService(context, list[3]),
                       ],
                     ),
                   ),
@@ -159,65 +70,14 @@ class TopCardCenter extends StatelessWidget {
                   ),
                   IntrinsicHeight(
                     child: Row(
-                      // mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Expanded(
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.of(context).pushNamed("services");
-                            },
-                            child: Container(
-                                padding: EdgeInsets.all(mdw / 15),
-
-                                // decoration: BoxDecoration(
-                                //     border: Border(
-                                //         left: BorderSide(
-                                //             color: Colors.grey[600]))),
-                                // padding: EdgeInsets.symmetric(
-                                //     horizontal: mdw / 10),
-                                alignment: Alignment.center,
-                                child: Column(
-                                  children: [
-                                    Icon(
-                                      Icons.home_repair_service_outlined,
-                                      color: mainColor,
-                                      size: 40,
-                                    ),
-                                    Text(
-                                      "${list[4]['services_name']}",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(fontSize: 12),
-                                    )
-                                  ],
-                                )),
-                          ),
-                        ),
+                        buildService(context, list[4]),
                         VerticalDivider(
                           color: Colors.grey,
                           thickness: 1,
                           width: 10,
                         ),
-                        Expanded(
-                          child: Container(
-                              padding: EdgeInsets.all(mdw / 15),
-                              // padding: EdgeInsets.symmetric(horizontal: 10),
-
-                              alignment: Alignment.center,
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    Icons.home_repair_service_outlined,
-                                    color: mainColor,
-                                    size: 40,
-                                  ),
-                                  Text(
-                                    "${list[5]['services_name']}",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: 12),
-                                  )
-                                ],
-                              )),
-                        ),
+                        buildService(context, list[5]),
                       ],
                     ),
                   ),
@@ -242,6 +102,35 @@ class TopCardCenter extends StatelessWidget {
               child: Text("عرض الكل"),
             ))
       ],
+    );
+  }
+
+  buildService(context, service) {
+    return Expanded(
+      child: InkWell(
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            return Service(list: service);
+          }));
+        },
+        child: Container(
+            padding: EdgeInsets.all(mdw / 15),
+            alignment: Alignment.center,
+            child: Column(
+              children: [
+                Icon(
+                  Icons.home_repair_service_outlined,
+                  color: mainColor,
+                  size: 40,
+                ),
+                Text(
+                  "${service['services_name']}",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 12),
+                )
+              ],
+            )),
+      ),
     );
   }
 }
