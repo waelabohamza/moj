@@ -38,10 +38,8 @@ class _ServicesState extends State<Services>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shape: Border.all(width: 0 , color: mainColor),
-        actions: [
-          IconButton(icon: Icon(Icons.exit_to_app), onPressed: (){})
-        ],
+        shape: Border.all(width: 0, color: mainColor),
+        actions: [IconButton(icon: Icon(Icons.exit_to_app), onPressed: () {})],
         bottom: TabBar(
             labelColor: Colors.white,
             unselectedLabelColor: Colors.white,
@@ -73,9 +71,9 @@ class _ServicesState extends State<Services>
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             if (Navigator.of(context).canPop()) {
-              Navigator.of(context).pop() ; 
-            }else {
-              Navigator.of(context).pushNamed("home") ; 
+              Navigator.of(context).pop();
+            } else {
+              Navigator.of(context).pushNamed("home");
             }
           },
         ),

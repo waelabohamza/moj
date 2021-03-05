@@ -4,15 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
 
 class Service extends StatefulWidget {
-  final list ; 
-  Service({Key key , this.list}) : super(key: key);
+  final list;
+  Service({Key key, this.list}) : super(key: key);
 
   @override
   _ServiceState createState() => _ServiceState();
 }
 
 class _ServiceState extends State<Service> {
-
   Icon icon1 = Icon(Icons.add);
   Icon icon2 = Icon(Icons.add);
   Icon icon3 = Icon(Icons.add);
@@ -27,9 +26,10 @@ class _ServiceState extends State<Service> {
 
   @override
   Widget build(BuildContext context) {
+    final list = widget.list;
     return Scaffold(
       appBar: AppBar(
-        shape: Border.all(width: 0 , color: mainColor),
+        shape: Border.all(width: 0, color: mainColor),
         toolbarHeight: 50,
         elevation: 0,
         backgroundColor: mainColor,
@@ -37,12 +37,6 @@ class _ServiceState extends State<Service> {
           "اجراءات",
           style: TextStyle(fontSize: 16),
         ),
-        // leading: IconButton(
-        //   icon: Icon(Icons.segment),
-        //   onPressed: () {
-        //     scaffoldkey.currentState.openDrawer();
-        //   },
-        // ),
         actions: [
           IconButton(icon: Icon(Icons.exit_to_app_outlined), onPressed: () {}),
         ],
@@ -53,7 +47,7 @@ class _ServiceState extends State<Service> {
             width: double.infinity,
             padding: EdgeInsets.all(15),
             child: Text(
-              "اسم الخدمة",
+              "${list['services_name']}",
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -70,7 +64,7 @@ class _ServiceState extends State<Service> {
                         fontWeight: FontWeight.bold, color: Colors.grey[800]),
                   ),
                   trailing: Text(
-                    "9",
+                    "${list['services_id']}",
                     style: TextStyle(color: Colors.red),
                   )),
               Padding(
@@ -97,9 +91,9 @@ class _ServiceState extends State<Service> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(15),
-                    child: Text(
-                      "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
-                    ),
+                    child: Text("${list['services_desc']}"
+                        // "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
+                        ),
                   )
                 ],
               ),
@@ -127,9 +121,7 @@ class _ServiceState extends State<Service> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(15),
-                    child: Text(
-                      "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
-                    ),
+                    child: Text("${list['services_procedures']}"),
                   )
                 ],
               ),
@@ -157,9 +149,7 @@ class _ServiceState extends State<Service> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(15),
-                    child: Text(
-                      "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
-                    ),
+                    child: Text("${list['services_document']}"),
                   )
                 ],
               ),
@@ -187,9 +177,7 @@ class _ServiceState extends State<Service> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(15),
-                    child: Text(
-                      "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
-                    ),
+                    child: Text("${list['services_fees']}"),
                   )
                 ],
               ),
