@@ -15,7 +15,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Crud crud = new Crud();
+  
+Crud crud = new Crud();
 
  bool  isLoading = true ; 
 
@@ -26,24 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List listHomeDataExperts = [];
   List listHomeDataCategories = [];
 
-  List services = [
-    {"name": "القضايا التجارية"},
-    {"name": "التنفيذ"},
-    {"name": "القضايا الجزائية"},
-    {"name": "القضايا الادارية"},
-  ];
-
-  List questions = [
-    {"name": "رفع الدعاوي الالكترونية"},
-    {"name": "الكاتب العدل الالكتروني "},
-    {"name": "طلب عبد الزواج"}
-  ];
-
-  List courses = [
-    {"name": "خبير"},
-    {"name": "حارس امين "},
-  ];
-
+  
   List issues = [
     {
       "name": "شركات",
@@ -62,16 +46,14 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   ];
 
-  List experts = [
-    {"image": "images/avatar.png", "name": "وائل", "job": "معاملات"},
-    {"image": "images/avatar.png", "name": "ياسر", "job": "دعاوي"},
-    {"image": "images/avatar.png", "name": "خالد", "job": "عقود"},
-  ];
+ 
 
   _getData() async {
+
     setState(() {
     isLoading = true ; 
     });
+
     var responsebody = await crud.readData(linkHomeData);
     listHomeDataServicesFavorite.addAll(responsebody['servicesfavorite']);
     listHomeDataServicesCommon.addAll(responsebody['servicescommon']);
@@ -79,12 +61,18 @@ class _HomeScreenState extends State<HomeScreen> {
     listHomeDataQuestions.addAll(responsebody['questionscommon']);
     listHomeDataCourses.addAll(responsebody['coursescommon']);
     listHomeDataCategories.addAll(responsebody['categories']);
+
+    print("==================") ; 
+    print(listHomeDataExperts) ; 
+    print("==================") ;
+
     if (this.mounted) {
       setState(() {
     isLoading = false ; 
 
       });
     }
+
   }
 
   @override
@@ -187,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () {})
                     ],
                   )),
-              ListExperts(mdw: mdw, list: experts),
+              ListExperts(mdw: mdw, list: listHomeDataExperts),
               SizedBox(height: 10),
               Container(
                   margin: EdgeInsets.only(top: 20),

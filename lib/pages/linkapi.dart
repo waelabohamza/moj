@@ -35,3 +35,9 @@ const String  linkHomeData     = "http://$serverName/api/home.php" ;
 // Course 
 
 
+// Root Image 
+
+const String  linkRootImage     = "http://$serverName/api/uploads/" ;  
+
+
+

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:moj/const.dart';
+import 'package:moj/pages/linkapi.dart';
+
 class ListExperts extends StatelessWidget {
   final mdw;
   final list;
@@ -28,19 +29,19 @@ class ListExperts extends StatelessWidget {
                         Container(
                             height: 60,
                             padding: EdgeInsets.all(10),
-                            child: Image.asset(
-                              "${list[i]['image']}",
+                            child: Image.network(
+                              "$linkRootImage/experts/${list[i]['experts_image']}",
                               fit: BoxFit.fill,
                               width: 75,
                               height: 75,
                             )),
                         Text(
-                          "${list[i]['name']}",
+                          "${list[i]['experts_name']}",
                           style: TextStyle(fontSize: 12),
                           textAlign: TextAlign.center,
                         ),
                         Text(
-                          list[i]['job'],
+                          "${list[i]['experts_spec']}",
                           style: TextStyle(fontSize: 12),
                           textAlign: TextAlign.center,
                         ),
