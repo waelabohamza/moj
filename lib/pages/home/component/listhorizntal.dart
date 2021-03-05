@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
+import 'package:moj/pages/services/service.dart';
 
 class ListHorzintal extends StatelessWidget {
   final type;
@@ -20,7 +21,9 @@ class ListHorzintal extends StatelessWidget {
             return InkWell(
               onTap: () {
                 if (type == "service") {
-                  Navigator.of(context).pushNamed("service");
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                     return Service(list: list[i]) ; 
+                  }));
                 } else if (type == "questions") {
                   Navigator.of(context).pushNamed("questions");
                 } else {
@@ -48,7 +51,7 @@ class ListHorzintal extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 10),
                           child: Text(
-                           type == "services" ?  list[i]['services_name']
+                           type == "service" ?  list[i]['services_name']
                            : type == "questions" ? list[i]['questions_name'] : 
                            type == "courses" ? list[i]['courses_name'] : 
                            "sew"
