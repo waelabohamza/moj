@@ -48,7 +48,10 @@ class ListHorzintal extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 10),
                           child: Text(
-                            list[i]['services_name'],
+                           type == "services" ?  list[i]['services_name']
+                           : type == "questions" ? list[i]['questions_name'] : 
+                           "sew"
+                           ,
                             style: TextStyle(fontSize: 12),
                             textAlign: TextAlign.center,
                           ),

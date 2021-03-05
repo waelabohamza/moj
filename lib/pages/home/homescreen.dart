@@ -132,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () {})
                     ],
                   )),
-              ListHorzintal(mdw: mdw, list: listHomeDataServicesCommon, type: "service"),
+              ListHorzintal(mdw: mdw, list: listHomeDataServicesCommon, type: "services"),
               Container(
                   margin: EdgeInsets.only(top: 10),
                   padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
@@ -153,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )),
               ListHorzintal(
                 mdw: mdw,
-                list: questions,
+                list: listHomeDataQuestions,
                 type: "questions",
               ),
               Container(
