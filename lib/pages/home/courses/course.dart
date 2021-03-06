@@ -2,14 +2,15 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
 
-class Courses extends StatefulWidget {
-  Courses({Key key}) : super(key: key);
+class Course extends StatefulWidget {
+  final list;
+  Course({Key key, this.list}) : super(key: key);
 
   @override
-  _CoursesState createState() => _CoursesState();
+  _CourseState createState() => _CourseState();
 }
 
-class _CoursesState extends State<Courses> {
+class _CourseState extends State<Course> {
   Icon icon1 = Icon(Icons.add);
   Icon icon2 = Icon(Icons.add);
   Icon icon3 = Icon(Icons.add);
@@ -24,6 +25,7 @@ class _CoursesState extends State<Courses> {
 
   @override
   Widget build(BuildContext context) {
+    var list = widget.list;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,
@@ -33,12 +35,6 @@ class _CoursesState extends State<Courses> {
           "اجراءات",
           style: TextStyle(fontSize: 16),
         ),
-        // leading: IconButton(
-        //   icon: Icon(Icons.segment),
-        //   onPressed: () {
-        //     scaffoldkey.currentState.openDrawer();
-        //   },
-        // ),
         actions: [
           IconButton(icon: Icon(Icons.exit_to_app_outlined), onPressed: () {}),
         ],
@@ -49,7 +45,7 @@ class _CoursesState extends State<Courses> {
             width: double.infinity,
             padding: EdgeInsets.all(15),
             child: Text(
-              "اسم الدورة",
+              "${list['courses_name_ar']}",
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -66,7 +62,7 @@ class _CoursesState extends State<Courses> {
                         fontWeight: FontWeight.bold, color: Colors.grey[800]),
                   ),
                   trailing: Text(
-                    "9",
+                    "${list['courses_id']}",
                     style: TextStyle(color: Colors.red),
                   )),
               Padding(
@@ -87,15 +83,13 @@ class _CoursesState extends State<Courses> {
                 },
                 trailing: icon2,
                 title: Text(
-                  "تفاصيل الدورة",
+                  "وصف الدورة",
                   style: liststyleservice,
                 ),
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(15),
-                    child: Text(
-                      "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
-                    ),
+                    child: Text("${list['courses_desc_ar']}"),
                   )
                 ],
               ),
@@ -117,15 +111,13 @@ class _CoursesState extends State<Courses> {
                 },
                 trailing: icon3,
                 title: Text(
-                  "عدد الساعات",
+                  "ساعات الدورة",
                   style: liststyleservice,
                 ),
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(15),
-                    child: Text(
-                      "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
-                    ),
+                    child: Text("${list['courses_hour']} ساعة"),
                   )
                 ],
               ),
@@ -137,25 +129,23 @@ class _CoursesState extends State<Courses> {
                 onExpansionChanged: (status) {
                   if (status) {
                     setState(() {
-                      icon3 = Icon(Icons.remove);
+                      icon4 = Icon(Icons.remove);
                     });
                   } else {
                     setState(() {
-                      icon3 = Icon(Icons.add);
+                      icon4 = Icon(Icons.add);
                     });
                   }
                 },
-                trailing: icon3,
+                trailing: icon4,
                 title: Text(
-                  "المستندات المطلوبة",
+                  "الوقت اللازم لتنفيذ الحكم",
                   style: liststyleservice,
                 ),
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(15),
-                    child: Text(
-                      "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
-                    ),
+                    child: Text("${list['courses_document']}"),
                   )
                 ],
               ),
@@ -163,45 +153,13 @@ class _CoursesState extends State<Courses> {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Divider(color: Colors.grey),
               ),
-              ExpansionTile(
-                onExpansionChanged: (status) {
-                  if (status) {
-                    setState(() {
-                      icon3 = Icon(Icons.remove);
-                    });
-                  } else {
-                    setState(() {
-                      icon3 = Icon(Icons.add);
-                    });
-                  }
-                },
-                trailing: icon3,
-                title: Text(
-                  "رسوم الدورة",
-                  style: liststyleservice,
-                ),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Text(
-                      "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
-                    ),
-                  )
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Divider(color: Colors.grey),
-              ),
-              RaisedButton(
-                padding: EdgeInsets.symmetric(horizontal: 40),
-                color: Colors.red,
-                textColor: Colors.white,
-                onPressed: () {
-                  Navigator.of(context).pushNamed("addordercourse") ; 
-                },
-                child: Text("طلب مشاركة"),
-              )
+              // RaisedButton(
+              //   padding: EdgeInsets.symmetric(horizontal: 40),
+              //   color: Colors.red,
+              //   textColor: Colors.white,
+              //   onPressed: () {},
+              //   child: Text("طلب مذكرة"),
+              // )
             ],
           ),
         ],

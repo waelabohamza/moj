@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
 
 class Questions extends StatefulWidget {
-  Questions({Key key}) : super(key: key);
+  final list ; 
+  Questions({Key key , this.list}) : super(key: key);
 
   @override
   _QuestionsState createState() => _QuestionsState();
@@ -24,6 +25,7 @@ class _QuestionsState extends State<Questions> {
 
   @override
   Widget build(BuildContext context) {
+    var list = widget.list ; 
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,
@@ -49,7 +51,7 @@ class _QuestionsState extends State<Questions> {
             width: double.infinity,
             padding: EdgeInsets.all(15),
             child: Text(
-              "اسم السوال",
+              "${list['questions_name']}",
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -66,7 +68,7 @@ class _QuestionsState extends State<Questions> {
                         fontWeight: FontWeight.bold, color: Colors.grey[800]),
                   ),
                   trailing: Text(
-                    "9",
+                    "${list['questions_id']}",
                     style: TextStyle(color: Colors.red),
                   )),
               Padding(
@@ -94,7 +96,7 @@ class _QuestionsState extends State<Questions> {
                   Padding(
                     padding: const EdgeInsets.all(15),
                     child: Text(
-                      "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
+                      "${list['questions_answer']}"
                     ),
                   )
                 ],
@@ -124,7 +126,7 @@ class _QuestionsState extends State<Questions> {
                   Padding(
                     padding: const EdgeInsets.all(15),
                     child: Text(
-                      "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
+                       "${list['question_document']}"
                     ),
                   )
                 ],
@@ -154,7 +156,7 @@ class _QuestionsState extends State<Questions> {
                   Padding(
                     padding: const EdgeInsets.all(15),
                     child: Text(
-                      "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
+                      "${list['questions_time_ar']}"
                     ),
                   )
                 ],
