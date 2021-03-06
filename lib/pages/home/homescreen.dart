@@ -15,10 +15,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  
-Crud crud = new Crud();
+  Crud crud = new Crud();
 
- bool  isLoading = true ; 
+  bool isLoading = true;
 
   List listHomeDataServicesFavorite = [];
   List listHomeDataServicesCommon = [];
@@ -27,7 +26,6 @@ Crud crud = new Crud();
   List listHomeDataExperts = [];
   List listHomeDataCategories = [];
 
-  
   List issues = [
     {
       "name": "شركات",
@@ -46,12 +44,9 @@ Crud crud = new Crud();
     }
   ];
 
- 
-
   _getData() async {
-
     setState(() {
-    isLoading = true ; 
+      isLoading = true;
     });
 
     var responsebody = await crud.readData(linkHomeData);
@@ -62,17 +57,15 @@ Crud crud = new Crud();
     listHomeDataCourses.addAll(responsebody['coursescommon']);
     listHomeDataCategories.addAll(responsebody['categories']);
 
-    print("==================") ; 
-    print(listHomeDataExperts) ; 
-    print("==================") ;
+    print("==================");
+    print(listHomeDataExperts);
+    print("==================");
 
     if (this.mounted) {
       setState(() {
-    isLoading = false ; 
-
+        isLoading = false;
       });
     }
-
   }
 
   @override
@@ -96,12 +89,15 @@ Crud crud = new Crud();
   Widget build(BuildContext context) {
     double mdw = MediaQuery.of(context).size.width;
 
-    return isLoading == true 
+    return isLoading == true
         ? Center(child: CircularProgressIndicator())
         : ListView(
             // controller: scrollController,
             children: [
-              TopCardCenter(mdw: mdw, list: listHomeDataServicesFavorite , listcat :listHomeDataCategories ),
+              TopCardCenter(
+                  mdw: mdw,
+                  list: listHomeDataServicesFavorite,
+                  listcat: listHomeDataCategories),
               Container(
                   margin: EdgeInsets.only(top: 30),
                   padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
@@ -120,7 +116,8 @@ Crud crud = new Crud();
                           onTap: () {})
                     ],
                   )),
-              ListHorzintal(mdw: mdw, list: listHomeDataServicesCommon, type: "service"),
+              ListHorzintal(
+                  mdw: mdw, list: listHomeDataServicesCommon, type: "service"),
               Container(
                   margin: EdgeInsets.only(top: 10),
                   padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
@@ -184,13 +181,7 @@ Crud crud = new Crud();
                     "القضايا",
                     style: TextStyle(fontSize: 16, color: Colors.black),
                   )),
-              ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: listHomeDataCategories.length,
-                  itemBuilder: (context, i) {
-                    return ListBottom(mdw: mdw, list: listHomeDataCategories[i]);
-                  }),
+              ListBottom(mdw: mdw, list: listHomeDataCategories),
               SizedBox(height: 30),
             ],
           );
