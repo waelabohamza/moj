@@ -15,7 +15,6 @@ class Services extends StatefulWidget {
 
 class _ServicesState extends State<Services>
     with SingleTickerProviderStateMixin {
-
   var search = "";
 
   TabController tc;
@@ -36,7 +35,9 @@ class _ServicesState extends State<Services>
 
   @override
   void initState() {
-    idcat = widget.catid == null ? widget.categories[0]['categories_id'] : widget.catid ;
+    idcat = widget.catid == null
+        ? widget.categories[0]['categories_id']
+        : widget.catid;
     tc = new TabController(
         length: widget.categories.length,
         vsync: this,
