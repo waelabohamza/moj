@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
 import 'package:moj/pages/services/service.dart';
+import 'package:moj/pages/services/services.dart';
 
 class TopCardCenter extends StatelessWidget {
   final list;
+  final listcat ; 
   final mdw;
-  const TopCardCenter({Key key, this.mdw, this.list}) : super(key: key);
+  const TopCardCenter({Key key, this.mdw, this.list  , this.listcat}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -95,7 +97,9 @@ class TopCardCenter extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
               onPressed: () {
-                Navigator.of(context).pushNamed("services");
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                     return Services(categories: listcat) ; 
+                }))  ; 
               },
               color: Colors.red,
               textColor: Colors.white,

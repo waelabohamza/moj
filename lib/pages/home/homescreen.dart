@@ -101,7 +101,7 @@ Crud crud = new Crud();
         : ListView(
             // controller: scrollController,
             children: [
-              TopCardCenter(mdw: mdw, list: listHomeDataServicesFavorite),
+              TopCardCenter(mdw: mdw, list: listHomeDataServicesFavorite , listcat :listHomeDataCategories ),
               Container(
                   margin: EdgeInsets.only(top: 30),
                   padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),

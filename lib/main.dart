@@ -5,6 +5,7 @@ import 'package:moj/pages/auth/login.dart';
 import 'package:moj/pages/home/home.dart';
 import 'package:moj/routes.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 SharedPreferences sharedPrefs;
@@ -13,7 +14,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   sharedPrefs = await SharedPreferences.getInstance();
   userid = sharedPrefs.getString("id");
-  runApp(MyApp());
+  runApp(MultiProvider(providers: [
+     ChangeNotifierProvider(create: (context){
+       return ChangeLocal() ; 
+     })
+  ],child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -37,4 +42,9 @@ class MyApp extends StatelessWidget {
       locale: Locale("ar", ""),
     );
   }
+}
+
+
+class ChangeLocal with ChangeNotifier {
+  
 }

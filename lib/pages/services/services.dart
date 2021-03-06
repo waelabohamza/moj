@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
 
 class Services extends StatefulWidget {
-  Services({Key key}) : super(key: key);
+  final categories ; 
+  Services({Key key , this.categories}) : super(key: key);
 
   @override
   _ServicesState createState() => _ServicesState();
@@ -10,17 +11,12 @@ class Services extends StatefulWidget {
 
 class _ServicesState extends State<Services>
     with SingleTickerProviderStateMixin {
+
   TabController tc;
+  
+ 
 
-  List categories = [
-    {"name": "جميع الخدمات", "icon": "ss"},
-    {"name": "الافراد", "icon": "ss"},
-    {"name": "الشركات", "icon": "ss"},
-    {"name": "الجزائية", "icon": "ss"},
-    {"name": "الخدمات ذات الاولوية", "icon": "ss"},
-  ];
-
-  List services = [
+    List services = [
     {"name": "تقديم المساعدة في المسائل المدنية"},
     {"name": "استرداد المطلوبين"},
     {"name": "نقل المحكوم عليه"}
@@ -30,12 +26,13 @@ class _ServicesState extends State<Services>
 
   @override
   void initState() {
-    tc = new TabController(length: categories.length, vsync: this);
+    tc = new TabController(length: widget.categories.length ,  vsync: this);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    List categories = widget.categories ; 
     return Scaffold(
       appBar: AppBar(
         shape: Border.all(width: 0, color: mainColor),
@@ -111,7 +108,9 @@ class _ServicesState extends State<Services>
 }
 
 class ListServices extends StatelessWidget {
+
   final services;
+
   const ListServices({Key key, this.services}) : super(key: key);
 
   @override
