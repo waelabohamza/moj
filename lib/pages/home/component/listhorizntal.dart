@@ -66,7 +66,7 @@ class ListHorzintal extends StatelessWidget {
                                 : type == "questions"
                                     ? list[i]['questions_name']
                                     : type == "courses"
-                                        ? list[i]['courses_name']
+                                        ? list[i]['catcourses_name']
                                         : "sew",
                             style: TextStyle(fontSize: 12),
                             textAlign: TextAlign.center,

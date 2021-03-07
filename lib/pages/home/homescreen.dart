@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List listHomeDataCourses = [];
   List listHomeDataExperts = [];
   List listHomeDataCategories = [];
+  List listHomeDataCatCourse = [];
 
   _getData() async {
     setState(() {
@@ -34,12 +35,14 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     var responsebody = await crud.readData(linkHomeData);
+
     listHomeDataServicesFavorite.addAll(responsebody['servicesfavorite']);
     listHomeDataServicesCommon.addAll(responsebody['servicescommon']);
     listHomeDataExperts.addAll(responsebody['expertscommon']);
     listHomeDataQuestions.addAll(responsebody['questionscommon']);
     listHomeDataCourses.addAll(responsebody['coursescommon']);
     listHomeDataCategories.addAll(responsebody['categories']);
+    listHomeDataCatCourse.addAll(responsebody['catcourses']) ; 
 
     print("==================");
     print(listHomeDataExperts);
@@ -140,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )),
               ListHorzintal(
                 mdw: mdw,
-                list: listHomeDataCourses,
+                list: listHomeDataCatCourse,
                 type: "courses",
               ),
               SizedBox(height: 10),
