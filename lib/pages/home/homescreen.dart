@@ -6,6 +6,8 @@ import 'package:moj/pages/home/component/listexperts.dart';
 import 'package:moj/pages/home/component/listhorizntal.dart';
 import 'package:moj/pages/home/component/topcardcenter.dart';
 import 'package:moj/pages/linkapi.dart';
+import 'package:moj/pages/services/service.dart';
+import 'package:moj/pages/services/services.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -113,7 +115,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             "رؤية الجميع",
                             style: TextStyle(fontSize: 16, color: mainColor),
                           ),
-                          onTap: () {})
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                               return  Services(categories:listHomeDataCategories) ; 
+                            }));
+                          })
                     ],
                   )),
               ListHorzintal(

@@ -149,12 +149,9 @@ class _ServicesState extends State<Services>
   }
 }
 
-class ListServices extends StatelessWidget {
-
+class ListServices extends StatelessWidget{
   final services;
-
   const ListServices({Key key, this.services}) : super(key: key);
-  
   @override
   Widget build(BuildContext context) {
     return Container(
