@@ -36,6 +36,10 @@ const String  linkServices    = "$serverName/api/services/services.php" ;
 
 // Course 
 
+const String  linkCatCourse   = "$serverName/api/courses/courses.php" ;  
+
+const String  linkCourses    = "$serverName/api/catcourse/catcourses.php" ;  
+
 
 // Root Image 
 

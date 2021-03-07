@@ -1,69 +1,80 @@
 import 'package:flutter/material.dart';
+import 'package:moj/component/crud.dart';
 import 'package:moj/const.dart';
+import 'package:moj/pages/linkapi.dart';
 
 class Courses extends StatefulWidget {
-  final type ; 
-  Courses({Key key , this.type}) : super(key: key);
-
+  final categories;
+  final index;
+  final catid;
+  Courses({Key key, this.categories, this.index, this.catid}) : super(key: key);
   @override
   _CoursesState createState() => _CoursesState();
 }
 
-class _CoursesState extends State<Courses>
-    with SingleTickerProviderStateMixin {
+class _CoursesState extends State<Courses> with SingleTickerProviderStateMixin {
+  var search = "";
+
   TabController tc;
 
-  List categories = [
-    {"name": "جميع الخدمات", "icon": "ss"},
-    {"name": "الافراد", "icon": "ss"},
-    {"name": "الشركات", "icon": "ss"},
-    {"name": "الجزائية", "icon": "ss"},
-    {"name": "الخدمات ذات الاولوية", "icon": "ss"},
-  ];
+  Crud crud = new Crud();
 
-  List Courses = [
-    {"name": "تقديم المساعدة في المسائل المدنية"},
-    {"name": "استرداد المطلوبين"},
-    {"name": "نقل المحكوم عليه"}
-  ];
+  var idcat;
+
+  bool isLoading = false;
 
   List icons = [];
 
   @override
   void initState() {
-    tc = new TabController(length: categories.length, vsync: this);
+    idcat = widget.catid == null
+        ? widget.categories[0]['categories_id']
+        : widget.catid;
+    tc = new TabController(
+        length: widget.categories.length,
+        vsync: this,
+        initialIndex: widget.index ?? 0);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    List categories = widget.categories;
     return Scaffold(
       appBar: AppBar(
         shape: Border.all(width: 0, color: mainColor),
         actions: [IconButton(icon: Icon(Icons.exit_to_app), onPressed: () {})],
         bottom: TabBar(
-            labelColor: Colors.white,
-            unselectedLabelColor: Colors.white,
-            isScrollable: true,
-            indicatorColor: Colors.white,
-            indicatorWeight: 3,
-            controller: tc,
-            tabs: [
-              ...List.generate(
-                  5,
-                  (index) => Tab(
-                        iconMargin: EdgeInsets.only(bottom: 0),
-                        child: Text(
-                          "${categories[index]['name']}",
-                          style: TextStyle(fontSize: 13),
-                        ),
-                        icon: Icon(
-                          Icons.ad_units,
-                          size: 25,
-                          color: Colors.white,
-                        ),
-                      ))
-            ]),
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.white,
+          isScrollable: true,
+          indicatorColor: Colors.white,
+          indicatorWeight: 3,
+          controller: tc,
+          onTap: (indextab) {
+            // Get Id For All Categories for Filter Body base on id categories
+            setState(() {
+              isLoading = true;
+              idcat = categories[indextab]['categories_id'];
+            });
+          },
+          tabs: [
+            ...List.generate(
+                widget.categories.length,
+                (index) => Tab(
+                      iconMargin: EdgeInsets.only(bottom: 0),
+                      child: Text(
+                        "${categories[index]['categories_name_ar']}",
+                        style: TextStyle(fontSize: 13),
+                      ),
+                      icon: Icon(
+                        Icons.golf_course_outlined,
+                        size: 25,
+                        color: Colors.white,
+                      ),
+                    ))
+          ],
+        ),
         title: Text(
           'دليل الخدمات',
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -84,7 +95,11 @@ class _CoursesState extends State<Courses>
         child: ListView(
           children: [
             TextField(
-              onChanged: (val) {},
+              onChanged: (val) {
+                setState(() {
+                  search = val;
+                });
+              },
               decoration: InputDecoration(
                   hintText: "ابدا البحث هنا ",
                   prefixIcon: Icon(Icons.search),
@@ -92,17 +107,38 @@ class _CoursesState extends State<Courses>
                   fillColor: Colors.grey[100],
                   border: InputBorder.none),
             ),
-            ListView.separated(
-                separatorBuilder: (context, i) {
-                  return Divider();
-                },
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: Courses.length,
-                itemBuilder: (context, i) {
-                  return ListCourses(
-                    Courses: Courses[i],
-                  );
+            FutureBuilder(
+                future: crud.writeData(linkCourses,
+                    {"id": idcat.toString(), "search": search.toString()}),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Container(
+                      margin: EdgeInsets.only(top: 50),
+                      child: new Center(
+                        child: new CircularProgressIndicator(),
+                      ),
+                    );
+                  }
+                  if (snapshot.hasData) {
+                    if (snapshot.data[0] == "falid") {
+                      return Center(
+                        child: Text("Not Courses"),
+                      );
+                    }
+                    return ListView.separated(
+                        separatorBuilder: (context, i) {
+                          return Divider();
+                        },
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, i) {
+                          return ListCourses(
+                            Courses: snapshot.data[i],
+                          );
+                        });
+                  }
+                  return Center(child: CircularProgressIndicator());
                 })
           ],
         ),
@@ -114,14 +150,13 @@ class _CoursesState extends State<Courses>
 class ListCourses extends StatelessWidget {
   final Courses;
   const ListCourses({Key key, this.Courses}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Row(
         children: [
-          Text("${Courses['name']}"),
+          Text("${Courses['Courses_name']}"),
           Spacer(),
           InkWell(
             onTap: () {},

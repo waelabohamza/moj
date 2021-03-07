@@ -28,24 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
   List listHomeDataExperts = [];
   List listHomeDataCategories = [];
 
-  List issues = [
-    {
-      "name": "شركات",
-      "desc":
-          "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل"
-    },
-    {
-      "name": "فردية",
-      "desc":
-          "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل"
-    },
-    {
-      "name": "جزائي",
-      "desc":
-          "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل"
-    }
-  ];
-
   _getData() async {
     setState(() {
       isLoading = true;
@@ -116,8 +98,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: TextStyle(fontSize: 16, color: mainColor),
                           ),
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                               return  Services(categories:listHomeDataCategories) ; 
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return Services(
+                                  categories: listHomeDataCategories);
                             }));
                           })
                     ],
@@ -128,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   margin: EdgeInsets.only(top: 10),
                   padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
                   child: Row(
-                    children: [
+                    children:[
                       Text(
                         "الاسئلة الشائعة",
                         style: TextStyle(fontSize: 16, color: Colors.black),
