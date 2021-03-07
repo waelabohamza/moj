@@ -25,12 +25,6 @@ class _ServicesState extends State<Services>
 
   bool isLoading = false;
 
-  List services = [
-    {"name": "تقديم المساعدة في المسائل المدنية"},
-    {"name": "استرداد المطلوبين"},
-    {"name": "نقل المحكوم عليه"}
-  ];
-
   List icons = [];
 
   @override
@@ -156,9 +150,11 @@ class _ServicesState extends State<Services>
 }
 
 class ListServices extends StatelessWidget {
+
   final services;
 
   const ListServices({Key key, this.services}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return Container(
