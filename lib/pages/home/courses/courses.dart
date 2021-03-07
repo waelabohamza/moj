@@ -28,7 +28,7 @@ class _CoursesState extends State<Courses> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     idcat = widget.catid == null
-        ? widget.categories[0]['categories_id']
+        ? widget.categories[0]['catcourses_id']
         : widget.catid;
     tc = new TabController(
         length: widget.categories.length,
@@ -55,7 +55,7 @@ class _CoursesState extends State<Courses> with SingleTickerProviderStateMixin {
             // Get Id For All Categories for Filter Body base on id categories
             setState(() {
               isLoading = true;
-              idcat = categories[indextab]['categories_id'];
+              idcat = categories[indextab]['catcourses_id'];
             });
           },
           tabs: [
@@ -64,7 +64,7 @@ class _CoursesState extends State<Courses> with SingleTickerProviderStateMixin {
                 (index) => Tab(
                       iconMargin: EdgeInsets.only(bottom: 0),
                       child: Text(
-                        "${categories[index]['categories_name_ar']}",
+                        "${categories[index]['catcourses_name_ar']}",
                         style: TextStyle(fontSize: 13),
                       ),
                       icon: Icon(
@@ -134,7 +134,7 @@ class _CoursesState extends State<Courses> with SingleTickerProviderStateMixin {
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, i) {
                           return ListCourses(
-                            Courses: snapshot.data[i],
+                            courses: snapshot.data[i],
                           );
                         });
                   }
@@ -147,16 +147,16 @@ class _CoursesState extends State<Courses> with SingleTickerProviderStateMixin {
   }
 }
 
-class ListCourses extends StatelessWidget {
-  final Courses;
-  const ListCourses({Key key, this.Courses}) : super(key: key);
+class ListCourses extends StatelessWidget{
+  final courses;
+  const ListCourses({Key key, this.courses}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Row(
         children: [
-          Text("${Courses['Courses_name']}"),
+          Text("${courses['courses_name']}"),
           Spacer(),
           InkWell(
             onTap: () {},

@@ -37,7 +37,7 @@ class ListHorzintal extends StatelessWidget {
                 } else {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return Courses();
+                    return Courses(categories: list,);
                   }));
                 }
               },
