@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:moj/component/crud.dart';
 import 'package:moj/const.dart';
 import 'package:moj/pages/linkapi.dart';
+import 'package:moj/pages/services/service.dart';
 
 class Services extends StatefulWidget {
   final categories;
@@ -159,9 +160,13 @@ class ListServices extends StatelessWidget{
       child: Row(
         children: [
           Text("${services['services_name']}"),
-          Spacer(),
+          Spacer(), 
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                       return Service(list: services) ; 
+              })) ; 
+            },
             child: Column(children: [
               Icon(Icons.help_outline_outlined, size: 25, color: mainColor),
               Text("معلومات", style: TextStyle(color: Colors.red, fontSize: 13))

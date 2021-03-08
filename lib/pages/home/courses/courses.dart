@@ -47,7 +47,7 @@ class _CoursesState extends State<Courses> with SingleTickerProviderStateMixin {
         bottom: TabBar(
           labelColor: Colors.white,
           unselectedLabelColor: Colors.white,
-          isScrollable: true,
+          // isScrollable: true,
           indicatorColor: Colors.white,
           indicatorWeight: 3,
           controller: tc,
@@ -56,6 +56,8 @@ class _CoursesState extends State<Courses> with SingleTickerProviderStateMixin {
             setState(() {
               isLoading = true;
               idcat = categories[indextab]['catcourses_id'];
+              print("===================================") ; 
+              print(idcat) ; 
             });
           },
           tabs: [
@@ -64,7 +66,7 @@ class _CoursesState extends State<Courses> with SingleTickerProviderStateMixin {
                 (index) => Tab(
                       iconMargin: EdgeInsets.only(bottom: 0),
                       child: Text(
-                        "${categories[index]['catcourses_name_ar']}",
+                        "${categories[index]['catcourses_name']}",
                         style: TextStyle(fontSize: 13),
                       ),
                       icon: Icon(
@@ -76,7 +78,7 @@ class _CoursesState extends State<Courses> with SingleTickerProviderStateMixin {
           ],
         ),
         title: Text(
-          'دليل الخدمات',
+          'دليل الدورات',
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         leading: IconButton(
@@ -108,7 +110,7 @@ class _CoursesState extends State<Courses> with SingleTickerProviderStateMixin {
                   border: InputBorder.none),
             ),
             FutureBuilder(
-                future: crud.writeData(linkCourses,
+                future: crud.writeData(linkCourse,
                     {"id": idcat.toString(), "search": search.toString()}),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
@@ -147,7 +149,7 @@ class _CoursesState extends State<Courses> with SingleTickerProviderStateMixin {
   }
 }
 
-class ListCourses extends StatelessWidget{
+class ListCourses extends StatelessWidget {
   final courses;
   const ListCourses({Key key, this.courses}) : super(key: key);
   @override
@@ -156,7 +158,7 @@ class ListCourses extends StatelessWidget{
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Row(
         children: [
-          Text("${courses['courses_name']}"),
+          Text("${courses['courses_name_ar']}"),
           Spacer(),
           InkWell(
             onTap: () {},

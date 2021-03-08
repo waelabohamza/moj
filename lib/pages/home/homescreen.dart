@@ -28,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List listHomeDataExperts = [];
   List listHomeDataCategories = [];
   List listHomeDataCatCourse = [];
+  List listHomeDataCatExperts = [];
 
   _getData() async {
     setState(() {
@@ -43,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
     listHomeDataCourses.addAll(responsebody['coursescommon']);
     listHomeDataCategories.addAll(responsebody['categories']);
     listHomeDataCatCourse.addAll(responsebody['catcourses']) ; 
+    listHomeDataCatExperts.addAll(responsebody['catexperts']) ; 
 
     print("==================");
     print(listHomeDataExperts);
@@ -180,3 +182,6 @@ class _HomeScreenState extends State<HomeScreen> {
           );
   }
 }
+
+
+ 
