@@ -9,6 +9,7 @@ class Questions extends StatefulWidget {
   @override
   _ServicesState createState() => _ServicesState();
 }
+
 class _ServicesState extends State<Questions>
     with SingleTickerProviderStateMixin {
   var search = "";
@@ -59,7 +60,7 @@ class _ServicesState extends State<Questions>
                   border: InputBorder.none),
             ),
             FutureBuilder(
-                future: crud.writeData(linkServices,
+                future: crud.writeData(linkQuestions,
                     {"id": idcat.toString(), "search": search.toString()}),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
@@ -84,7 +85,7 @@ class _ServicesState extends State<Questions>
                         physics: NeverScrollableScrollPhysics(),
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, i) {
-                          return ListServices(
+                          return ListQuestions(
                             questions: snapshot.data[i],
                           );
                         });
@@ -98,16 +99,16 @@ class _ServicesState extends State<Questions>
   }
 }
 
-class ListServices extends StatelessWidget {
+class ListQuestions extends StatelessWidget {
   final questions;
-  const ListServices({Key key, this.questions}) : super(key: key);
+  const ListQuestions({Key key, this.questions}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Row(
         children: [
-          Text("${questions['services_name']}"),
+          Text("${questions['questions_name']}"),
           Spacer(),
           InkWell(
             onTap: () {
@@ -122,7 +123,12 @@ class ListServices extends StatelessWidget {
           ),
           SizedBox(width: 20),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) {
+                    return Question(list:questions) ; 
+                  }));
+            },
             child: Column(children: [
               Icon(Icons.download_done_sharp, size: 25, color: Colors.green),
               Text("ابدا ", style: TextStyle(color: Colors.green, fontSize: 13))
