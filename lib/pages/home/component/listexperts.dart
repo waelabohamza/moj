@@ -27,13 +27,13 @@ class ListExperts extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                            height: 60,
+                            height: 100,
                             padding: EdgeInsets.all(10),
                             child: Image.network(
                               "$linkRootImage/experts/${list[i]['experts_image']}",
                               fit: BoxFit.fill,
                               width: 75,
-                              height: 75,
+                              height: 100,
                             )),
                         Text(
                           "${list[i]['experts_name']}",

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moj/component/crud.dart';
 import 'package:moj/const.dart';
+import 'package:moj/pages/experts/experts.dart';
 import 'package:moj/pages/home/component/listbottom.dart';
 import 'package:moj/pages/home/component/listexperts.dart';
 import 'package:moj/pages/home/component/listhorizntal.dart';
@@ -164,7 +165,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             "رؤية الجميع",
                             style: TextStyle(fontSize: 16, color: mainColor),
                           ),
-                          onTap: () {})
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                                           return Experts(categories: listHomeDataCatExperts,) ; 
+                            })) ; 
+                          })
                     ],
                   )),
               ListExperts(mdw: mdw, list: listHomeDataExperts),
