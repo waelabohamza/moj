@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
-import 'package:moj/pages/home/courses/courses.dart';
+import 'package:moj/pages/courses/courses.dart';
 import 'package:moj/pages/questions/questions.dart';
 import 'package:moj/pages/services/service.dart';
 

@@ -38,7 +38,7 @@ class _ExpertsState extends State<Experts> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     List categories = widget.categories;
-
+    double mdw = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         shape: Border.all(width: 0, color: mainColor),
@@ -65,7 +65,7 @@ class _ExpertsState extends State<Experts> with SingleTickerProviderStateMixin {
                 (index) => Tab(
                       iconMargin: EdgeInsets.only(bottom: 0),
                       child: Text(
-                        "${categories[index]['catcourses_name']}",
+                        "${categories[index]['catexperts_name']}",
                         style: TextStyle(fontSize: 13),
                       ),
                       icon: Icon(
@@ -108,27 +108,88 @@ class _ExpertsState extends State<Experts> with SingleTickerProviderStateMixin {
                 fillColor: Colors.grey[100],
                 border: InputBorder.none),
           ),
-          FutureBuilder(
-            future: crud.writeData(
-              linkExperts,
-              {"id": idcat.toString(), "search": search.toString()},
-            ),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                return GridView.count(
-                  crossAxisCount: 2 , 
-                  children: List.generate(snapshot.data.length, (index) {
-                             
-                             
+          Container(
+            margin: EdgeInsets.only(top: 20),
+            child: FutureBuilder(
+              future: crud.writeData(
+                linkExperts,
+                {"id": idcat.toString(), "search": search.toString()},
+              ),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasError) {
+                  return Center(child: Text("Error"));
+                }
+                if (snapshot.hasData) {
+                  if (snapshot.data[0] == "falid") {
+                    return Center(
+                      child: Text("Not Courses"),
+                    );
+                  }
 
-                  }),
+                  return GridView.count(
+                    childAspectRatio: 1.3,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    crossAxisCount: 2,
+                    children: List.generate(snapshot.data.length, (index) {
+                      return ListHomeExperts(
+                          mdw: mdw, list: snapshot.data[index]);
+                    }),
                   );
-              }
-              return Center(child: CircularProgressIndicator());
-            },
+                }
+                return Center(child: CircularProgressIndicator());
+              },
+            ),
           )
         ],
       )),
     );
+  }
+}
+
+class ListHomeExperts extends StatelessWidget {
+  final mdw;
+  final list;
+  const ListHomeExperts({Key key, this.mdw, this.list}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: EdgeInsets.symmetric(horizontal: mdw / 15),
+        height: 140,
+        child: InkWell(
+          onTap: () {},
+          child: Container(
+            width: mdw / 3,
+            child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                elevation: 3,
+                child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                        height: 75,
+                        padding: EdgeInsets.all(10),
+                        child: Image.network(
+                          "$linkRootImage/experts/${list['experts_image']}",
+                          fit: BoxFit.fill,
+                          width: 75,
+                          height: 75,
+                        )),
+                    Text(
+                      "${list['experts_name']}",
+                      style: TextStyle(fontSize: 12),
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      "${list['experts_spec']}",
+                      style: TextStyle(fontSize: 12),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                )),
+          ),
+        ));
   }
 }

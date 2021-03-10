@@ -9,7 +9,7 @@ class ListExperts extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: mdw / 15),
-      height: 120,
+      height: 140,
       child: ListView.builder(
           itemCount: list.length,
           scrollDirection: Axis.horizontal,
@@ -27,13 +27,13 @@ class ListExperts extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                            height: 100,
+                            height: 75,
                             padding: EdgeInsets.all(10),
                             child: Image.network(
                               "$linkRootImage/experts/${list[i]['experts_image']}",
                               fit: BoxFit.fill,
                               width: 75,
-                              height: 100,
+                              height: 75,
                             )),
                         Text(
                           "${list[i]['experts_name']}",
