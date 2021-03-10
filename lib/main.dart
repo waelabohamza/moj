@@ -4,7 +4,7 @@ import 'package:moj/component/applocal.dart';
 import 'package:moj/pages/auth/login.dart';
 import 'package:moj/pages/home/home.dart';
 import 'package:moj/routes.dart';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+// import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,7 +24,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context){
-    FlutterStatusbarcolor.setStatusBarColor(Colors.red);
+    // FlutterStatusbarcolor.setStatusBarColor(Colors.red);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Moj',
