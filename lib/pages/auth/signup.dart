@@ -82,7 +82,7 @@ class _SignUpState extends State<SignUp> {
                   bulidTextForm(
                       "كلمة المرور", Icons.lock_open, password, "password"),
                   SizedBox(height: 40),
-                  FlatButton(
+                  MaterialButton(
                     color: Colors.grey[50],
                     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                     shape: RoundedRectangleBorder(

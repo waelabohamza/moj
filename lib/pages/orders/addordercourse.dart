@@ -73,7 +73,9 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
                     ),
                   ],
                 ),
-                RaisedButton(
+                MaterialButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50)),
                   onPressed: () {},
                   child: Text("صورة الرخصة"),
                   color: mainColor,
@@ -81,7 +83,9 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 ),
                 SizedBox(height: 20),
-                RaisedButton(
+                MaterialButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50)),
                   onPressed: () {
                     Navigator.of(context).pushNamed("addordercourse");
                   },
@@ -98,7 +102,7 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
     );
   }
 
-  buildTextForm(labeltext, icon, mycontroller) {
+    buildTextForm(labeltext, icon, mycontroller) {
     return TextFormField(
       validator: (val) {
         return null;

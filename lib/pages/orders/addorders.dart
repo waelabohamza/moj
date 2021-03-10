@@ -11,21 +11,21 @@ class AddOrders extends StatefulWidget {
 
 class _AddOrdersState extends State<AddOrders> {
   List<String> datadropdowncatname = [
-      "القسم 1"  , 
-      "القسم 2"  , 
-      "القسم 3 "  , 
-      "القسم 4"  , 
-      "القسم 5"  , 
-  ] ; 
-    List<String> datadropdownservicename = [
-      "الخدمة 1"  , 
-      "الخدمة 2"  , 
-      "الخدمة 3 "  , 
-      "الخدمة 4"  , 
-      "الخدمة 5"  , 
-  ] ; 
-  var servicename ; 
-  var catname ; 
+    "القسم 1",
+    "القسم 2",
+    "القسم 3 ",
+    "القسم 4",
+    "القسم 5",
+  ];
+  List<String> datadropdownservicename = [
+    "الخدمة 1",
+    "الخدمة 2",
+    "الخدمة 3 ",
+    "الخدمة 4",
+    "الخدمة 5",
+  ];
+  var servicename;
+  var catname;
   TextEditingController username = new TextEditingController();
 
   @override
@@ -36,50 +36,51 @@ class _AddOrdersState extends State<AddOrders> {
         title: Text('اضافة طلب'),
       ),
       body: Container(
+        padding: EdgeInsets.all(10),
         child: ListView(
           children: [
             Form(
                 child: Column(
               children: [
-                buildTextForm("ادخل الاسم", Icons.person_add_alt, username),
-                buildTextForm(
-                    "ادخل البريد الالكتروني", Icons.mail_outline, username),
-                buildTextForm("ادخل رقم الهاتف",
-                    Icons.phone_bluetooth_speaker_outlined, username),
-                buildTextForm(
-                    "ادخل العنوان ", Icons.location_city_outlined, username),
-                      DropdownSearch(
-                    items: datadropdowncatname,
-                    label: "ادخل هنا اسم القسم  الذي تريد",
-                    mode: Mode.BOTTOM_SHEET,
-                    onChanged: (val) async {
-                      setState(() {
-                        catname = val;
-                      });
+                bulidTextForm("ادخل الاسم", Icons.person_add_alt, username, ""),
+                bulidTextForm(
+                    "ادخل البريد الالكتروني", Icons.mail_outline, username, ""),
+                bulidTextForm("ادخل رقم الهاتف",
+                    Icons.phone_bluetooth_speaker_outlined, username, ""),
+                bulidTextForm("ادخل العنوان ", Icons.location_city_outlined,
+                    username, ""),
+                DropdownSearch(
+                  items: datadropdowncatname,
+                  label: "ادخل هنا اسم القسم  الذي تريد",
+                  mode: Mode.BOTTOM_SHEET,
+                  onChanged: (val) async {
+                    setState(() {
+                      catname = val;
+                    });
 
-                      
-                      // setState(() {});
-                    },
-                    selectedItem: "اسم الخدمة",
-                  ),
-                    DropdownSearch(
-                    items: datadropdownservicename,
-                    label: "ادخل هنا اسم الخدمة  الذي تريد",
-                    mode: Mode.BOTTOM_SHEET,
-                    onChanged: (val) async {
-                      setState(() {
-                        servicename = val;
-                      });
+                    // setState(() {});
+                  },
+                  selectedItem: "اسم الخدمة",
+                ),
+                DropdownSearch(
+                  items: datadropdownservicename,
+                  label: "ادخل هنا اسم الخدمة  الذي تريد",
+                  mode: Mode.BOTTOM_SHEET,
+                  onChanged: (val) async {
+                    setState(() {
+                      servicename = val;
+                    });
 
-                      
-                      // setState(() {});
-                    },
-                    selectedItem: "اسم القسم",
-                  ),
+                    // setState(() {});
+                  },
+                  selectedItem: "اسم القسم",
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    RaisedButton(
+                    MaterialButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
                       onPressed: () {},
                       child: Text("صورة الرخصة"),
                       color: mainColor,
@@ -87,22 +88,22 @@ class _AddOrdersState extends State<AddOrders> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                     ),
-                    RaisedButton(
+                    MaterialButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50)),
                         color: mainColor,
                         textColor: Colors.white,
                         padding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                        onPressed: () {
-
-                        },
+                        onPressed: () {},
                         child: Text("صورة الهوية")),
                   ],
                 ),
                 SizedBox(height: 20),
-                RaisedButton(
-                  onPressed: () {
-
-                  },
+                MaterialButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50)),
+                  onPressed: () {},
                   child: Text("اضافة الطلب"),
                   color: mainColor,
                   textColor: Colors.white,
@@ -116,18 +117,24 @@ class _AddOrdersState extends State<AddOrders> {
     );
   }
 
-  buildTextForm(labeltext, icon, mycontroller) {
-    return TextFormField(
-      validator: (val) {
-        return null;
-      },
-      controller: mycontroller,
-      decoration: InputDecoration(
-          prefixIcon: Icon(icon),
-          labelText: labeltext,
-          filled: true,
-          fillColor: Colors.white),
+  Widget bulidTextForm(hint, IconData icon, control, type) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 10),
+      child: TextFormField(
+        controller: control,
+        validator: (val) {
+          return null;
+        },
+        decoration: InputDecoration(
+            contentPadding: EdgeInsets.all(1),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+            suffixIcon: type == "password"
+                ? Icon(Icons.remove_red_eye_outlined)
+                : SizedBox(),
+            prefixIcon: Icon(icon),
+            hintText: hint,
+            hintStyle: TextStyle(fontSize: 14)),
+      ),
     );
   }
-  
 }
