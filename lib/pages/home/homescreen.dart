@@ -7,6 +7,7 @@ import 'package:moj/pages/home/component/listexperts.dart';
 import 'package:moj/pages/home/component/listhorizntal.dart';
 import 'package:moj/pages/home/component/topcardcenter.dart';
 import 'package:moj/pages/linkapi.dart';
+import 'package:moj/pages/questions/questions.dart';
 import 'package:moj/pages/services/service.dart';
 import 'package:moj/pages/services/services.dart';
 
@@ -44,8 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
     listHomeDataQuestions.addAll(responsebody['questionscommon']);
     listHomeDataCourses.addAll(responsebody['coursescommon']);
     listHomeDataCategories.addAll(responsebody['categories']);
-    listHomeDataCatCourse.addAll(responsebody['catcourses']) ; 
-    listHomeDataCatExperts.addAll(responsebody['catexperts']) ; 
+    listHomeDataCatCourse.addAll(responsebody['catcourses']);
+    listHomeDataCatExperts.addAll(responsebody['catexperts']);
 
     print("==================");
     print(listHomeDataExperts);
@@ -118,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   margin: EdgeInsets.only(top: 10),
                   padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
                   child: Row(
-                    children:[
+                    children: [
                       Text(
                         "الاسئلة الشائعة",
                         style: TextStyle(fontSize: 16, color: Colors.black),
@@ -129,7 +130,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             "رؤية الجميع",
                             style: TextStyle(fontSize: 16, color: mainColor),
                           ),
-                          onTap: () {})
+                          onTap: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return Questions();
+                            }));
+                          })
                     ],
                   )),
               ListHorzintal(
@@ -166,9 +172,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: TextStyle(fontSize: 16, color: mainColor),
                           ),
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                                           return Experts(categories: listHomeDataCatExperts,) ; 
-                            })) ; 
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return Experts(
+                                categories: listHomeDataCatExperts,
+                              );
+                            }));
                           })
                     ],
                   )),
@@ -187,6 +196,3 @@ class _HomeScreenState extends State<HomeScreen> {
           );
   }
 }
-
-
- 

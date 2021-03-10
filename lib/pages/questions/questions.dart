@@ -9,10 +9,8 @@ class Questions extends StatefulWidget {
   @override
   _ServicesState createState() => _ServicesState();
 }
-
 class _ServicesState extends State<Questions>
     with SingleTickerProviderStateMixin {
-      
   var search = "";
   TabController tc;
   Crud crud = new Crud();
