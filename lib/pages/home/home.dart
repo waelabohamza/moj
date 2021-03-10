@@ -1,5 +1,6 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:moj/component/mydrawer.dart';
 import 'package:moj/const.dart';
 import 'package:moj/main.dart';
@@ -40,6 +41,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       key: scaffoldkey,
       appBar: AppBar(
+         systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.red),
       shape: Border.all(width: 0 , color: mainColor),
         toolbarHeight: 50,
         elevation: 0,

@@ -1,235 +1,182 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:moj/component/crud.dart';
 import 'package:moj/const.dart';
+import 'package:moj/pages/linkapi.dart';
 
 class Courses extends StatefulWidget {
-  Courses({Key key}) : super(key: key);
-
+  final categories;
+  final index;
+  final catid;
+  Courses({Key key, this.categories, this.index, this.catid}) : super(key: key);
   @override
   _CoursesState createState() => _CoursesState();
 }
 
-class _CoursesState extends State<Courses> {
-  Icon icon1 = Icon(Icons.add);
-  Icon icon2 = Icon(Icons.add);
-  Icon icon3 = Icon(Icons.add);
-  Icon icon4 = Icon(Icons.add);
-  Icon icon5 = Icon(Icons.add);
-  Icon icon6 = Icon(Icons.add);
+class _CoursesState extends State<Courses> with SingleTickerProviderStateMixin {
+  var search = "";
 
-  TextStyle liststyleservice = TextStyle(
-      color: Colors.grey[800], fontWeight: FontWeight.bold, fontSize: 18);
+  TabController tc;
 
-  GlobalKey<ScaffoldState> scaffoldkey = new GlobalKey<ScaffoldState>();
+  Crud crud = new Crud();
+
+  var idcat;
+
+  bool isLoading = false;
+
+  List icons = [];
+
+  @override
+  void initState() {
+    idcat = widget.catid == null
+        ? widget.categories[0]['catcourses_id']
+        : widget.catid;
+    tc = new TabController(
+        length: widget.categories.length,
+        vsync: this,
+        initialIndex: widget.index ?? 0);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    List categories = widget.categories;
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 50,
-        elevation: 0,
-        backgroundColor: mainColor,
-        title: Text(
-          "اجراءات",
-          style: TextStyle(fontSize: 16),
+        shape: Border.all(width: 0, color: mainColor),
+        actions: [IconButton(icon: Icon(Icons.exit_to_app), onPressed: () {})],
+        bottom: TabBar(
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.white,
+          // isScrollable: true,
+          indicatorColor: Colors.white,
+          indicatorWeight: 3,
+          controller: tc,
+          onTap: (indextab) {
+            // Get Id For All Categories for Filter Body base on id categories
+            setState(() {
+              isLoading = true;
+              idcat = categories[indextab]['catcourses_id'];
+              print("===================================") ; 
+              print(idcat) ; 
+            });
+          },
+          tabs: [
+            ...List.generate(
+                widget.categories.length,
+                (index) => Tab(
+                      iconMargin: EdgeInsets.only(bottom: 0),
+                      child: Text(
+                        "${categories[index]['catcourses_name']}",
+                        style: TextStyle(fontSize: 13),
+                      ),
+                      icon: Icon(
+                        Icons.golf_course_outlined,
+                        size: 25,
+                        color: Colors.white,
+                      ),
+                    ))
+          ],
         ),
-        // leading: IconButton(
-        //   icon: Icon(Icons.segment),
-        //   onPressed: () {
-        //     scaffoldkey.currentState.openDrawer();
-        //   },
-        // ),
-        actions: [
-          IconButton(icon: Icon(Icons.exit_to_app_outlined), onPressed: () {}),
-        ],
+        title: Text(
+          'دليل الدورات',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            if (Navigator.of(context).canPop()) {
+              Navigator.of(context).pop();
+            } else {
+              Navigator.of(context).pushNamed("home");
+            }
+          },
+        ),
+        backgroundColor: mainColor,
       ),
-      body: ListView(
-        children: [
-          Container(
-            width: double.infinity,
-            padding: EdgeInsets.all(15),
-            child: Text(
-              "اسم الدورة",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18),
+      body: Container(
+        child: ListView(
+          children: [
+            TextField(
+              onChanged: (val) {
+                setState(() {
+                  search = val;
+                });
+              },
+              decoration: InputDecoration(
+                  hintText: "ابدا البحث هنا ",
+                  prefixIcon: Icon(Icons.search),
+                  filled: true,
+                  fillColor: Colors.grey[100],
+                  border: InputBorder.none),
             ),
-            color: mainColor,
-          ),
-          Column(
-            children: [
-              ListTile(
-                  title: Text(
-                    "رمز الدورة",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.grey[800]),
-                  ),
-                  trailing: Text(
-                    "9",
-                    style: TextStyle(color: Colors.red),
-                  )),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Divider(color: Colors.grey),
-              ),
-              ExpansionTile(
-                onExpansionChanged: (status) {
-                  if (status) {
-                    setState(() {
-                      icon2 = Icon(Icons.remove);
-                    });
-                  } else {
-                    setState(() {
-                      icon2 = Icon(Icons.add);
-                    });
+            FutureBuilder(
+                future: crud.writeData(linkCourse,
+                    {"id": idcat.toString(), "search": search.toString()}),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Container(
+                      margin: EdgeInsets.only(top: 50),
+                      child: new Center(
+                        child: new CircularProgressIndicator(),
+                      ),
+                    );
                   }
-                },
-                trailing: icon2,
-                title: Text(
-                  "تفاصيل الدورة",
-                  style: liststyleservice,
-                ),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Text(
-                      "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
-                    ),
-                  )
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Divider(color: Colors.grey),
-              ),
-              ExpansionTile(
-                onExpansionChanged: (status) {
-                  if (status) {
-                    setState(() {
-                      icon3 = Icon(Icons.remove);
-                    });
-                  } else {
-                    setState(() {
-                      icon3 = Icon(Icons.add);
-                    });
+                  if (snapshot.hasData) {
+                    if (snapshot.data[0] == "falid") {
+                      return Center(
+                        child: Text("Not Courses"),
+                      );
+                    }
+                    return ListView.separated(
+                        separatorBuilder: (context, i) {
+                          return Divider();
+                        },
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, i) {
+                          return ListCourses(
+                            courses: snapshot.data[i],
+                          );
+                        });
                   }
-                },
-                trailing: icon3,
-                title: Text(
-                  "عدد الساعات",
-                  style: liststyleservice,
-                ),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Text(
-                      "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
-                    ),
-                  )
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Divider(color: Colors.grey),
-              ),
-              ExpansionTile(
-                onExpansionChanged: (status) {
-                  if (status) {
-                    setState(() {
-                      icon3 = Icon(Icons.remove);
-                    });
-                  } else {
-                    setState(() {
-                      icon3 = Icon(Icons.add);
-                    });
-                  }
-                },
-                trailing: icon3,
-                title: Text(
-                  "المستندات المطلوبة",
-                  style: liststyleservice,
-                ),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Text(
-                      "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
-                    ),
-                  )
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Divider(color: Colors.grey),
-              ),
-              ExpansionTile(
-                onExpansionChanged: (status) {
-                  if (status) {
-                    setState(() {
-                      icon3 = Icon(Icons.remove);
-                    });
-                  } else {
-                    setState(() {
-                      icon3 = Icon(Icons.add);
-                    });
-                  }
-                },
-                trailing: icon3,
-                title: Text(
-                  "رسوم الدورة",
-                  style: liststyleservice,
-                ),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Text(
-                      "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
-                    ),
-                  )
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Divider(color: Colors.grey),
-              ),
-              RaisedButton(
-                padding: EdgeInsets.symmetric(horizontal: 40),
-                color: Colors.red,
-                textColor: Colors.white,
-                onPressed: () {
-                  Navigator.of(context).pushNamed("addordercourse") ; 
-                },
-                child: Text("طلب مشاركة"),
-              )
-            ],
-          ),
-        ],
+                  return Center(child: CircularProgressIndicator());
+                })
+          ],
+        ),
       ),
     );
   }
 }
 
-/*
-طلب المذكرة 
-1 - الاسم 
-2 -  البريد الالكتروني
-3 - رقم الهاتف 
-4 - دروب دون للسعر 
-5 - 4 - العنوان
-
-
-*/
-
-// AppBar(
-//         toolbarHeight: 50,
-//         elevation: 0,
-//         backgroundColor: mainColor,
-//         title: Text(
-//           "الخدمة",
-//           style: TextStyle(fontSize: 16),
-//         ),
-//         actions: [
-//           IconButton(icon: Icon(Icons.search), onPressed: () {}),
-//         ],
-//       ),
+class ListCourses extends StatelessWidget {
+  final courses;
+  const ListCourses({Key key, this.courses}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Row(
+        children: [
+          Text("${courses['courses_name_ar']}"),
+          Spacer(),
+          InkWell(
+            onTap: () {},
+            child: Column(children: [
+              Icon(Icons.help_outline_outlined, size: 25, color: mainColor),
+              Text("معلومات", style: TextStyle(color: Colors.red, fontSize: 13))
+            ]),
+          ),
+          SizedBox(width: 20),
+          InkWell(
+            onTap: () {},
+            child: Column(children: [
+              Icon(Icons.download_done_sharp, size: 25, color: Colors.green),
+              Text("ابدا ", style: TextStyle(color: Colors.green, fontSize: 13))
+            ]),
+          )
+        ],
+      ),
+    );
+  }
+}
