@@ -10,7 +10,6 @@ class ListHorzintal extends StatelessWidget {
   final list;
   const ListHorzintal({Key key, this.mdw, this.list, this.type})
       : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,7 +36,9 @@ class ListHorzintal extends StatelessWidget {
                 } else {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return Courses(categories: list,);
+                    return Courses(
+                      categories: list,
+                    );
                   }));
                 }
               },

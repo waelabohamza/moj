@@ -6,7 +6,7 @@ import 'package:moj/pages/forgetpassword/forgetpassword.dart';
 import 'package:moj/pages/home/home.dart';
 import 'package:moj/pages/orders/addordercourse.dart';
 import 'package:moj/pages/orders/addorders.dart';
-import 'package:moj/pages/questions/questions.dart';
+import 'package:moj/pages/questions/question.dart';
 import 'package:moj/pages/services/services.dart';
 
 Map<String, Widget Function(BuildContext)> routes = {
@@ -14,7 +14,7 @@ Map<String, Widget Function(BuildContext)> routes = {
   "services": (context) => Services(),
   "addorders": (context) => AddOrders(),
   "addordercourse": (context) => AddOrderCourse(),
-  "questions": (context) => Questions(),
+  "questions": (context) => Question(),
   "login": (context) => Login(),
   "signup": (context) => SignUp(),
   "forgetPassword": (context) => ForgetPassword()
