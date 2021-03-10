@@ -2,15 +2,15 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
 
-class Questions extends StatefulWidget {
+class Question extends StatefulWidget {
   final list ; 
-  Questions({Key key , this.list}) : super(key: key);
+  Question({Key key , this.list}) : super(key: key);
 
   @override
   _QuestionsState createState() => _QuestionsState();
 }
 
-class _QuestionsState extends State<Questions> {
+class _QuestionsState extends State<Question> {
   Icon icon1 = Icon(Icons.add);
   Icon icon2 = Icon(Icons.add);
   Icon icon3 = Icon(Icons.add);

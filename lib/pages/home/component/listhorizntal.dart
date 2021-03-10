@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
 import 'package:moj/pages/courses/courses.dart';
-import 'package:moj/pages/questions/questions.dart';
+import 'package:moj/pages/questions/question.dart';
 import 'package:moj/pages/services/service.dart';
 
 class ListHorzintal extends StatelessWidget {
@@ -30,7 +30,7 @@ class ListHorzintal extends StatelessWidget {
                 } else if (type == "questions") {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
-                    return Questions(
+                    return Question(
                       list: list[i],
                     );
                   }));
