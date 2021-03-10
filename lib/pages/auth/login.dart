@@ -105,7 +105,7 @@ class _LoginState extends State<Login> {
                   SizedBox(height: 20),
                   InkWell(
                     onTap: () {
-                      Navigator.of(context).pushNamed("forgetPassword")  ; 
+                      Navigator.of(context).pushNamed("forgetPassword");
                     },
                     child: Text("هل نسيت كلمة المرور"),
                   ),
