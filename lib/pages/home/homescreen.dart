@@ -1,16 +1,13 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:moj/component/crud.dart';
 import 'package:moj/const.dart';
 import 'package:moj/pages/experts/experts.dart';
-import 'package:moj/pages/home/component/listbottom.dart';
 import 'package:moj/pages/home/component/listexperts.dart';
 import 'package:moj/pages/home/component/listhorizntal.dart';
 import 'package:moj/pages/home/component/topcardcenter.dart';
 import 'package:moj/pages/linkapi.dart';
 import 'package:moj/pages/questions/questions.dart';
-import 'package:moj/pages/services/service.dart';
 import 'package:moj/pages/services/services.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -62,19 +59,27 @@ class _HomeScreenState extends State<HomeScreen>
         isLoading = false;
       });
     }
-    startAnimate();
   }
+
+  Completer<bool> completer = new Completer<bool>();
 
   @override
   void initState() {
-    pageController = PageController(viewportFraction: 0.8);
+    /// Callback called after widget has been fully built
 
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      //Future will be completed here
+
+      startAnimate();
+    });
+
+    pageController = PageController(viewportFraction: 0.8);
     _getData();
     super.initState();
   }
 
   startAnimate() {
-    Future.delayed(Duration(seconds: 2)).then((_) {
+    Future.delayed(Duration(seconds: 5), () {
       int nextPage = pageController.page.round() + 1;
       if (nextPage == listHomeDataCategories.length) {
         nextPage = 0;
@@ -278,22 +283,6 @@ class _HomeScreenState extends State<HomeScreen>
                     ],
                   ),
                 ),
-                // SizedBox(width: 3),
-                // Expanded(
-                //     child: Column(
-                //   crossAxisAlignment: CrossAxisAlignment.center,
-                //   children: [
-                //     RaisedButton(
-                //       color: mainColor,
-                //       textColor: Colors.white,
-                //       onPressed: () {},
-                //       child: Text(
-                //         "ابدا الخدمة",
-                //         style: TextStyle(fontSize: 12),
-                //       ),
-                //     ),
-                //   ],
-                // ))
               ],
             ),
           ),
