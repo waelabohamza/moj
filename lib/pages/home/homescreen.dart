@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen>
       }
       pageController
           .animateToPage(nextPage,
-              duration: Duration(seconds: 1), curve: Curves.linear)
+              duration: Duration(seconds: 1), curve: Curves.easeInOut)
           .then((_) => startAnimate());
     });
   }
@@ -214,7 +214,7 @@ class _HomeScreenState extends State<HomeScreen>
               // ListBottom(mdw: mdw, list: listHomeDataCategories),
 
               Container(
-                height: 150,
+                height: 160,
                 child: PageView.builder(
                     controller: pageController,
                     itemCount: listHomeDataCategories.length,
