@@ -1,5 +1,3 @@
-  
-import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
@@ -25,14 +23,15 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
   @override
   Widget build(BuildContext context) {
     final name = basename(widget.file.path);
-    final text = '${indexPage + 1} of $pages';
+    final text = '${indexPage + 1} من   $pages';
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(name),
+        backgroundColor: Colors.red,
+        // title: Text(name),
+        title: Text("اجراءات"  , style: TextStyle(fontSize: 16),),
         actions: pages >= 2
             ? [
-                Center(child: Text(text)),
                 IconButton(
                   icon: Icon(Icons.chevron_left, size: 32),
                   onPressed: () {
@@ -40,6 +39,7 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
                     controller.setPage(page);
                   },
                 ),
+                Center(child: Text(text)),
                 IconButton(
                   icon: Icon(Icons.chevron_right, size: 32),
                   onPressed: () {
