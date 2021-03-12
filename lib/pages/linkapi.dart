@@ -57,4 +57,9 @@ const String  linkQuestions    = "$serverName/api/questions/questions.php" ;
 const String  linkRootImage     = "$serverName/api/uploads/" ;  
 
 
+// Root File Pdf
+
+const String  linkRootPdf     = "$serverName/api/uploads/pdfviewservices/22.pdf" ;  
+
+
 

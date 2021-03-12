@@ -67,11 +67,11 @@ class _HomeScreenState extends State<HomeScreen>
   void initState() {
     /// Callback called after widget has been fully built
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      //Future will be completed here
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   //Future will be completed here
 
-      startAnimate();
-    });
+    //   // startAnimate();
+    // });
 
     pageController = PageController(viewportFraction: 0.8);
     _getData();
@@ -218,15 +218,15 @@ class _HomeScreenState extends State<HomeScreen>
                   )),
               // ListBottom(mdw: mdw, list: listHomeDataCategories),
 
-              Container(
-                height: 160,
-                child: PageView.builder(
-                    controller: pageController,
-                    itemCount: listHomeDataCategories.length,
-                    itemBuilder: (context, i) {
-                      return carousal(listHomeDataCategories, i, mdw);
-                    }),
-              ),
+              // Container(
+              //   height: 160,
+              //   child: PageView.builder(
+              //       controller: pageController,
+              //       itemCount: listHomeDataCategories.length,
+              //       itemBuilder: (context, i) {
+              //         return carousal(listHomeDataCategories, i, mdw);
+              //       }),
+              // ),
 
               SizedBox(height: 30),
             ],

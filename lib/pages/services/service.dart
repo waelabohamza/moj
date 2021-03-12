@@ -1,6 +1,13 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+// import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:moj/const.dart';
+import 'package:moj/pages/linkapi.dart';
+import 'package:moj/pages/services/ApiServiceProvider.dart';
+import 'package:moj/pages/services/pdfview.dart';
+ 
+ 
 
 class Service extends StatefulWidget {
   final list;
@@ -11,7 +18,9 @@ class Service extends StatefulWidget {
 }
 
 class _ServiceState extends State<Service> {
+ 
   
+ 
   Icon icon1 = Icon(Icons.add);
   Icon icon2 = Icon(Icons.add);
   Icon icon3 = Icon(Icons.add);
@@ -149,8 +158,14 @@ class _ServiceState extends State<Service> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(15),
-                    child: Text("${list['services_document']}"),
-                  )
+                    // child: Text("${list['services_document']}"),
+                    child: InkWell(child: Text("PDF"),onTap: () async {
+                      final file = await  PDFApi.loadNetwork(linkRootPdf); 
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                               return PDFViewerPage(file: file) ; 
+                      })); 
+                    },),
+                  ),
                 ],
               ),
               Padding(
