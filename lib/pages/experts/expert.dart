@@ -1,17 +1,18 @@
 import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
+import 'package:moj/pages/linkapi.dart';
 
 class Expert extends StatefulWidget {
-  final list ; 
-  Expert({Key key , this.list}) : super(key: key);
+  final list;
+  Expert({Key key, this.list}) : super(key: key);
 
   @override
   _QuestionsState createState() => _QuestionsState();
 }
 
-class _QuestionsState extends State<Expert>{
-
+class _QuestionsState extends State<Expert> {
   Icon icon1 = Icon(Icons.add);
   Icon icon2 = Icon(Icons.add);
   Icon icon3 = Icon(Icons.add);
@@ -26,7 +27,7 @@ class _QuestionsState extends State<Expert>{
 
   @override
   Widget build(BuildContext context) {
-    var list = widget.list ; 
+    var list = widget.list;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,
@@ -62,14 +63,26 @@ class _QuestionsState extends State<Expert>{
           ),
           Column(
             children: [
+              Container(
+                margin: EdgeInsets.only(top: 20),
+                child: CachedNetworkImage(
+                  placeholder: (context, e) =>
+                      Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, st, w) => Text("ERROR"),
+                  imageUrl: "$linkRootImage/experts/${list['experts_image']}",
+                  fit: BoxFit.fill,
+                  width: 200,
+                  height: 200,
+                ),
+              ),
               ListTile(
                   title: Text(
-                    "رمز السوأل",
+                    "رمز",
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.grey[800]),
                   ),
                   trailing: Text(
-                    "${list['questions_id']}",
+                    "${list['experts_id']}",
                     style: TextStyle(color: Colors.red),
                   )),
               Padding(
@@ -90,15 +103,13 @@ class _QuestionsState extends State<Expert>{
                 },
                 trailing: icon2,
                 title: Text(
-                  "الجواب",
+                  "التخصص",
                   style: liststyleservice,
                 ),
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(15),
-                    child: Text(
-                      "${list['questions_answer']}"
-                    ),
+                    child: Text("${list['experts_spec']}"),
                   )
                 ],
               ),
@@ -120,15 +131,13 @@ class _QuestionsState extends State<Expert>{
                 },
                 trailing: icon3,
                 title: Text(
-                  "المستندات المطلوبة",
+                  "الخبرة",
                   style: liststyleservice,
                 ),
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(15),
-                    child: Text(
-                       "${list['question_document']}"
-                    ),
+                    child: Text("${list['experts_experience']} سنوات"),
                   )
                 ],
               ),
@@ -136,43 +145,15 @@ class _QuestionsState extends State<Expert>{
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Divider(color: Colors.grey),
               ),
-              ExpansionTile(
-                onExpansionChanged: (status) {
-                  if (status) {
-                    setState(() {
-                      icon4 = Icon(Icons.remove);
-                    });
-                  } else {
-                    setState(() {
-                      icon4 = Icon(Icons.add);
-                    });
-                  }
-                },
-                trailing: icon4,
-                title: Text(
-                  "الوقت اللازم لتنفيذ الحكم",
-                  style: liststyleservice,
-                ),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Text(
-                      "${list['questions_time_ar']}"
-                    ),
-                  )
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Divider(color: Colors.grey),
-              ),
-              // RaisedButton(
-              //   padding: EdgeInsets.symmetric(horizontal: 40),
-              //   color: Colors.red,
-              //   textColor: Colors.white,
-              //   onPressed: () {},
-              //   child: Text("طلب مذكرة"),
-              // )
+              MaterialButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50)),
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                color: Colors.red,
+                textColor: Colors.white,
+                onPressed: () {},
+                child: Text("طلب تواصل"),
+              )
             ],
           ),
         ],

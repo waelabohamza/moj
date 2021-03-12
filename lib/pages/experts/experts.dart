@@ -1,10 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:moj/component/crud.dart';
 import 'package:moj/const.dart';
 import 'package:moj/pages/linkapi.dart';
 
 class Experts extends StatefulWidget {
-  
   final categories;
   final index;
   final catid;
@@ -15,7 +15,6 @@ class Experts extends StatefulWidget {
 }
 
 class _ExpertsState extends State<Experts> with SingleTickerProviderStateMixin {
-
   TabController tc;
 
   var search = "";
@@ -173,8 +172,12 @@ class ListHomeExperts extends StatelessWidget {
                     Container(
                         height: 75,
                         padding: EdgeInsets.all(10),
-                        child: Image.network(
-                          "$linkRootImage/experts/${list['experts_image']}",
+                        child: CachedNetworkImage(
+                          placeholder: (context, e) =>
+                              Center(child: CircularProgressIndicator()),
+                          errorWidget: (context, st, w) => Text("ERROR"),
+                          imageUrl:
+                              "$linkRootImage/experts/${list['experts_image']}",
                           fit: BoxFit.fill,
                           width: 75,
                           height: 75,

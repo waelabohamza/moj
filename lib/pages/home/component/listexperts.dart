@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:moj/pages/experts/expert.dart';
 import 'package:moj/pages/linkapi.dart';
 
 class ListExperts extends StatelessWidget {
@@ -13,9 +15,14 @@ class ListExperts extends StatelessWidget {
       child: ListView.builder(
           itemCount: list.length,
           scrollDirection: Axis.horizontal,
-          itemBuilder: (context, i) {
+          itemBuilder: (context, i){
             return InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return Expert(list: list[i]);
+                }));
+              },
               child: Container(
                 width: mdw / 3,
                 child: Card(
@@ -29,8 +36,12 @@ class ListExperts extends StatelessWidget {
                         Container(
                             height: 75,
                             padding: EdgeInsets.all(10),
-                            child: Image.network(
-                              "$linkRootImage/experts/${list[i]['experts_image']}",
+                            child: CachedNetworkImage(
+                              placeholder: (context, e) =>
+                                  Center(child: CircularProgressIndicator()),
+                              errorWidget: (context, st, w) => Text("ERROR"),
+                              imageUrl:
+                                  "$linkRootImage/experts/${list[i]['experts_image']}",
                               fit: BoxFit.fill,
                               width: 75,
                               height: 75,
