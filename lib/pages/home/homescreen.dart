@@ -39,7 +39,6 @@ class _HomeScreenState extends State<HomeScreen>
     });
 
     var responsebody = await crud.readData(linkHomeData);
-
     listHomeDataServicesFavorite.addAll(responsebody['servicesfavorite']);
     listHomeDataServicesCommon.addAll(responsebody['servicescommon']);
     listHomeDataExperts.addAll(responsebody['expertscommon']);
@@ -233,6 +232,7 @@ class _HomeScreenState extends State<HomeScreen>
             ],
           );
   }
+
   Widget carousal(list, i, mdw) {
     return InkWell(
       onTap: () {

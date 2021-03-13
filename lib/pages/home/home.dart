@@ -5,6 +5,7 @@ import 'package:moj/component/mydrawer.dart';
 import 'package:moj/main.dart';
 import 'package:moj/pages/home/homescreen.dart';
 import 'package:moj/pages/home/themecolors.dart';
+import 'package:moj/pages/orders/myorders.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> {
     HomeScreen(),
     //  Service() ,
     ThemeColors(),
-    Text("Test"),
+    MyOrders()
     //  Services()
   ];
 
