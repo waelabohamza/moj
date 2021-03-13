@@ -123,7 +123,9 @@ class _HomeScreenState extends State<HomeScreen>
                       InkWell(
                           child: Text(
                             "رؤية الجميع",
-                            style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Theme.of(context).primaryColor),
                           ),
                           onTap: () {
                             Navigator.of(context)
@@ -149,7 +151,9 @@ class _HomeScreenState extends State<HomeScreen>
                       InkWell(
                           child: Text(
                             "رؤية الجميع",
-                            style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Theme.of(context).primaryColor),
                           ),
                           onTap: () {
                             Navigator.of(context)
@@ -190,7 +194,9 @@ class _HomeScreenState extends State<HomeScreen>
                       InkWell(
                           child: Text(
                             "رؤية الجميع",
-                            style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Theme.of(context).primaryColor),
                           ),
                           onTap: () {
                             Navigator.of(context)
@@ -227,7 +233,6 @@ class _HomeScreenState extends State<HomeScreen>
             ],
           );
   }
-
   Widget carousal(list, i, mdw) {
     return InkWell(
       onTap: () {
@@ -254,7 +259,9 @@ class _HomeScreenState extends State<HomeScreen>
                       Center(
                         child: Text(
                           "${list[i]['categories_name_ar']}",
-                          style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Theme.of(context).primaryColor),
                         ),
                       ),
                       Center(
