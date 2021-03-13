@@ -28,7 +28,7 @@ class _ServicesState extends State<Questions>
         shape: Border.all(width: 0, color: Theme.of(context).primaryColor),
         actions: [IconButton(icon: Icon(Icons.exit_to_app), onPressed: () {})],
         title: Text(
-          'دليل الخدمات',
+          'دليل الاسئلة',
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         leading: IconButton(
@@ -117,17 +117,19 @@ class ListQuestions extends StatelessWidget {
               }));
             },
             child: Column(children: [
-              Icon(Icons.help_outline_outlined, size: 25, color: Theme.of(context).primaryColor),
-              Text("معلومات", style: TextStyle(color: Colors.red, fontSize: 13))
+              Icon(Icons.help_outline_outlined,
+                  size: 25, color: Theme.of(context).primaryColor),
+              Text("معلومات",
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor, fontSize: 13))
             ]),
           ),
           SizedBox(width: 20),
           InkWell(
             onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) {
-                    return Question(list:questions) ; 
-                  }));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return Question(list: questions);
+              }));
             },
             child: Column(children: [
               Icon(Icons.download_done_sharp, size: 25, color: Colors.green),

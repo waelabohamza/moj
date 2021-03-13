@@ -169,7 +169,7 @@ class ListServices extends StatelessWidget{
             },
             child: Column(children: [
               Icon(Icons.help_outline_outlined, size: 25, color: Theme.of(context).primaryColor),
-              Text("معلومات", style: TextStyle(color: Colors.red, fontSize: 13))
+              Text("معلومات", style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 13))
             ]),
           ),
           SizedBox(width: 20),

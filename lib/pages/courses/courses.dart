@@ -58,8 +58,8 @@ class _CoursesState extends State<Courses> with SingleTickerProviderStateMixin {
             setState(() {
               isLoading = true;
               idcat = categories[indextab]['catcourses_id'];
-              print("===================================") ; 
-              print(idcat) ; 
+              print("===================================");
+              print(idcat);
             });
           },
           tabs: [
@@ -164,23 +164,26 @@ class ListCourses extends StatelessWidget {
           Spacer(),
           InkWell(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                  
-                  return Course(list: courses) ; 
-
-              })) ; 
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return Course(list: courses);
+              }));
             },
             child: Column(children: [
-              Icon(Icons.help_outline_outlined, size: 25, color: Theme.of(context).primaryColor),
-              Text("معلومات", style: TextStyle(color: Colors.red, fontSize: 13))
+              Icon(Icons.help_outline_outlined,
+                  size: 25, color: Theme.of(context).primaryColor),
+              Text("معلومات",
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor, fontSize: 13))
             ]),
           ),
           SizedBox(width: 20),
           InkWell(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                     return AddOrderCourse(courseid: courses['courses_id'],); 
-              })) ; 
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return AddOrderCourse(
+                  courseid: courses['courses_id'],
+                );
+              }));
             },
             child: Column(children: [
               Icon(Icons.download_done_sharp, size: 25, color: Colors.green),
