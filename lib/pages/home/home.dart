@@ -109,17 +109,6 @@ class _HomePageState extends State<HomePage> {
                 color: Theme.of(context).primaryColor,
               ),
               title: Text("الثيم")),
-          // BubbleBottomBarItem(
-          //     backgroundColor: Colors.indigo,
-          //     icon: Icon(
-          //       Icons.folder_open,
-          //       color: Colors.black,
-          //     ),
-          //     activeIcon: Icon(
-          //       Icons.folder_open,
-          //       color: Colors.indigo,
-          //     ),
-          //     title: Text("Folders")),
           BubbleBottomBarItem(
               backgroundColor: Theme.of(context).primaryColor,
               icon: Icon(
