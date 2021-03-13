@@ -2,11 +2,9 @@ import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:moj/component/mydrawer.dart';
-import 'package:moj/const.dart';
 import 'package:moj/main.dart';
 import 'package:moj/pages/home/homescreen.dart';
 import 'package:moj/pages/home/themecolors.dart';
-import 'package:moj/pages/services/service.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -31,7 +29,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> widgetsBottombar = [
     HomeScreen(),
     //  Service() ,
-    ThemeColors() , 
+    ThemeColors(),
     Text("Test"),
     //  Services()
   ];
@@ -42,8 +40,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       key: scaffoldkey,
       appBar: AppBar(
-         systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.red),
-      shape: Border.all(width: 0 , color: Theme.of(context).primaryColor),
+        systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.red),
+        shape: Border.all(width: 0, color: Theme.of(context).primaryColor),
         toolbarHeight: 50,
         elevation: 0,
         backgroundColor: Theme.of(context).primaryColor,
@@ -71,7 +69,7 @@ class _HomePageState extends State<HomePage> {
           Navigator.of(context).pushNamed("addorders");
         },
         child: Icon(Icons.add),
-        backgroundColor: Colors.red,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
       bottomNavigationBar: BubbleBottomBar(
@@ -90,25 +88,25 @@ class _HomePageState extends State<HomePage> {
         elevation: 8,
         items: <BubbleBottomBarItem>[
           BubbleBottomBarItem(
-              backgroundColor: Colors.red,
+              backgroundColor: Theme.of(context).primaryColor,
               icon: Icon(
                 Icons.dashboard,
                 color: Colors.black,
               ),
               activeIcon: Icon(
                 Icons.dashboard,
-                color: Colors.red,
+                color: Theme.of(context).primaryColor,
               ),
               title: Text("الرئيسية")),
           BubbleBottomBarItem(
-              backgroundColor: Colors.red,
+              backgroundColor: Theme.of(context).primaryColor,
               icon: Icon(
                 Icons.theater_comedy,
                 color: Colors.black,
               ),
               activeIcon: Icon(
                 Icons.theater_comedy,
-                color: Colors.red,
+                color: Theme.of(context).primaryColor,
               ),
               title: Text("الثيم")),
           // BubbleBottomBarItem(
@@ -123,14 +121,14 @@ class _HomePageState extends State<HomePage> {
           //     ),
           //     title: Text("Folders")),
           BubbleBottomBarItem(
-              backgroundColor: Colors.red,
+              backgroundColor: Theme.of(context).primaryColor,
               icon: Icon(
                 Icons.addchart_sharp,
                 color: Colors.black,
               ),
               activeIcon: Icon(
                 Icons.addchart_sharp,
-                color: Colors.red,
+                color: Theme.of(context).primaryColor,
               ),
               title: Text("الطلبات"))
         ],

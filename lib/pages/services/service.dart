@@ -200,9 +200,9 @@ class _ServiceState extends State<Service> {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Divider(color: Colors.grey),
               ),
-              RaisedButton(
+              MaterialButton(
                 padding: EdgeInsets.symmetric(horizontal: 40),
-                color: Colors.red,
+                color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
                 onPressed: () {},
                 child: Text("طلب مذكرة"),

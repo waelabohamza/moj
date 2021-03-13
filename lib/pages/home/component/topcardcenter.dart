@@ -93,7 +93,7 @@ class TopCardCenter extends StatelessWidget {
             bottom: -20,
             right: mdw / 3,
             left: mdw / 3,
-            child: RaisedButton(
+            child: MaterialButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
               onPressed: () {
@@ -101,7 +101,7 @@ class TopCardCenter extends StatelessWidget {
                      return Services(categories: listcat) ; 
                 }))  ; 
               },
-              color: Colors.red,
+              color: Theme.of(context).primaryColor,
               textColor: Colors.white,
               child: Text("عرض الكل"),
             ))
