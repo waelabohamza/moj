@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:moj/component/crud.dart';
-import 'package:moj/const.dart';
 import 'package:moj/pages/linkapi.dart';
 
 class Experts extends StatefulWidget {
