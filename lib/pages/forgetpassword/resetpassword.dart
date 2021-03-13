@@ -51,7 +51,7 @@ class _ResetPasswordState extends State<ResetPassword> {
       appBar: AppBar(
         title: Text("اعادة تعيين كلمة المرور"),
         centerTitle: true,
-        backgroundColor: mainColor,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       body: Container(
         margin: EdgeInsets.only(top: 20),
@@ -69,7 +69,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50),
-                        side: BorderSide(color: mainColor, width: 2)),
+                        side: BorderSide(color: Theme.of(context).primaryColor, width: 2)),
                     onPressed: () {
                       resetPassword();
                     },

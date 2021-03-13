@@ -38,10 +38,10 @@ class _ServiceState extends State<Service> {
     final list = widget.list;
     return Scaffold(
       appBar: AppBar(
-        shape: Border.all(width: 0, color: mainColor),
+        shape: Border.all(width: 0, color: Theme.of(context).primaryColor),
         toolbarHeight: 50,
         elevation: 0,
-        backgroundColor: mainColor,
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text(
           "اجراءات",
           style: TextStyle(fontSize: 16),
@@ -62,7 +62,7 @@ class _ServiceState extends State<Service> {
                   fontWeight: FontWeight.bold,
                   fontSize: 18),
             ),
-            color: mainColor,
+            color: Theme.of(context).primaryColor,
           ),
           Column(
             children: [

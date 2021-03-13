@@ -25,7 +25,7 @@ class _ServicesState extends State<Questions>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shape: Border.all(width: 0, color: mainColor),
+        shape: Border.all(width: 0, color: Theme.of(context).primaryColor),
         actions: [IconButton(icon: Icon(Icons.exit_to_app), onPressed: () {})],
         title: Text(
           'دليل الخدمات',
@@ -41,7 +41,7 @@ class _ServicesState extends State<Questions>
             }
           },
         ),
-        backgroundColor: mainColor,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       body: Container(
         child: ListView(
@@ -117,7 +117,7 @@ class ListQuestions extends StatelessWidget {
               }));
             },
             child: Column(children: [
-              Icon(Icons.help_outline_outlined, size: 25, color: mainColor),
+              Icon(Icons.help_outline_outlined, size: 25, color: Theme.of(context).primaryColor),
               Text("معلومات", style: TextStyle(color: Colors.red, fontSize: 13))
             ]),
           ),

@@ -17,6 +17,9 @@ void main() async {
   runApp(MultiProvider(providers: [
      ChangeNotifierProvider(create: (context){
        return ChangeLocal() ; 
+     }) , 
+       ChangeNotifierProvider(create: (context){
+       return ChangeColorTheme() ; 
      })
   ],child: MyApp()));
 }
@@ -46,5 +49,11 @@ class MyApp extends StatelessWidget {
 
 
 class ChangeLocal with ChangeNotifier {
+
   
+}
+
+class ChangeColorTheme with ChangeNotifier{
+
+
 }

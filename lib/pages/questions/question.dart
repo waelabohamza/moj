@@ -30,7 +30,7 @@ class _QuestionsState extends State<Question> {
       appBar: AppBar(
         toolbarHeight: 50,
         elevation: 0,
-        backgroundColor: mainColor,
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text(
           "اجراءات",
           style: TextStyle(fontSize: 16),
@@ -57,7 +57,7 @@ class _QuestionsState extends State<Question> {
                   fontWeight: FontWeight.bold,
                   fontSize: 18),
             ),
-            color: mainColor,
+            color: Theme.of(context).primaryColor,
           ),
           Column(
             children: [
@@ -194,7 +194,7 @@ class _QuestionsState extends State<Question> {
 // AppBar(
 //         toolbarHeight: 50,
 //         elevation: 0,
-//         backgroundColor: mainColor,
+//         backgroundColor: Theme.of(context).primaryColor,
 //         title: Text(
 //           "الخدمة",
 //           style: TextStyle(fontSize: 16),

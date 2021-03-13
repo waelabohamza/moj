@@ -17,7 +17,7 @@ class TopCardCenter extends StatelessWidget {
           height: mdw / 1.6,
           width: double.infinity,
           decoration: BoxDecoration(
-              color: mainColor,
+              color: Theme.of(context).primaryColor,
               borderRadius: BorderRadius.vertical(bottom: Radius.circular(50))),
         ),
         Center(
@@ -124,7 +124,7 @@ class TopCardCenter extends StatelessWidget {
               children: [
                 Icon(
                   Icons.home_repair_service_outlined,
-                  color: mainColor,
+                  color: Theme.of(context).primaryColor,
                   size: 40,
                 ),
                 Text(

@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen>
                       InkWell(
                           child: Text(
                             "رؤية الجميع",
-                            style: TextStyle(fontSize: 16, color: mainColor),
+                            style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
                           ),
                           onTap: () {
                             Navigator.of(context)
@@ -150,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen>
                       InkWell(
                           child: Text(
                             "رؤية الجميع",
-                            style: TextStyle(fontSize: 16, color: mainColor),
+                            style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
                           ),
                           onTap: () {
                             Navigator.of(context)
@@ -191,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen>
                       InkWell(
                           child: Text(
                             "رؤية الجميع",
-                            style: TextStyle(fontSize: 16, color: mainColor),
+                            style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
                           ),
                           onTap: () {
                             Navigator.of(context)
@@ -255,7 +255,7 @@ class _HomeScreenState extends State<HomeScreen>
                       Center(
                         child: Text(
                           "${list[i]['categories_name_ar']}",
-                          style: TextStyle(fontSize: 16, color: mainColor),
+                          style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
                         ),
                       ),
                       Center(
@@ -268,7 +268,7 @@ class _HomeScreenState extends State<HomeScreen>
                       MaterialButton(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50)),
-                        color: mainColor,
+                        color: Theme.of(context).primaryColor,
                         textColor: Colors.white,
                         onPressed: () {},
                         child: Text(

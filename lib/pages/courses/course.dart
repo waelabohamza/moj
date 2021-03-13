@@ -31,7 +31,7 @@ class _CourseState extends State<Course> {
       appBar: AppBar(
         toolbarHeight: 50,
         elevation: 0,
-        backgroundColor: mainColor,
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text(
           "اجراءات",
           style: TextStyle(fontSize: 16),
@@ -52,7 +52,7 @@ class _CourseState extends State<Course> {
                   fontWeight: FontWeight.bold,
                   fontSize: 18),
             ),
-            color: mainColor,
+            color: Theme.of(context).primaryColor,
           ),
           Column(
             children: [
@@ -190,7 +190,7 @@ class _CourseState extends State<Course> {
 // AppBar(
 //         toolbarHeight: 50,
 //         elevation: 0,
-//         backgroundColor: mainColor,
+//         backgroundColor: Theme.of(context).primaryColor,
 //         title: Text(
 //           "الخدمة",
 //           style: TextStyle(fontSize: 16),

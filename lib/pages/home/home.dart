@@ -5,6 +5,7 @@ import 'package:moj/component/mydrawer.dart';
 import 'package:moj/const.dart';
 import 'package:moj/main.dart';
 import 'package:moj/pages/home/homescreen.dart';
+import 'package:moj/pages/home/themecolors.dart';
 import 'package:moj/pages/services/service.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> widgetsBottombar = [
     HomeScreen(),
     //  Service() ,
-    Text("Test"),
+    ThemeColors() , 
     Text("Test"),
     //  Services()
   ];
@@ -42,10 +43,10 @@ class _HomePageState extends State<HomePage> {
       key: scaffoldkey,
       appBar: AppBar(
          systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.red),
-      shape: Border.all(width: 0 , color: mainColor),
+      shape: Border.all(width: 0 , color: Theme.of(context).primaryColor),
         toolbarHeight: 50,
         elevation: 0,
-        backgroundColor: mainColor,
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text(
           "اجراءات",
           style: TextStyle(fontSize: 16),

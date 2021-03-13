@@ -32,7 +32,7 @@ class _MyDrawerState extends State<MyDrawer> {
                     "w",
                     style: TextStyle(color: Colors.white , fontSize: 30),
                   ),
-                  backgroundColor: mainColor,
+                  backgroundColor: Theme.of(context).primaryColor,
                 ) , 
                 SizedBox(width: 10) , 
                 Text("wael@gmail.com")

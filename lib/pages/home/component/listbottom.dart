@@ -38,7 +38,7 @@ class ListBottom extends StatelessWidget {
                           children: [
                             Text(
                               "${list[i]['categories_name_ar']}",
-                              style: TextStyle(fontSize: 16, color: mainColor),
+                              style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
                             ),
                             Text(
                               "${list[i]['categories_desc_ar']}",
@@ -54,7 +54,7 @@ class ListBottom extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           RaisedButton(
-                            color: mainColor,
+                            color: Theme.of(context).primaryColor,
                             textColor: Colors.white,
                             onPressed: () {},
                             child: Text(

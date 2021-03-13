@@ -56,7 +56,7 @@ class ListHorzintal extends StatelessWidget {
                             padding: EdgeInsets.all(10),
                             child: Icon(
                               Icons.image_search_sharp,
-                              color: mainColor,
+                              color: Theme.of(context).primaryColor,
                               size: 40,
                             )),
                         Container(

@@ -44,7 +44,7 @@ class _CoursesState extends State<Courses> with SingleTickerProviderStateMixin {
     List categories = widget.categories;
     return Scaffold(
       appBar: AppBar(
-        shape: Border.all(width: 0, color: mainColor),
+        shape: Border.all(width: 0, color: Theme.of(context).primaryColor),
         actions: [IconButton(icon: Icon(Icons.exit_to_app), onPressed: () {})],
         bottom: TabBar(
           labelColor: Colors.white,
@@ -93,7 +93,7 @@ class _CoursesState extends State<Courses> with SingleTickerProviderStateMixin {
             }
           },
         ),
-        backgroundColor: mainColor,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       body: Container(
         child: ListView(
@@ -171,7 +171,7 @@ class ListCourses extends StatelessWidget {
               })) ; 
             },
             child: Column(children: [
-              Icon(Icons.help_outline_outlined, size: 25, color: mainColor),
+              Icon(Icons.help_outline_outlined, size: 25, color: Theme.of(context).primaryColor),
               Text("معلومات", style: TextStyle(color: Colors.red, fontSize: 13))
             ]),
           ),

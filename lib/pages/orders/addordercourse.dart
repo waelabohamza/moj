@@ -30,7 +30,7 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: mainColor,
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text('اضافة طلب'),
       ),
       body: Container(
@@ -80,7 +80,7 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
                       borderRadius: BorderRadius.circular(50)),
                   onPressed: () {},
                   child: Text("صورة الهوية"),
-                  color: mainColor,
+                  color: Theme.of(context).primaryColor,
                   textColor: Colors.white,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 ),
@@ -92,7 +92,7 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
                     Navigator.of(context).pushNamed("addordercourse");
                   },
                   child: Text("اضافة الطلب"),
-                  color: mainColor,
+                  color: Theme.of(context).primaryColor,
                   textColor: Colors.white,
                   padding: EdgeInsets.symmetric(horizontal: 60, vertical: 5),
                 ),

@@ -32,7 +32,7 @@ class _AddOrdersState extends State<AddOrders> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: mainColor,
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text('اضافة طلب'),
       ),
       body: Container(
@@ -83,7 +83,7 @@ class _AddOrdersState extends State<AddOrders> {
                           borderRadius: BorderRadius.circular(50)),
                       onPressed: () {},
                       child: Text("صورة الرخصة"),
-                      color: mainColor,
+                      color: Theme.of(context).primaryColor,
                       textColor: Colors.white,
                       padding:
                           EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -91,7 +91,7 @@ class _AddOrdersState extends State<AddOrders> {
                     MaterialButton(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50)),
-                        color: mainColor,
+                        color: Theme.of(context).primaryColor,
                         textColor: Colors.white,
                         padding:
                             EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -105,7 +105,7 @@ class _AddOrdersState extends State<AddOrders> {
                       borderRadius: BorderRadius.circular(50)),
                   onPressed: () {},
                   child: Text("اضافة الطلب"),
-                  color: mainColor,
+                  color: Theme.of(context).primaryColor,
                   textColor: Colors.white,
                   padding: EdgeInsets.symmetric(horizontal: 60, vertical: 5),
                 ),

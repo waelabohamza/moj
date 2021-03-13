@@ -42,7 +42,7 @@ class _ExpertsState extends State<Experts> with SingleTickerProviderStateMixin {
     double mdw = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        shape: Border.all(width: 0, color: mainColor),
+        shape: Border.all(width: 0, color: Theme.of(context).primaryColor),
         actions: [IconButton(icon: Icon(Icons.exit_to_app), onPressed: () {})],
         bottom: TabBar(
           labelColor: Colors.white,
@@ -91,7 +91,7 @@ class _ExpertsState extends State<Experts> with SingleTickerProviderStateMixin {
             }
           },
         ),
-        backgroundColor: mainColor,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       body: Container(
           child: ListView(
