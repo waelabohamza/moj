@@ -1,11 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
+import 'package:moj/pages/orders/addordercourse.dart';
 
 class Course extends StatefulWidget {
   final list;
-  Course({Key key, this.list}) : super(key: key);
-
+  Course({Key key, this.list  }) : super(key: key);
   @override
   _CourseState createState() => _CourseState();
 }
@@ -24,7 +24,8 @@ class _CourseState extends State<Course> {
   GlobalKey<ScaffoldState> scaffoldkey = new GlobalKey<ScaffoldState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
+
     var list = widget.list;
     return Scaffold(
       appBar: AppBar(
@@ -153,13 +154,20 @@ class _CourseState extends State<Course> {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Divider(color: Colors.grey),
               ),
-              // RaisedButton(
-              //   padding: EdgeInsets.symmetric(horizontal: 40),
-              //   color: Colors.red,
-              //   textColor: Colors.white,
-              //   onPressed: () {},
-              //   child: Text("طلب مذكرة"),
-              // )
+              MaterialButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50)
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                color: Colors.red,
+                textColor: Colors.white,
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                    return AddOrderCourse(courseid: list['courses_id']) ; 
+                  })); 
+                },
+                child: Text("طلب انتساب"),
+              )
             ],
           ),
         ],
@@ -168,6 +176,8 @@ class _CourseState extends State<Course> {
   }
 }
 
+
+
 /*
 طلب المذكرة 
 1 - الاسم 
@@ -175,8 +185,6 @@ class _CourseState extends State<Course> {
 3 - رقم الهاتف 
 4 - دروب دون للسعر 
 5 - 4 - العنوان
-
-
 */
 
 // AppBar(

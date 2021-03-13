@@ -1,13 +1,11 @@
-import 'package:dropdown_search/dropdownSearch.dart';
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
-
 class AddOrderCourse extends StatefulWidget {
-  AddOrderCourse({Key key}) : super(key: key);
+  final courseid;
+  AddOrderCourse({Key key, this.courseid}) : super(key: key);
   @override
   _AddOrderCourseState createState() => _AddOrderCourseState();
 }
-
 class _AddOrderCourseState extends State<AddOrderCourse> {
   bool course;
   List<String> datadropdowncatname = [
@@ -36,16 +34,20 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
         title: Text('اضافة طلب'),
       ),
       body: Container(
+        padding: EdgeInsets.all(10),
         child: ListView(
           children: [
             Form(
                 child: Column(
               children: [
-                buildTextForm("ادخل الاسم", Icons.person_add_alt, username),
+                buildTextForm("ادخل الاسم ", Icons.person_add_alt, username),
+                SizedBox(height: 10),
                 buildTextForm(
                     "ادخل البريد الالكتروني", Icons.mail_outline, username),
+                SizedBox(height: 10),
                 buildTextForm("ادخل رقم الهاتف",
                     Icons.phone_bluetooth_speaker_outlined, username),
+                SizedBox(height: 10),
                 Text("هل سبق ان دخلت مثل هذه الدورة "),
                 Row(
                   children: [
@@ -77,7 +79,7 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50)),
                   onPressed: () {},
-                  child: Text("صورة الرخصة"),
+                  child: Text("صورة الهوية"),
                   color: mainColor,
                   textColor: Colors.white,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -101,18 +103,20 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
       ),
     );
   }
-
-    buildTextForm(labeltext, icon, mycontroller) {
+  buildTextForm(labeltext, icon, mycontroller) {
     return TextFormField(
       validator: (val) {
         return null;
       },
       controller: mycontroller,
       decoration: InputDecoration(
+          contentPadding: EdgeInsets.all(1),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
           prefixIcon: Icon(icon),
           labelText: labeltext,
-          filled: true,
-          fillColor: Colors.white),
+          // filled: true,
+          // fillColor: Colors.white
+          ),
     );
   }
 }

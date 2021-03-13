@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:moj/component/crud.dart';
 import 'package:moj/const.dart';
+import 'package:moj/pages/courses/course.dart';
 import 'package:moj/pages/linkapi.dart';
+import 'package:moj/pages/orders/addordercourse.dart';
 
 class Courses extends StatefulWidget {
   final categories;
@@ -161,7 +163,13 @@ class ListCourses extends StatelessWidget {
           Text("${courses['courses_name_ar']}"),
           Spacer(),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                  
+                  return Course(list: courses) ; 
+
+              })) ; 
+            },
             child: Column(children: [
               Icon(Icons.help_outline_outlined, size: 25, color: mainColor),
               Text("معلومات", style: TextStyle(color: Colors.red, fontSize: 13))
@@ -169,7 +177,11 @@ class ListCourses extends StatelessWidget {
           ),
           SizedBox(width: 20),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                     return AddOrderCourse(courseid: courses['courses_id'],); 
+              })) ; 
+            },
             child: Column(children: [
               Icon(Icons.download_done_sharp, size: 25, color: Colors.green),
               Text("ابدا ", style: TextStyle(color: Colors.green, fontSize: 13))
