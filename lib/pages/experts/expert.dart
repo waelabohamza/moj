@@ -149,7 +149,7 @@ class _QuestionsState extends State<Expert> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50)),
                 padding: EdgeInsets.symmetric(horizontal: 40),
-                color: Colors.red,
+                color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
                 onPressed: () {},
                 child: Text("طلب تواصل"),

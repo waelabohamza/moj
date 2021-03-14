@@ -65,20 +65,11 @@ class _LoginState extends State<Login> {
             ),
             Center(
               child: Stack(
-                overflow: Overflow.visible,
                 children: [
                   Text(
-                    "ALBALLAM",
+                    "I J R A A' T",
                     style: TextStyle(fontSize: 30),
                   ),
-                  Positioned(
-                    bottom: -10,
-                    left: 60,
-                    child: Text(
-                      "Group",
-                      style: TextStyle(fontSize: 14),
-                    ),
-                  )
                 ],
               ),
             ),
@@ -97,7 +88,8 @@ class _LoginState extends State<Login> {
                     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50),
-                        side: BorderSide(color: Theme.of(context).primaryColor, width: 2)),
+                        side: BorderSide(
+                            color: Theme.of(context).primaryColor, width: 2)),
                     onPressed: () {
                       signIn();
                     },
@@ -136,11 +128,13 @@ class _LoginState extends State<Login> {
       },
       decoration: InputDecoration(
           suffixIcon: type == "password"
-              ? IconButton(icon: Icon(Icons.remove_red_eye_outlined), onPressed: (){
-                setState(() {
-                  isShowPass = !isShowPass ; 
-                });
-              })
+              ? IconButton(
+                  icon: Icon(Icons.remove_red_eye_outlined),
+                  onPressed: () {
+                    setState(() {
+                      isShowPass = !isShowPass;
+                    });
+                  })
               : SizedBox(),
           prefixIcon: Icon(icon),
           hintText: hint,

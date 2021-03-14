@@ -199,6 +199,9 @@ class _ServiceState extends State<Service> {
                 child: Divider(color: Colors.grey),
               ),
               MaterialButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50)
+                ),
                 padding: EdgeInsets.symmetric(horizontal: 40),
                 color: Theme.of(context).primaryColor,
                 textColor: Colors.white,

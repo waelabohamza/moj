@@ -12,14 +12,13 @@ class _MyOrdersState extends State<MyOrders> {
       padding: EdgeInsets.all(10),
       child: ListView(
         children: [
-          buildOrders(),
-          buildOrders(),
-          buildOrders(),
+          
+     
         ],
       ),
     );
   }
-  buildOrders(){
+  buildOrders(String id  , String nameorder  , String status){
     return Card(
         child: Container(
       padding: EdgeInsets.all(10),
