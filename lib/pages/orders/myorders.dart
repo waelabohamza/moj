@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+
 class MyOrders extends StatefulWidget {
   MyOrders({Key key}) : super(key: key);
-
   @override
   _MyOrdersState createState() => _MyOrdersState();
 }
@@ -11,15 +11,11 @@ class _MyOrdersState extends State<MyOrders> {
     return Container(
       padding: EdgeInsets.all(10),
       child: ListView(
-        children: [
-            
-             
-     
-        ],
+        children: [],
       ),
     );
   }
-  buildOrders(String id  , String nameorder  , String status){
+  buildOrders(String id, String nameorder, String status) {
     return Card(
         child: Container(
       padding: EdgeInsets.all(10),
