@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int selectedindex  = 0  ; 
+  int selectedindex = 0;
   int countcode = 40;
   // ScrollController scrollController;
   double sc = 0;
@@ -25,7 +25,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    selectedindex = widget.initialpage != null ? int.parse(widget.initialpage.toString()) : 0;
+    selectedindex = widget.initialpage != null
+        ? int.parse(widget.initialpage.toString())
+        : 0;
     super.initState();
   }
 
@@ -42,6 +44,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       key: scaffoldkey,
       appBar: AppBar(
+        
         systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.red),
         shape: Border.all(width: 0, color: Theme.of(context).primaryColor),
         toolbarHeight: 50,
