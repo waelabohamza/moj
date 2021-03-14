@@ -8,14 +8,15 @@ import 'package:moj/pages/home/themecolors.dart';
 import 'package:moj/pages/orders/myorders.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+  final initialpage;
+  HomePage({Key key, this.initialpage}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  int selectedindex = 0;
+  int selectedindex  = 0  ; 
   int countcode = 40;
   // ScrollController scrollController;
   double sc = 0;
@@ -24,12 +25,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    selectedindex = widget.initialpage != null ? int.parse(widget.initialpage.toString()) : 0;
     super.initState();
   }
 
   List<Widget> widgetsBottombar = [
     HomeScreen(),
-    //  Service() ,
     ThemeColors(),
     MyOrders()
     //  Services()

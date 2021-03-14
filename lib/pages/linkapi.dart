@@ -59,7 +59,16 @@ const String  linkRootImage     = "$serverName/api/uploads/" ;
 
 // Root File Pdf
 
-const String  linkRootPdf     = "$serverName/api/uploads/pdfviewservices/22.pdf" ;  
+const String  linkRootPdf     = "$serverName/api/upload/pdfviewservices/22.pdf" ;  
+
+
+// Add Order Course 
+
+const String  linkOrdersCourse     = "$serverName/api/orderscourse/addorderscourse.php" ;  
+
+ 
+
+
 
 
 

@@ -9,12 +9,13 @@ myChooseGallery() async {
     return File(myfile.path);
   }
   return null;
-  // setState(() {
-  // });
+ 
 }
 
 myChooseCamera() async {
   final myfile = await ImagePicker().getImage(source: ImageSource.camera);
+  print("====================== file ===========================================================") ; 
+  print(myfile) ; 
   // For Show Image Direct in Page Current witout Reload Page
   if (myfile != null) {
     return File(myfile.path);

@@ -136,7 +136,11 @@ class _LoginState extends State<Login> {
       },
       decoration: InputDecoration(
           suffixIcon: type == "password"
-              ? Icon(Icons.remove_red_eye_outlined)
+              ? IconButton(icon: Icon(Icons.remove_red_eye_outlined), onPressed: (){
+                setState(() {
+                  isShowPass = !isShowPass ; 
+                });
+              })
               : SizedBox(),
           prefixIcon: Icon(icon),
           hintText: hint,
