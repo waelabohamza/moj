@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
+import 'package:moj/main.dart';
 
 class AddOrderCourse extends StatefulWidget {
   final courseid;
@@ -9,9 +10,20 @@ class AddOrderCourse extends StatefulWidget {
 }
 
 class _AddOrderCourseState extends State<AddOrderCourse> {
-  bool course;
-  
+
+  String  course = "0";
+
   TextEditingController username = new TextEditingController();
+  TextEditingController email = new TextEditingController();
+  TextEditingController phone = new TextEditingController();
+
+  @override
+  void initState() {
+    username.text = sharedPrefs.getString("username");
+    email.text = sharedPrefs.getString("email");
+    phone.text = sharedPrefs.getString("phone");
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +42,10 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
                 buildTextForm("ادخل الاسم ", Icons.person_add_alt, username),
                 SizedBox(height: 10),
                 buildTextForm(
-                    "ادخل البريد الالكتروني", Icons.mail_outline, username),
+                    "ادخل البريد الالكتروني", Icons.mail_outline, email),
                 SizedBox(height: 10),
                 buildTextForm("ادخل رقم الهاتف",
-                    Icons.phone_bluetooth_speaker_outlined, username),
+                    Icons.phone_bluetooth_speaker_outlined, phone),
                 SizedBox(height: 10),
                 Text("هل سبق ان دخلت مثل هذه الدورة "),
                 Row(
@@ -41,7 +53,7 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
                     Expanded(
                       child: RadioListTile(
                           title: Text("نعم"),
-                          value: true,
+                          value: "1",
                           groupValue: course,
                           onChanged: (val) {
                             setState(() {
@@ -52,7 +64,7 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
                     Expanded(
                       child: RadioListTile(
                           title: Text("لا"),
-                          value: false,
+                          value: "0",
                           groupValue: course,
                           onChanged: (val) {
                             setState(() {
@@ -65,7 +77,7 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
                 MaterialButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50)),
-                  onPressed: () {},
+                  onPressed:(){},
                   child: Text("صورة الهوية"),
                   color: Theme.of(context).primaryColor,
                   textColor: Colors.white,

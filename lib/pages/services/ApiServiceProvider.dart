@@ -14,7 +14,7 @@ class PDFApi {
     return _storeFile(path, bytes);
   }
   static Future<File> loadNetwork(String url) async {
-    final response = await http.get(url);
+    final response = await http.get(Uri.parse(url));
     final bytes = response.bodyBytes;
     return _storeFile(url, bytes);
   }
