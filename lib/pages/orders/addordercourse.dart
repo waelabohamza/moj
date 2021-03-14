@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:moj/component/chooseimage.dart';
 import 'package:moj/const.dart';
 import 'package:moj/main.dart';
 
@@ -10,12 +13,22 @@ class AddOrderCourse extends StatefulWidget {
 }
 
 class _AddOrderCourseState extends State<AddOrderCourse> {
-
-  String  course = "0";
+  File file;
+  String course = "0";
 
   TextEditingController username = new TextEditingController();
   TextEditingController email = new TextEditingController();
   TextEditingController phone = new TextEditingController();
+
+  addImageGallery() async {
+    file = await myChooseGallery();
+    setState(() {});
+  }
+
+  addImageCamera() async {
+    file = await myChooseCamera();
+    setState(() {});
+  }
 
   @override
   void initState() {
@@ -77,7 +90,9 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
                 MaterialButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50)),
-                  onPressed:(){},
+                  onPressed: () {
+                    showbottommenu(context, myChooseCamera, myChooseGallery);
+                  },
                   child: Text("صورة الهوية"),
                   color: Theme.of(context).primaryColor,
                   textColor: Colors.white,
