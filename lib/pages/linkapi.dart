@@ -62,9 +62,12 @@ const String  linkRootImage     = "$serverName/api/upload/" ;
 const String  linkRootPdf     = "$serverName/api/upload/pdfviewservices/22.pdf" ;  
 
 
-// Add Order Course 
+// Orders 
 
-const String  linkOrdersCourse     = "$serverName/api/orderscourse/addorderscourse.php" ;  
+const String  linkOrdersCourse     = "$serverName/api/orderscourse/addorderscourse.php" ;
+const String  linkMyOrdersCourse   = "$serverName/api/orderscourse/orderscourse.php" ;
+
+
 
  
 
