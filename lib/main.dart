@@ -49,5 +49,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 class ChangeLocal with ChangeNotifier {}
