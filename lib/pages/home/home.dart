@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       key: scaffoldkey,
       appBar: AppBar(
-        
+        titleSpacing: 0,
         systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.red),
         shape: Border.all(width: 0, color: Theme.of(context).primaryColor),
         toolbarHeight: 50,
