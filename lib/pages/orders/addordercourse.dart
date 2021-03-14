@@ -1,29 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
+
 class AddOrderCourse extends StatefulWidget {
   final courseid;
   AddOrderCourse({Key key, this.courseid}) : super(key: key);
   @override
   _AddOrderCourseState createState() => _AddOrderCourseState();
 }
+
 class _AddOrderCourseState extends State<AddOrderCourse> {
   bool course;
-  List<String> datadropdowncatname = [
-    "القسم 1",
-    "القسم 2",
-    "القسم 3 ",
-    "القسم 4",
-    "القسم 5",
-  ];
-  List<String> datadropdownservicename = [
-    "الخدمة 1",
-    "الخدمة 2",
-    "الخدمة 3 ",
-    "الخدمة 4",
-    "الخدمة 5",
-  ];
-  var servicename;
-  var catname;
+  
   TextEditingController username = new TextEditingController();
 
   @override
@@ -103,6 +90,7 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
       ),
     );
   }
+
   buildTextForm(labeltext, icon, mycontroller) {
     return TextFormField(
       validator: (val) {
@@ -110,13 +98,13 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
       },
       controller: mycontroller,
       decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(1),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-          prefixIcon: Icon(icon),
-          labelText: labeltext,
-          // filled: true,
-          // fillColor: Colors.white
-          ),
+        contentPadding: EdgeInsets.all(1),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+        prefixIcon: Icon(icon),
+        labelText: labeltext,
+        // filled: true,
+        // fillColor: Colors.white
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
+import 'package:moj/main.dart';
 
 class MyDrawer extends StatefulWidget {
   MyDrawer({Key key}) : super(key: key);
@@ -21,7 +22,6 @@ class _MyDrawerState extends State<MyDrawer> {
               style: TextStyle(fontSize: 22),
             ),
           ),
-
           Container(
             padding: EdgeInsets.all(20),
             child: Row(
@@ -29,13 +29,19 @@ class _MyDrawerState extends State<MyDrawer> {
                 CircleAvatar(
                   radius: 30,
                   child: Text(
-                    "w",
-                    style: TextStyle(color: Colors.white , fontSize: 30),
+                    "${sharedPrefs.getString('username')[0]}",
+                    style: TextStyle(color: Colors.white, fontSize: 30),
                   ),
                   backgroundColor: Theme.of(context).primaryColor,
-                ) , 
-                SizedBox(width: 10) , 
-                Text("wael@gmail.com")
+                ),
+                SizedBox(width: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("${sharedPrefs.getString('username')}"),
+                    Text("${sharedPrefs.getString('email')}")
+                  ],
+                )
               ],
             ),
           ),
@@ -44,27 +50,6 @@ class _MyDrawerState extends State<MyDrawer> {
             title: Text("الخدمات"),
             leading: Icon(Icons.home_repair_service_sharp),
           ),
-          // ExpansionTile(
-          //   title: Text("المركز الاعلامي"),
-          //   leading: Icon(Icons.medical_services_outlined),
-          //   children: [
-          //     ListTile(
-          //       onTap: () {},
-          //       title: Text("اخر الاخبار"),
-          //       leading: Icon(Icons.assignment_outlined),
-          //     ),
-          //     ListTile(
-          //       onTap: () {},
-          //       title: Text("الصور"),
-          //       leading: Icon(Icons.photo),
-          //     ),
-          //     ListTile(
-          //       onTap: () {},
-          //       title: Text("الفعاليات"),
-          //       leading: Icon(Icons.insights_rounded),
-          //     ),
-          //   ],
-          // ),
           ListTile(
             onTap: () {},
             title: Text("عن التطبيق"),

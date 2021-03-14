@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:moj/component/crud.dart';
+import 'package:moj/main.dart';
 import 'package:moj/pages/experts/experts.dart';
 import 'package:moj/pages/home/component/listexperts.dart';
 import 'package:moj/pages/home/component/listhorizntal.dart';
@@ -18,6 +19,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
+  
+  var email = sharedPrefs.getString("email") ; 
+
+  var username = sharedPrefs.getString("username") ; 
+
   Crud crud = new Crud();
 
   bool isLoading = true;
@@ -51,7 +57,9 @@ class _HomeScreenState extends State<HomeScreen>
     print("==================");
     print(listHomeDataExperts);
     print("==================");
-
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      startAnimate();
+    });
     if (this.mounted) {
       setState(() {
         isLoading = false;
@@ -63,17 +71,13 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      startAnimate();
-    });
-
     pageController = PageController(viewportFraction: 0.8);
     _getData();
     super.initState();
   }
 
   startAnimate() {
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(Duration(seconds: 3), () {
       int nextPage = pageController.page.round() + 1;
       if (nextPage == listHomeDataCategories.length) {
         nextPage = 0;
@@ -93,6 +97,7 @@ class _HomeScreenState extends State<HomeScreen>
     listHomeDataQuestions.clear();
     listHomeDataServicesCommon.clear();
     listHomeDataExperts.clear();
+
     super.dispose();
   }
 
