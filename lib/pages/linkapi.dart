@@ -29,7 +29,7 @@ const String  linkHomeData     = "$serverName/api/home.php" ;
  
 
 const String  linkServices    = "$serverName/api/services/services.php" ;
- 
+
 
 const String  linkServicesprice    = "$serverName/api/servicesprice/serviceprice.php" ;  
 
@@ -71,6 +71,11 @@ const String  linkRootPdf     = "$serverName/api/upload/pdfviewservices/22.pdf" 
 
 const String  linkOrdersCourse     = "$serverName/api/orderscourse/addorderscourse.php" ;
 const String  linkMyOrdersCourse   = "$serverName/api/orderscourse/orderscourse.php" ;
+
+
+const String  linkAddOrdersService     = "$serverName/api/ordersservice/addordersservice.php" ;
+
+ 
 
 
 

@@ -81,49 +81,7 @@ Future addRequestAndImageTwo(
   }
 }
 
-Future addRequestAndImageOneRequied(String url, Map data, File image,
-    [File imagetwo]) async {
-  var stream = new http.ByteStream(image.openRead());
-  stream.cast();
-
-  var length = await image.length();
-
-  var uri = Uri.parse(url);
-
-  var request = new http.MultipartRequest("POST", uri);
-  request.headers.addAll(myheaders);
-
-  var multipartFile = new http.MultipartFile("file", stream, length,
-      filename: basename(image.path));
-
-  if (imagetwo != null){
-    var length = await image.length();
-    var stream = new http.ByteStream(image.openRead());
-    stream.cast();
-    var multipartFileTwo = new http.MultipartFile("filetwo", stream, length,
-    filename: basename(image.path));
-    request.files.add(multipartFileTwo);
-  }
-
-  // add Data to request
-  data.forEach((key, value) {
-    request.fields[key] = value;
-  });
-  // add Data to request
-  request.files.add(multipartFile);
-
-  // Send Request
-  var myrequest = await request.send();
-  // For get Response Body
-  var response = await http.Response.fromStream(myrequest);
-  if (myrequest.statusCode == 200) {
-    print(response.body);
-    return jsonDecode(response.body);
-  } else {
-    print(response.body);
-    return jsonDecode(response.body);
-  }
-}
+ 
 
 Future editRequestWithoutImage(String url, Map data) async {
   var uri = Uri.parse(url);
