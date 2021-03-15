@@ -96,13 +96,15 @@ Future addRequestAndImageOneRequied(String url, Map data, File image,
   var multipartFile = new http.MultipartFile("file", stream, length,
       filename: basename(image.path));
 
-  if (imagetwo != null) {
+  if (imagetwo != null){
+
     var length = await image.length();
     var stream = new http.ByteStream(image.openRead());
     stream.cast();
     var multipartFileTwo = new http.MultipartFile("file", stream, length,
-        filename: basename(image.path));
+    filename: basename(image.path));
     request.files.add(multipartFileTwo);
+    
   }
 
   // add Data to request
