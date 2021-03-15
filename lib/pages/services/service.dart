@@ -1,8 +1,10 @@
+
 import 'dart:ui';
 import 'package:flutter/material.dart';
 // import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:moj/pages/linkapi.dart';
-import 'package:moj/pages/services/ApiServiceProvider.dart';
+import 'package:moj/component/ApiPdfProvider.dart';
+import 'package:moj/pages/orders/addorderservice.dart';
 import 'package:moj/pages/services/pdfview.dart';
  
  
@@ -205,7 +207,11 @@ class _ServiceState extends State<Service> {
                 padding: EdgeInsets.symmetric(horizontal: 40),
                 color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                      return AddOrdersService(); 
+                  })) ; 
+                },
                 child: Text("طلب مذكرة"),
               )
             ],
@@ -224,3 +230,11 @@ class _ServiceState extends State<Service> {
 4 - دروب دون للسعر 
 5 - 4 - العنوان
 */
+
+
+// المبلغ المطالب به 
+
+// 1 - Confirm Password
+// 2 - number phone  -> Resolve 
+// 3 - المطالب ضده 
+// 4 - طلب استشارة  => واتس 
