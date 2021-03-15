@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 import 'package:flutter/material.dart';
 // import 'package:flutter_pdfview/flutter_pdfview.dart';
@@ -6,8 +5,6 @@ import 'package:moj/pages/linkapi.dart';
 import 'package:moj/component/ApiPdfProvider.dart';
 import 'package:moj/pages/orders/addorderservice.dart';
 import 'package:moj/pages/services/pdfview.dart';
- 
- 
 
 class Service extends StatefulWidget {
   final list;
@@ -18,9 +15,6 @@ class Service extends StatefulWidget {
 }
 
 class _ServiceState extends State<Service> {
- 
-  
- 
   Icon icon1 = Icon(Icons.add);
   Icon icon2 = Icon(Icons.add);
   Icon icon3 = Icon(Icons.add);
@@ -159,12 +153,16 @@ class _ServiceState extends State<Service> {
                   Padding(
                     padding: const EdgeInsets.all(15),
                     // child: Text("${list['services_document']}"),
-                    child: InkWell(child: Text("PDF"),onTap: () async {
-                      final file = await  PDFApi.loadNetwork(linkRootPdf); 
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                               return PDFViewerPage(file: file) ; 
-                      })); 
-                    },),
+                    child: InkWell(
+                      child: Text("PDF"),
+                      onTap: () async {
+                        final file = await PDFApi.loadNetwork(linkRootPdf);
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return PDFViewerPage(file: file);
+                        }));
+                      },
+                    ),
                   ),
                 ],
               ),
@@ -202,15 +200,18 @@ class _ServiceState extends State<Service> {
               ),
               MaterialButton(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50)
-                ),
+                    borderRadius: BorderRadius.circular(50)),
                 padding: EdgeInsets.symmetric(horizontal: 40),
                 color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                      return AddOrdersService(); 
-                  })) ; 
+                onPressed:(){
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return AddOrdersService(
+                        servicesid: list['services_id'],
+                        typeprice: list['services_typeprice']
+                        );
+                  }));
                 },
                 child: Text("طلب مذكرة"),
               )
@@ -231,10 +232,9 @@ class _ServiceState extends State<Service> {
 5 - 4 - العنوان
 */
 
-
-// المبلغ المطالب به 
+// المبلغ المطالب به
 
 // 1 - Confirm Password
-// 2 - number phone  -> Resolve 
-// 3 - المطالب ضده 
-// 4 - طلب استشارة  => واتس 
+// 2 - number phone  -> Resolve
+// 3 - المطالب ضده
+// 4 - طلب استشارة  => واتس

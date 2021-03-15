@@ -30,13 +30,11 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
 
   addImageGallery() async {
     file = await myChooseGallery();
-
     setState(() {});
   }
 
   addImageCamera() async {
     file = await myChooseCamera();
-    print("Camera File $file") ; 
     setState(() {});
   }
 
