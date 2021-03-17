@@ -1,6 +1,7 @@
 import 'package:dropdown_search/dropdownSearch.dart';
 import 'package:flutter/material.dart';
-import 'package:moj/const.dart';
+import 'package:moj/component/crud.dart';
+import 'package:moj/pages/linkapi.dart';
 
 class AddOrders extends StatefulWidget {
   AddOrders({Key key}) : super(key: key);
@@ -10,24 +11,32 @@ class AddOrders extends StatefulWidget {
 }
 
 class _AddOrdersState extends State<AddOrders> {
-  List<String> datadropdowncatname = [
-    "القسم 1",
-    "القسم 2",
-    "القسم 3 ",
-    "القسم 4",
-    "القسم 5",
-  ];
-  List<String> datadropdownservicename = [
-    "الخدمة 1",
-    "الخدمة 2",
-    "الخدمة 3 ",
-    "الخدمة 4",
-    "الخدمة 5",
-  ];
-  var servicename;
-  var catname;
-  TextEditingController username = new TextEditingController();
+  Crud crud = new Crud();
 
+  var servicename;
+
+  List datadropdown = [];
+
+  List datadropdownname = [];
+
+  void getServiceName() async {
+    var listData =
+        await crud.writeData(linkServices, {"dropdownsearch": "true"});
+    for (int i = 0; i < listData.length; i++)
+      setState(() {
+        datadropdown.add(listData[i]);
+        datadropdownname.add(listData[i]['services_name']);
+      });
+  }
+  //
+
+  @override
+  void initState() {
+    super.initState();
+    getServiceName();
+  }
+
+  TextEditingController username = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,82 +46,71 @@ class _AddOrdersState extends State<AddOrders> {
       ),
       body: Container(
         padding: EdgeInsets.all(10),
-        child: ListView(
-          children: [
-            Form(
-                child: Column(
-              children: [
-                bulidTextForm("ادخل الاسم", Icons.person_add_alt, username, ""),
-                bulidTextForm(
-                    "ادخل البريد الالكتروني", Icons.mail_outline, username, ""),
-                bulidTextForm("ادخل رقم الهاتف",
-                    Icons.phone_bluetooth_speaker_outlined, username, ""),
-                bulidTextForm("ادخل العنوان ", Icons.location_city_outlined,
-                    username, ""),
-                DropdownSearch(
-                  items: datadropdowncatname,
-                  label: "ادخل هنا اسم القسم  الذي تريد",
-                  mode: Mode.BOTTOM_SHEET,
-                  onChanged: (val) async {
-                    setState(() {
-                      catname = val;
-                    });
-
-                    // setState(() {});
-                  },
-                  selectedItem: "اسم الخدمة",
-                ),
-                DropdownSearch(
-                  items: datadropdownservicename,
-                  label: "ادخل هنا اسم الخدمة  الذي تريد",
-                  mode: Mode.BOTTOM_SHEET,
-                  onChanged: (val) async {
-                    setState(() {
-                      servicename = val;
-                    });
-
-                    // setState(() {});
-                  },
-                  selectedItem: "اسم القسم",
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    MaterialButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50)),
-                      onPressed: () {},
-                      child: Text("صورة الرخصة"),
-                      color: Theme.of(context).primaryColor,
-                      textColor: Colors.white,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    ),
-                    MaterialButton(
+        child: datadropdown == null
+            ? Center(child: CircularProgressIndicator())
+            : ListView(
+                children: [
+                  Form(
+                      child: Column(
+                    children: [
+                      bulidTextForm(
+                          "ادخل الاسم", Icons.person_add_alt, username, ""),
+                      bulidTextForm("ادخل البريد الالكتروني",
+                          Icons.mail_outline, username, ""),
+                      bulidTextForm("ادخل رقم الهاتف",
+                          Icons.phone_bluetooth_speaker_outlined, username, ""),
+                      bulidTextForm("ادخل العنوان ",
+                          Icons.location_city_outlined, username, ""),
+                      DropdownSearch(
+                        items: datadropdownname,
+                        label: "ادخل هنا اسم الخدمة  الذي تريد",
+                        mode: Mode.BOTTOM_SHEET,
+                        onChanged: (val) async {
+                          setState(() {
+                            servicename = val;
+                          });
+                        },
+                        selectedItem: "اسم الخدمة",
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          MaterialButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
+                            onPressed: () {},
+                            child: Text("صورة الرخصة"),
+                            color: Theme.of(context).primaryColor,
+                            textColor: Colors.white,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 5),
+                          ),
+                          MaterialButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50)),
+                              color: Theme.of(context).primaryColor,
+                              textColor: Colors.white,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 5),
+                              onPressed: () {},
+                              child: Text("صورة الهوية")),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      MaterialButton(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50)),
+                        onPressed: () {},
+                        child: Text("اضافة الطلب"),
                         color: Theme.of(context).primaryColor,
                         textColor: Colors.white,
                         padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                        onPressed: () {},
-                        child: Text("صورة الهوية")),
-                  ],
-                ),
-                SizedBox(height: 20),
-                MaterialButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50)),
-                  onPressed: () {},
-                  child: Text("اضافة الطلب"),
-                  color: Theme.of(context).primaryColor,
-                  textColor: Colors.white,
-                  padding: EdgeInsets.symmetric(horizontal: 60, vertical: 5),
-                ),
-              ],
-            ))
-          ],
-        ),
+                            EdgeInsets.symmetric(horizontal: 60, vertical: 5),
+                      ),
+                    ],
+                  ))
+                ],
+              ),
       ),
     );
   }
@@ -136,5 +134,11 @@ class _AddOrdersState extends State<AddOrders> {
             hintStyle: TextStyle(fontSize: 14)),
       ),
     );
+  }
+
+  getDataByNameInListCat(String val, List list) {
+    var databyname =
+        list.where((element) => element['servicesprice_name'] == val).toList();
+    return databyname[0];
   }
 }
