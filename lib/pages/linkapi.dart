@@ -74,6 +74,8 @@ const String  linkMyOrdersCourse   = "$serverName/api/orderscourse/orderscourse.
 
 
 const String  linkAddOrdersService     = "$serverName/api/ordersservice/addordersservice.php" ;
+const String  linkOrdersService     = "$serverName/api/ordersservice/ordersservice.php" ;
+
 
  
 

@@ -31,13 +31,31 @@ class _MyOrdersState extends State<MyOrders> {
                               // physics: NeverScrollableScrollPhysics(),
                               itemCount: snapshot.data.length,
                               itemBuilder: (context, i) {
-                                return buildOrders(snapshot.data[i]);
+                                return buildOrders(snapshot.data[i]['orderscourse_id'] , snapshot.data[i]['orderscourse_name'] , snapshot.data[i]['orderscourse_status'], "courses");
                               });
                         }
                         return Center(child: CircularProgressIndicator());
                       }),
                 )
-              : Text("wael"),
+              : Container(
+                  margin: EdgeInsets.only(top: 50),
+                  child: FutureBuilder(
+                      future: crud.writeData(linkOrdersService,
+                          {"userid": sharedPrefs.getString("id")}),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                              shrinkWrap: true,
+                              // physics: NeverScrollableScrollPhysics(),
+                              itemCount: snapshot.data.length,
+                              itemBuilder: (context, i) {
+                                return buildOrders(
+                                    snapshot.data[i]['ordersservice_id'] , snapshot.data[i]['ordersservice_name'], snapshot.data[i]['ordersservice_orders'], "services");
+                              });
+                        }
+                        return Center(child: CircularProgressIndicator());
+                      }),
+                ),
           Row(
             children: [
               Expanded(
@@ -77,7 +95,7 @@ class _MyOrdersState extends State<MyOrders> {
     );
   }
 
-  buildOrders(listorders) {
+  buildOrders(ordersid, ordersname, ordersstatus, type) {
     return Card(
         child: Container(
       padding: EdgeInsets.all(10),
@@ -85,22 +103,21 @@ class _MyOrdersState extends State<MyOrders> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("رقم الطلب : ${listorders['orderscourse_id']} "),
-          Text("اسم الطلب :   ${listorders['courses_name_ar']}"),
-          int.parse(listorders['orderscourse_status']) == 0
+          Text("رقم الطلب : $ordersid"),
+          Text("اسم الطلب : $ordersname "),
+          int.parse(ordersstatus) == 0
               ? Text(
                   "حالة الطلب :  بانتظار  الموافقة ",
                   style: TextStyle(
                       color: Colors.blue, fontWeight: FontWeight.bold),
                 )
-              : int.parse(listorders['orderscourse_status']) == 1
+              : int.parse(ordersstatus) == 1
                   ? Text("حالة الطلب :  تمت الموافقة  ",
                       style: TextStyle(
                           color: Colors.green, fontWeight: FontWeight.bold))
                   : Text("حالة الطلب :  مرفوض  ",
                       style: TextStyle(
                           color: Colors.red, fontWeight: FontWeight.bold)),
-          // Text("نوع الطلب : ؟؟"),
         ],
       ),
     ));
