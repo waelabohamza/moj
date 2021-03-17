@@ -10,8 +10,10 @@ class MyOrders extends StatefulWidget {
 }
 
 class _MyOrdersState extends State<MyOrders> {
+  
   bool isactive = false;
   Crud crud = new Crud();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,13 +27,21 @@ class _MyOrdersState extends State<MyOrders> {
                       future: crud.writeData(linkMyOrdersCourse,
                           {"userid": sharedPrefs.getString("id")}),
                       builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator());
+                        }
                         if (snapshot.hasData) {
                           return ListView.builder(
                               shrinkWrap: true,
                               // physics: NeverScrollableScrollPhysics(),
                               itemCount: snapshot.data.length,
                               itemBuilder: (context, i) {
-                                return buildOrders(snapshot.data[i]['orderscourse_id'] , snapshot.data[i]['orderscourse_name'] , snapshot.data[i]['orderscourse_status'], "courses");
+                                return buildOrders(
+                                    snapshot.data[i]['orderscourse_id'],
+                                    snapshot.data[i]['courses_name'],
+                                    snapshot.data[i]['orderscourse_status'],
+                                    "courses");
                               });
                         }
                         return Center(child: CircularProgressIndicator());
@@ -43,6 +53,10 @@ class _MyOrdersState extends State<MyOrders> {
                       future: crud.writeData(linkOrdersService,
                           {"userid": sharedPrefs.getString("id")}),
                       builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator());
+                        }
                         if (snapshot.hasData) {
                           return ListView.builder(
                               shrinkWrap: true,
@@ -50,7 +64,10 @@ class _MyOrdersState extends State<MyOrders> {
                               itemCount: snapshot.data.length,
                               itemBuilder: (context, i) {
                                 return buildOrders(
-                                    snapshot.data[i]['ordersservice_id'] , snapshot.data[i]['ordersservice_name'], snapshot.data[i]['ordersservice_orders'], "services");
+                                    snapshot.data[i]['ordersservice_id'],
+                                    snapshot.data[i]['services_name'],
+                                    snapshot.data[i]['ordersservice_status'],
+                                    "services");
                               });
                         }
                         return Center(child: CircularProgressIndicator());
