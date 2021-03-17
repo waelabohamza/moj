@@ -8,7 +8,6 @@ class MyOrders extends StatefulWidget {
   @override
   _MyOrdersState createState() => _MyOrdersState();
 }
-
 class _MyOrdersState extends State<MyOrders> {
   bool isactive = false;
   Crud crud = new Crud();
@@ -21,13 +20,11 @@ class _MyOrdersState extends State<MyOrders> {
     ordersservices.addAll(responsebody['ordersservice']);
     setState(() {});
   }
-
   @override
   void initState() {
     getInitialOrders();
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return Container(
