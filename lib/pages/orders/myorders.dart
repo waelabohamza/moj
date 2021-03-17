@@ -10,7 +10,7 @@ class MyOrders extends StatefulWidget {
 }
 
 class _MyOrdersState extends State<MyOrders> {
-  
+
   bool isactive = false;
   Crud crud = new Crud();
 
@@ -111,7 +111,6 @@ class _MyOrdersState extends State<MyOrders> {
       ),
     );
   }
-
   buildOrders(ordersid, ordersname, ordersstatus, type) {
     return Card(
         child: Container(
