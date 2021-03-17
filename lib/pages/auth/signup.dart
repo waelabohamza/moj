@@ -25,6 +25,8 @@ class _SignUpState extends State<SignUp> {
   TextEditingController phone = new TextEditingController();
   TextEditingController password = new TextEditingController();
   TextEditingController repassword = new TextEditingController();
+  TextEditingController confirmPassword = new TextEditingController();
+
   // Method
   signUp() async {
     var formdata = formstate.currentState;
@@ -81,13 +83,17 @@ class _SignUpState extends State<SignUp> {
                   SizedBox(height: 10),
                   bulidTextForm(
                       "كلمة المرور", Icons.lock_open, password, "password"),
+                  SizedBox(height: 10),
+                  bulidTextForm("كلمة المرور مره اخرى", Icons.lock_open,
+                      confirmPassword, "confirmpassword"),
                   SizedBox(height: 40),
                   MaterialButton(
                     color: Colors.grey[50],
                     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50),
-                        side: BorderSide(color: Theme.of(context).primaryColor, width: 2)),
+                        side: BorderSide(
+                            color: Theme.of(context).primaryColor, width: 2)),
                     onPressed: () {
                       signUp();
                     },
@@ -107,19 +113,25 @@ class _SignUpState extends State<SignUp> {
       controller: control,
       validator: (val) {
         if (type == "email") {
-          return validInput(val, 2, 60, "يكون البريد الالكتروني");
+          return validInput(val, 2, 60, "يكون البريد الالكتروني", "email");
         }
         if (type == "username") {
           return validInput(val, 2, 60, "يكون اسم المستخدم");
         }
         if (type == "phone") {
-          return validInput(val, 2, 60, "يكون رقم الهاتف");
+          return validInput(val, 2, 60, "يكون رقم الهاتف", "phone");
         }
         if (type == "password") {
           return validInput(val, 2, 60, "تكون كلمة المرور");
         }
+        if (type == "confirmpassword") {
+          if (confirmPassword.text != password.text) {
+            return "كلمة المرور غير متطابقة";
+          }
+        }
         return null;
       },
+      keyboardType: type == "phone" ? TextInputType.number : TextInputType.text,
       decoration: InputDecoration(
           contentPadding: EdgeInsets.all(1),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
