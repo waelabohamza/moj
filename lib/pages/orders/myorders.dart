@@ -10,9 +10,23 @@ class MyOrders extends StatefulWidget {
 }
 
 class _MyOrdersState extends State<MyOrders> {
-
   bool isactive = false;
   Crud crud = new Crud();
+  List orderscourses = [];
+  List ordersservices = [];
+  getInitialOrders() async {
+    var responsebody = await crud
+        .writeData(linkAllOrders, {"userid": sharedPrefs.getString("id")});
+    orderscourses.addAll(responsebody['orderscourse']);
+    ordersservices.addAll(responsebody['ordersservice']);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getInitialOrders();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,59 +34,33 @@ class _MyOrdersState extends State<MyOrders> {
       padding: EdgeInsets.symmetric(horizontal: 10),
       child: Stack(
         children: [
-          isactive == true
-              ? Container(
-                  margin: EdgeInsets.only(top: 50),
-                  child: FutureBuilder(
-                      future: crud.writeData(linkMyOrdersCourse,
-                          {"userid": sharedPrefs.getString("id")}),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Center(child: CircularProgressIndicator());
-                        }
-                        if (snapshot.hasData) {
-                          return ListView.builder(
-                              shrinkWrap: true,
-                              // physics: NeverScrollableScrollPhysics(),
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (context, i) {
-                                return buildOrders(
-                                    snapshot.data[i]['orderscourse_id'],
-                                    snapshot.data[i]['courses_name'],
-                                    snapshot.data[i]['orderscourse_status'],
-                                    "courses");
-                              });
-                        }
-                        return Center(child: CircularProgressIndicator());
-                      }),
-                )
-              : Container(
-                  margin: EdgeInsets.only(top: 50),
-                  child: FutureBuilder(
-                      future: crud.writeData(linkOrdersService,
-                          {"userid": sharedPrefs.getString("id")}),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Center(child: CircularProgressIndicator());
-                        }
-                        if (snapshot.hasData) {
-                          return ListView.builder(
-                              shrinkWrap: true,
-                              // physics: NeverScrollableScrollPhysics(),
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (context, i) {
-                                return buildOrders(
-                                    snapshot.data[i]['ordersservice_id'],
-                                    snapshot.data[i]['services_name'],
-                                    snapshot.data[i]['ordersservice_status'],
-                                    "services");
-                              });
-                        }
-                        return Center(child: CircularProgressIndicator());
-                      }),
-                ),
+          Container(
+              margin: EdgeInsets.only(top: 50),
+              child: orderscourses.isNotEmpty && orderscourses != null
+                  ? (isactive == true)
+                      ? ListView.builder(
+                          shrinkWrap: true,
+                          // physics: NeverScrollableScrollPhysics(),
+                          itemCount: orderscourses.length,
+                          itemBuilder: (context, i) {
+                            return buildOrders(
+                                orderscourses[i]['orderscourse_id'],
+                                orderscourses[i]['courses_name'],
+                                orderscourses[i]['orderscourse_status'],
+                                "courses");
+                          })
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          // physics: NeverScrollableScrollPhysics(),
+                          itemCount: ordersservices.length,
+                          itemBuilder: (context, i) {
+                            return buildOrders(
+                                ordersservices[i]['ordersservice_id'],
+                                ordersservices[i]['services_name'],
+                                ordersservices[i]['ordersservice_status'],
+                                "services");
+                          })
+                  : Center(child: CircularProgressIndicator())),
           Row(
             children: [
               Expanded(
@@ -111,6 +99,7 @@ class _MyOrdersState extends State<MyOrders> {
       ),
     );
   }
+
   buildOrders(ordersid, ordersname, ordersstatus, type) {
     return Card(
         child: Container(
