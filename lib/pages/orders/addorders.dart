@@ -104,8 +104,11 @@ class _AddOrdersState extends State<AddOrders> {
       return showAlertOneChoose(
           context, "error", "خطأ", "الرجاءادخال صورة الهوية");
     if (serviceid == null)
-      return showAlertOneChoose(  
+      return showAlertOneChoose(
           context, "error", "خطأ", "الرجاء اختيار الخدمة اولا");
+    if ((typeprice != null || typeprice != "0") && fees == null)
+      return showAlertOneChoose(
+          context, "error", "خطأ", "الرجاء اختيار السعر اولا");
     var formdata = formstate.currentState;
     if (formdata.validate()) {
       var data = {
