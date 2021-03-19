@@ -5,6 +5,7 @@ import 'package:moj/component/alert.dart';
 import 'package:moj/component/chooseimage.dart';
 import 'package:moj/component/crud.dart';
 import 'package:moj/component/myrequest.dart';
+import 'package:moj/component/valid.dart';
 import 'package:moj/main.dart';
 import 'package:moj/pages/linkapi.dart';
 
@@ -35,6 +36,8 @@ class _AddOrdersState extends State<AddOrdersService> {
 
   List listprice = [];
   List listpricename = [];
+
+  var serviceprice;
 
   getDataServicesPrice() async {
     var listData = await crud.writeData(
@@ -137,22 +140,22 @@ class _AddOrdersState extends State<AddOrdersService> {
                 key: formstate,
                 child: Column(
                   children: [
-                    buildTextForm("ادخل الاسم", Icons.person_add_alt, username),
+                    buildTextForm("ادخل الاسم", Icons.person_add_alt, username , "username"),
                     SizedBox(height: 10),
                     buildTextForm(
-                        "ادخل البريد الالكتروني", Icons.mail_outline, email),
+                        "ادخل البريد الالكتروني", Icons.mail_outline, email , "email"),
                     SizedBox(height: 10),
                     buildTextForm("ادخل رقم الهاتف",
-                        Icons.phone_bluetooth_speaker_outlined, phone),
+                        Icons.phone_bluetooth_speaker_outlined, phone , "phone"),
                     SizedBox(height: 10),
                     buildTextForm(
-                        "ادخل العنوان ", Icons.location_city_outlined, address),
+                        "ادخل العنوان ", Icons.location_city_outlined, address , "address"),
                     SizedBox(height: 10),
                     buildTextForm(
                         "المطالب ضده ",
                         Icons
                             .signal_cellular_connected_no_internet_4_bar_outlined,
-                        aganist),
+                        aganist , "against"),
                     SizedBox(height: 10),
                     int.parse(widget.typeprice.toString()) == 1
                         ? DropdownSearch(
@@ -161,14 +164,13 @@ class _AddOrdersState extends State<AddOrdersService> {
                             // mode: Mode.BOTTOM_SHEET,
                             onChanged: (val) async {
                               setState(() {
-                                servicename = val;
+                                serviceprice = val;
                                 fees = getDataByNameInListCat(
                                     val, listprice)['servicesprice_fees'];
                               });
                               // setState(() {});
                             },
-                            selectedItem: "اسم القسم",
-                          )
+                            selectedItem: "المبلغ المطالب به")
                         : SizedBox(),
                     fees != null
                         ? Container(
@@ -192,7 +194,9 @@ class _AddOrdersState extends State<AddOrdersService> {
                                 context, addImageCameratwo, addImageGallerytwo);
                           },
                           child: Text("صورة الرخصة"),
-                          color:filetwo == null ?  Theme.of(context).primaryColor : Colors.green,
+                          color: filetwo == null
+                              ? Theme.of(context).primaryColor
+                              : Colors.green,
                           textColor: Colors.white,
                           padding:
                               EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -200,13 +204,15 @@ class _AddOrdersState extends State<AddOrdersService> {
                         MaterialButton(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),
-                            color: file == null ?  Theme.of(context).primaryColor : Colors.green,
+                            color: file == null
+                                ? Theme.of(context).primaryColor
+                                : Colors.green,
                             textColor: Colors.white,
                             padding: EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 5),
                             onPressed: () {
-                              return showbottommenu(context, addImageCamera,
-                                  addImageGallery);
+                              return showbottommenu(
+                                  context, addImageCamera, addImageGallery);
                             },
                             child: Text("صورة الهوية")),
                       ],
@@ -232,10 +238,15 @@ class _AddOrdersState extends State<AddOrdersService> {
     );
   }
 
-  Widget buildTextForm(labeltext, icon, mycontroller) {
+  Widget buildTextForm(labeltext, icon, mycontroller , type) {
     return TextFormField(
       validator: (val) {
-        return null;
+           if (type == "email")    return validInput(val, 2, 100, "يكون البريد الالكتروني"  , "email")  ; 
+           if (type == "username") return validInput(val, 2, 100, "يكون اسم المستخدم")  ; 
+           if (type == "phone")    return validInput(val, 7, 12, "يكون اسم المستخدم"  , "phone")  ; 
+           if (type == "address")  return validInput(val, 2, 100, "يكون العنوان  " )  ; 
+           if (type == "against")  return validInput(val, 2, 100, "يكون المطالب ضده"  )  ; 
+           return null ; 
       },
       controller: mycontroller,
       decoration: InputDecoration(

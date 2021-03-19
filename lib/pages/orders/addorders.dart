@@ -1,6 +1,13 @@
+import 'dart:io';
+
 import 'package:dropdown_search/dropdownSearch.dart';
 import 'package:flutter/material.dart';
+import 'package:moj/component/alert.dart';
+import 'package:moj/component/chooseimage.dart';
 import 'package:moj/component/crud.dart';
+import 'package:moj/component/myrequest.dart';
+import 'package:moj/component/valid.dart';
+import 'package:moj/main.dart';
 import 'package:moj/pages/linkapi.dart';
 
 class AddOrders extends StatefulWidget {
@@ -11,6 +18,11 @@ class AddOrders extends StatefulWidget {
 }
 
 class _AddOrdersState extends State<AddOrders> {
+  File file;
+  File filetwo;
+
+  bool isLoadingGetPriceForService = false;
+
   Crud crud = new Crud();
 
   var servicename;
@@ -18,6 +30,28 @@ class _AddOrdersState extends State<AddOrders> {
   List datadropdown = [];
 
   List datadropdownname = [];
+
+  var fees;
+
+  var typeprice;
+
+  var serviceid;
+
+  List listpricename = [];
+
+  List listprice = [];
+
+  var serviceprice;
+
+  // For Filed
+
+  TextEditingController username = new TextEditingController();
+  TextEditingController email = new TextEditingController();
+  TextEditingController phone = new TextEditingController();
+  TextEditingController address = new TextEditingController();
+  TextEditingController aganist = new TextEditingController();
+
+  GlobalKey<FormState> formstate = new GlobalKey<FormState>();
 
   void getServiceName() async {
     var listData =
@@ -28,7 +62,82 @@ class _AddOrdersState extends State<AddOrders> {
         datadropdownname.add(listData[i]['services_name']);
       });
   }
+
+  getDataServicesPrice(String serviceid) async {
+    listprice.clear();
+    listpricename.clear();
+    var listData =
+        await crud.writeData(linkServicesprice, {"serviceid": serviceid});
+    if (listData[0] != "falid") {
+      for (int a = 0; a < listData.length; a++)
+        setState(() {
+          listprice.add(listData[a]);
+          listpricename.add(listData[a]['servicesprice_name']);
+        });
+    }
+    // print("data : $listData");
+  }
   //
+
+  addImageGallery() async {
+    file = await myChooseGallery();
+    setState(() {});
+  }
+
+  addImageCamera() async {
+    file = await myChooseCamera();
+    setState(() {});
+  }
+
+  addImageGallerytwo() async {
+    filetwo = await myChooseGallery();
+    setState(() {});
+  }
+
+  addImageCameratwo() async {
+    filetwo = await myChooseCamera();
+    setState(() {});
+  }
+
+  addOrdersService() async {
+    if (file == null)
+      return showAlertOneChoose(
+          context, "error", "خطأ", "الرجاءادخال صورة الهوية");
+    if (serviceid == null)
+      return showAlertOneChoose(  
+          context, "error", "خطأ", "الرجاء اختيار الخدمة اولا");
+    var formdata = formstate.currentState;
+    if (formdata.validate()) {
+      var data = {
+        "username": username.text.toString(),
+        "email": email.text.toString(),
+        "phone": phone.text.toString(),
+        "address": address.text.toString(),
+        "against": aganist.text.toString(),
+        "fees": fees.toString() ?? "0",
+        "serviceid": serviceid.toString(),
+        "userid": sharedPrefs.get("id")
+      };
+      var responsebody;
+      if (filetwo == null) {
+        showLoading(context);
+        responsebody =
+            await addRequestWithImageOne(linkAddOrdersService, data, file);
+      } else {
+        showLoading(context);
+        responsebody = await addRequestAndImageTwo(
+            linkAddOrdersService, data, file, filetwo);
+      }
+      if (responsebody['status'] == "success") {
+        Navigator.of(context).pushReplacementNamed("home");
+      } else {
+        if (Navigator.of(context).canPop()) {
+          Navigator.of(context).pop();
+        }
+        showAlertOneChoose(context, "error", "خطا", "الرجاء المحاولة مره اخرى");
+      }
+    }
+  }
 
   @override
   void initState() {
@@ -36,7 +145,6 @@ class _AddOrdersState extends State<AddOrders> {
     getServiceName();
   }
 
-  TextEditingController username = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,39 +154,93 @@ class _AddOrdersState extends State<AddOrders> {
       ),
       body: Container(
         padding: EdgeInsets.all(10),
-        child: datadropdown == null
+        child: datadropdown == null || datadropdown.isEmpty
             ? Center(child: CircularProgressIndicator())
             : ListView(
                 children: [
                   Form(
                       child: Column(
                     children: [
-                      bulidTextForm(
-                          "ادخل الاسم", Icons.person_add_alt, username, ""),
+                      bulidTextForm("ادخل الاسم", Icons.person_add_alt,
+                          username, "username"),
                       bulidTextForm("ادخل البريد الالكتروني",
-                          Icons.mail_outline, username, ""),
-                      bulidTextForm("ادخل رقم الهاتف",
-                          Icons.phone_bluetooth_speaker_outlined, username, ""),
+                          Icons.mail_outline, email, "email"),
+                      bulidTextForm(
+                          "ادخل رقم الهاتف",
+                          Icons.phone_bluetooth_speaker_outlined,
+                          phone,
+                          "phone"),
                       bulidTextForm("ادخل العنوان ",
-                          Icons.location_city_outlined, username, ""),
+                          Icons.location_city_outlined, address, "address"),
                       DropdownSearch(
                         items: datadropdownname,
+                        mode: Mode.MENU,
                         label: "ادخل هنا اسم الخدمة  الذي تريد",
-                        mode: Mode.BOTTOM_SHEET,
                         onChanged: (val) async {
+                          fees = null;
                           setState(() {
                             servicename = val;
+                            serviceid = getDataByNameInListCat(
+                                val, datadropdown)['services_id'];
+                            typeprice = getDataByNameInListCat(
+                                val, datadropdown)['services_typeprice'];
+                            isLoadingGetPriceForService = true;
                           });
+                          // showLoading(context);
+                          await getDataServicesPrice(serviceid);
+                          setState(() {
+                            isLoadingGetPriceForService = false;
+                          });
+                          print(listpricename);
                         },
                         selectedItem: "اسم الخدمة",
                       ),
+                      typeprice != null &&
+                              typeprice != "0" &&
+                              isLoadingGetPriceForService != true
+                          ? DropdownSearch(
+                              items: listpricename,
+                              mode: Mode.MENU,
+                              label: "المبلغ المطالب به",
+                              // mode: Mode.BOTTOM_SHEET,
+                              onChanged: (val) async {
+                                setState(() {
+                                  serviceprice = val;
+                                  fees = getdataByNameInListserviceprice(
+                                      val, listprice)['servicesprice_fees'];
+                                  print(fees);
+                                });
+                                // setState(() {});
+                              },
+                              selectedItem: "المبلغ المطالب به",
+                            )
+                          : SizedBox(),
+                      isLoadingGetPriceForService == true
+                          ? Container(
+                              margin: EdgeInsets.all(15),
+                              child: Center(child: CircularProgressIndicator()))
+                          : SizedBox(),
+                      fees != null
+                          ? Container(
+                              margin: EdgeInsets.only(top: 10, bottom: 10),
+                              child: Center(
+                                  child: Text(
+                                "رسوم الخدمة : $fees",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Theme.of(context).primaryColor),
+                              )))
+                          : SizedBox(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           MaterialButton(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),
-                            onPressed: () {},
+                            onPressed: () {
+                              return showbottommenu(context, addImageCameratwo,
+                                  addImageGallerytwo);
+                            },
                             child: Text("صورة الرخصة"),
                             color: Theme.of(context).primaryColor,
                             textColor: Colors.white,
@@ -92,7 +254,10 @@ class _AddOrdersState extends State<AddOrders> {
                               textColor: Colors.white,
                               padding: EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 5),
-                              onPressed: () {},
+                              onPressed: () {
+                                return showbottommenu(
+                                    context, addImageCamera, addImageGallery);
+                              },
                               child: Text("صورة الهوية")),
                         ],
                       ),
@@ -121,6 +286,16 @@ class _AddOrdersState extends State<AddOrders> {
       child: TextFormField(
         controller: control,
         validator: (val) {
+          if (type == "email")
+            return validInput(val, 2, 100, "يكون البريد الالكتروني", "email");
+          if (type == "username")
+            return validInput(val, 2, 100, "يكون اسم المستخدم");
+          if (type == "phone")
+            return validInput(val, 7, 12, "يكون اسم المستخدم", "phone");
+          if (type == "address")
+            return validInput(val, 2, 100, "يكون العنوان  ");
+          if (type == "against")
+            return validInput(val, 2, 100, "يكون المطالب ضده");
           return null;
         },
         decoration: InputDecoration(
@@ -137,6 +312,12 @@ class _AddOrdersState extends State<AddOrders> {
   }
 
   getDataByNameInListCat(String val, List list) {
+    var databyname =
+        list.where((element) => element['services_name'] == val).toList();
+    return databyname[0];
+  }
+
+  getdataByNameInListserviceprice(String val, List list) {
     var databyname =
         list.where((element) => element['servicesprice_name'] == val).toList();
     return databyname[0];

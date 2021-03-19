@@ -57,9 +57,9 @@ class _HomeScreenState extends State<HomeScreen>
     print("==================");
     print(listHomeDataExperts);
     print("==================");
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      startAnimate();
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   startAnimate();
+    // });
     if (this.mounted) {
       setState(() {
         isLoading = false;
@@ -222,22 +222,20 @@ class _HomeScreenState extends State<HomeScreen>
                     style: TextStyle(fontSize: 16, color: Colors.black),
                   )),
               // ListBottom(mdw: mdw, list: listHomeDataCategories),
-
-              Container(
-                height: 160,
-                child: PageView.builder(
-                    controller: pageController,
-                    itemCount: listHomeDataCategories.length,
-                    itemBuilder: (context, i) {
-                      return carousal(listHomeDataCategories, i, mdw);
-                    }),
-              ),
+              // Container(
+              //   height: 160,
+              //   child: PageView.builder(
+              //       controller: pageController,
+              //       itemCount: listHomeDataCategories.length,
+              //       itemBuilder: (context, i) {
+              //         return carousal(listHomeDataCategories, i, mdw);
+              //       }),
+              // ),
 
               SizedBox(height: 30),
             ],
           );
   }
-
   Widget carousal(list, i, mdw) {
     return InkWell(
       onTap: () {
