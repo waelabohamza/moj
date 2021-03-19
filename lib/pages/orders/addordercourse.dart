@@ -9,6 +9,7 @@ import 'package:moj/component/alert.dart';
 import 'package:moj/component/chooseimage.dart';
 import 'package:moj/const.dart';
 import 'package:moj/main.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AddOrderCourse extends StatefulWidget {
   final courseid;
@@ -138,6 +139,26 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
                               }),
                         ),
                       ],
+                    ),
+                    SizedBox(height: 20),
+                    MaterialButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
+                      onPressed: () async {
+                        String text = "اريد الاستفسار من اجل خدمات تطبيقاتكم";
+                        String url =
+                            'https://api.whatsapp.com/send/?phone=$phonewhatsapp&text=$text&app_absent=0';
+                        if (await canLaunch(url)) {
+                          await launch(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
+                      },
+                      child: Text("تواصل واتس اب"),
+                      color: Colors.green,
+                      textColor: Colors.white,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 60, vertical: 5),
                     ),
                     MaterialButton(
                       shape: RoundedRectangleBorder(

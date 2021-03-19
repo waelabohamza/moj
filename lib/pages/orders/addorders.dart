@@ -8,6 +8,8 @@ import 'package:moj/component/myrequest.dart';
 import 'package:moj/component/valid.dart';
 import 'package:moj/main.dart';
 import 'package:moj/pages/linkapi.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:moj/const.dart';
 
 class AddOrders extends StatefulWidget {
   AddOrders({Key key}) : super(key: key);
@@ -281,6 +283,27 @@ class _AddOrdersState extends State<AddOrders> {
                           MaterialButton(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),
+                            onPressed: () async {
+                              String text =
+                                  "اريد الاستفسار من اجل خدمات تطبيقاتكم";
+                              String url =
+                                  'https://api.whatsapp.com/send/?phone=$phonewhatsapp&text=$text&app_absent=0';
+                              if (await canLaunch(url)) {
+                                await launch(url);
+                              } else {
+                                throw 'Could not launch $url';
+                              }
+                            },
+                            child: Text("تواصل واتس اب"),
+                            color: Colors.green,
+                            textColor: Colors.white,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 60, vertical: 5),
+                          ),
+                          SizedBox(height: 20),
+                          MaterialButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
                             onPressed: () {
                               addOrdersService();
                             },
@@ -316,7 +339,8 @@ class _AddOrdersState extends State<AddOrders> {
             return validInput(val, 2, 100, "يكون المطالب ضده");
           return null;
         },
-          keyboardType:type == "phone" ? TextInputType.number : TextInputType.text , 
+        keyboardType:
+            type == "phone" ? TextInputType.number : TextInputType.text,
         decoration: InputDecoration(
             contentPadding: EdgeInsets.all(1),
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),

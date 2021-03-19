@@ -4,3 +4,4 @@ const String serverName = "http://10.0.2.2:8080/adminmoj";
 // const String serverName = "https://curvy-earwig-29.loca.lt/adminmoj";
 
 
+const String phonewhatsapp = "099233323" ; 

@@ -8,6 +8,8 @@ import 'package:moj/component/myrequest.dart';
 import 'package:moj/component/valid.dart';
 import 'package:moj/main.dart';
 import 'package:moj/pages/linkapi.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:moj/const.dart';
 
 class AddOrdersService extends StatefulWidget {
   final typeprice;
@@ -228,6 +230,26 @@ class _AddOrdersState extends State<AddOrdersService> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
                       onPressed: () async {
+                        String text = "اريد الاستفسار من اجل خدمات تطبيقاتكم";
+                        String url =
+                            'https://api.whatsapp.com/send/?phone=$phonewhatsapp&text=$text&app_absent=0';
+                        if (await canLaunch(url)) {
+                          await launch(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
+                      },
+                      child: Text("تواصل واتس اب"),
+                      color: Colors.green,
+                      textColor: Colors.white,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 60, vertical: 5),
+                    ),
+                    SizedBox(height: 20),
+                    MaterialButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
+                      onPressed: () async {
                         await addOrdersService();
                       },
                       child: Text("اضافة الطلب"),
@@ -252,7 +274,7 @@ class _AddOrdersState extends State<AddOrdersService> {
         if (type == "username")
           return validInput(val, 2, 100, "يكون اسم المستخدم");
         if (type == "phone")
-      return validInput(val, 7, 12, "يكون رقم الهاتف", "phone");
+          return validInput(val, 7, 12, "يكون رقم الهاتف", "phone");
         if (type == "address") return validInput(val, 2, 100, "يكون العنوان  ");
         if (type == "against")
           return validInput(val, 2, 100, "يكون المطالب ضده");
