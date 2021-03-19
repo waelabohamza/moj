@@ -72,7 +72,7 @@ class _AddOrdersState extends State<AddOrdersService> {
     setState(() {});
   }
 
-  initalData() {
+  initalDataTextForm() {
     username.text = sharedPrefs.getString("username");
     email.text = sharedPrefs.getString("email");
     phone.text = sharedPrefs.getString("phone");
@@ -82,6 +82,10 @@ class _AddOrdersState extends State<AddOrdersService> {
     if (file == null)
       return showAlertOneChoose(
           context, "error", "خطأ", "الرجاءادخال صورة الهوية");
+
+    if (int.parse(widget.typeprice.toString()) == 1 && fees == null)
+      return showAlertOneChoose(
+          context, "error", "خطأ", "الرجاء اختيار السعر اولا");
 
     var formdata = formstate.currentState;
 
@@ -120,7 +124,7 @@ class _AddOrdersState extends State<AddOrdersService> {
 
   @override
   void initState() {
-    initalData();
+    initalDataTextForm();
     getDataServicesPrice();
     super.initState();
   }
@@ -140,22 +144,24 @@ class _AddOrdersState extends State<AddOrdersService> {
                 key: formstate,
                 child: Column(
                   children: [
-                    buildTextForm("ادخل الاسم", Icons.person_add_alt, username , "username"),
+                    buildTextForm("ادخل الاسم", Icons.person_add_alt, username,
+                        "username"),
                     SizedBox(height: 10),
-                    buildTextForm(
-                        "ادخل البريد الالكتروني", Icons.mail_outline, email , "email"),
+                    buildTextForm("ادخل البريد الالكتروني", Icons.mail_outline,
+                        email, "email"),
                     SizedBox(height: 10),
                     buildTextForm("ادخل رقم الهاتف",
-                        Icons.phone_bluetooth_speaker_outlined, phone , "phone"),
+                        Icons.phone_bluetooth_speaker_outlined, phone, "phone"),
                     SizedBox(height: 10),
-                    buildTextForm(
-                        "ادخل العنوان ", Icons.location_city_outlined, address , "address"),
+                    buildTextForm("ادخل العنوان ", Icons.location_city_outlined,
+                        address, "address"),
                     SizedBox(height: 10),
                     buildTextForm(
                         "المطالب ضده ",
                         Icons
                             .signal_cellular_connected_no_internet_4_bar_outlined,
-                        aganist , "against"),
+                        aganist,
+                        "against"),
                     SizedBox(height: 10),
                     int.parse(widget.typeprice.toString()) == 1
                         ? DropdownSearch(
@@ -238,16 +244,21 @@ class _AddOrdersState extends State<AddOrdersService> {
     );
   }
 
-  Widget buildTextForm(labeltext, icon, mycontroller , type) {
+  Widget buildTextForm(labeltext, icon, mycontroller, type) {
     return TextFormField(
       validator: (val) {
-           if (type == "email")    return validInput(val, 2, 100, "يكون البريد الالكتروني"  , "email")  ; 
-           if (type == "username") return validInput(val, 2, 100, "يكون اسم المستخدم")  ; 
-           if (type == "phone")    return validInput(val, 7, 12, "يكون اسم المستخدم"  , "phone")  ; 
-           if (type == "address")  return validInput(val, 2, 100, "يكون العنوان  " )  ; 
-           if (type == "against")  return validInput(val, 2, 100, "يكون المطالب ضده"  )  ; 
-           return null ; 
+        if (type == "email")
+          return validInput(val, 2, 100, "يكون البريد الالكتروني", "email");
+        if (type == "username")
+          return validInput(val, 2, 100, "يكون اسم المستخدم");
+        if (type == "phone")
+      return validInput(val, 7, 12, "يكون رقم الهاتف", "phone");
+        if (type == "address") return validInput(val, 2, 100, "يكون العنوان  ");
+        if (type == "against")
+          return validInput(val, 2, 100, "يكون المطالب ضده");
+        return null;
       },
+      keyboardType: type == "phone" ? TextInputType.number : TextInputType.text,
       controller: mycontroller,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(1),

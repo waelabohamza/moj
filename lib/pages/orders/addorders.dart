@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dropdown_search/dropdownSearch.dart';
 import 'package:flutter/material.dart';
 import 'package:moj/component/alert.dart';
@@ -12,7 +11,6 @@ import 'package:moj/pages/linkapi.dart';
 
 class AddOrders extends StatefulWidget {
   AddOrders({Key key}) : super(key: key);
-
   @override
   _AddOrdersState createState() => _AddOrdersState();
 }
@@ -106,7 +104,7 @@ class _AddOrdersState extends State<AddOrders> {
     if (serviceid == null)
       return showAlertOneChoose(
           context, "error", "خطأ", "الرجاء اختيار الخدمة اولا");
-    if ((typeprice != null || typeprice != "0") && fees == null)
+    if ((typeprice != null && typeprice != "0") && fees == null)
       return showAlertOneChoose(
           context, "error", "خطأ", "الرجاء اختيار السعر اولا");
     var formdata = formstate.currentState;
@@ -142,9 +140,16 @@ class _AddOrdersState extends State<AddOrders> {
     }
   }
 
+  initalDataTextForm() {
+    username.text = sharedPrefs.getString("username");
+    email.text = sharedPrefs.getString("email");
+    phone.text = sharedPrefs.getString("phone");
+  }
+
   @override
   void initState() {
     super.initState();
+    initalDataTextForm();
     getServiceName();
   }
 
@@ -162,121 +167,131 @@ class _AddOrdersState extends State<AddOrders> {
             : ListView(
                 children: [
                   Form(
+                      key: formstate,
                       child: Column(
-                    children: [
-                      bulidTextForm("ادخل الاسم", Icons.person_add_alt,
-                          username, "username"),
-                      bulidTextForm("ادخل البريد الالكتروني",
-                          Icons.mail_outline, email, "email"),
-                      bulidTextForm(
-                          "ادخل رقم الهاتف",
-                          Icons.phone_bluetooth_speaker_outlined,
-                          phone,
-                          "phone"),
-                      bulidTextForm("ادخل العنوان ",
-                          Icons.location_city_outlined, address, "address"),
-                      DropdownSearch(
-                        items: datadropdownname,
-                        mode: Mode.MENU,
-                        label: "ادخل هنا اسم الخدمة  الذي تريد",
-                        onChanged: (val) async {
-                          fees = null;
-                          setState(() {
-                            servicename = val;
-                            serviceid = getDataByNameInListCat(
-                                val, datadropdown)['services_id'];
-                            typeprice = getDataByNameInListCat(
-                                val, datadropdown)['services_typeprice'];
-                            isLoadingGetPriceForService = true;
-                          });
-                          // showLoading(context);
-                          await getDataServicesPrice(serviceid);
-                          setState(() {
-                            isLoadingGetPriceForService = false;
-                          });
-                          print(listpricename);
-                        },
-                        selectedItem: "اسم الخدمة",
-                      ),
-                      typeprice != null &&
-                              typeprice != "0" &&
-                              isLoadingGetPriceForService != true
-                          ? DropdownSearch(
-                              items: listpricename,
-                              mode: Mode.MENU,
-                              label: "المبلغ المطالب به",
-                              // mode: Mode.BOTTOM_SHEET,
-                              onChanged: (val) async {
-                                setState(() {
-                                  serviceprice = val;
-                                  fees = getdataByNameInListserviceprice(
-                                      val, listprice)['servicesprice_fees'];
-                                  print(fees);
-                                });
-                                // setState(() {});
-                              },
-                              selectedItem: "المبلغ المطالب به",
-                            )
-                          : SizedBox(),
-                      isLoadingGetPriceForService == true
-                          ? Container(
-                              margin: EdgeInsets.all(15),
-                              child: Center(child: CircularProgressIndicator()))
-                          : SizedBox(),
-                      fees != null
-                          ? Container(
-                              margin: EdgeInsets.only(top: 10, bottom: 10),
-                              child: Center(
-                                  child: Text(
-                                "رسوم الخدمة : $fees",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Theme.of(context).primaryColor),
-                              )))
-                          : SizedBox(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
+                          bulidTextForm("ادخل الاسم", Icons.person_add_alt,
+                              username, "username"),
+                          bulidTextForm("ادخل البريد الالكتروني",
+                              Icons.mail_outline, email, "email"),
+                          bulidTextForm(
+                              "ادخل رقم الهاتف",
+                              Icons.phone_bluetooth_speaker_outlined,
+                              phone,
+                              "phone"),
+                          bulidTextForm("ادخل العنوان ",
+                              Icons.location_city_outlined, address, "address"),
+                          bulidTextForm("المطالب ضده ",
+                              Icons.follow_the_signs_sharp, aganist, "against"),
+                          DropdownSearch(
+                            items: datadropdownname,
+                            mode: Mode.MENU,
+                            label: "ادخل هنا اسم الخدمة  الذي تريد",
+                            onChanged: (val) async {
+                              fees = null;
+                              setState(() {
+                                servicename = val;
+                                serviceid = getDataByNameInListCat(
+                                    val, datadropdown)['services_id'];
+                                typeprice = getDataByNameInListCat(
+                                    val, datadropdown)['services_typeprice'];
+                                isLoadingGetPriceForService = true;
+                              });
+                              // showLoading(context);
+                              await getDataServicesPrice(serviceid);
+                              setState(() {
+                                isLoadingGetPriceForService = false;
+                              });
+                              print(listpricename);
+                            },
+                            selectedItem: "اسم الخدمة",
+                          ),
+                          typeprice != null &&
+                                  typeprice != "0" &&
+                                  isLoadingGetPriceForService != true
+                              ? DropdownSearch(
+                                  items: listpricename,
+                                  mode: Mode.MENU,
+                                  label: "المبلغ المطالب به",
+                                  // mode: Mode.BOTTOM_SHEET,
+                                  onChanged: (val) async {
+                                    setState(() {
+                                      serviceprice = val;
+                                      fees = getdataByNameInListserviceprice(
+                                          val, listprice)['servicesprice_fees'];
+                                      print(fees);
+                                    });
+                                    // setState(() {});
+                                  },
+                                  selectedItem: "المبلغ المطالب به",
+                                )
+                              : SizedBox(),
+                          isLoadingGetPriceForService == true
+                              ? Container(
+                                  margin: EdgeInsets.all(15),
+                                  child: Center(
+                                      child: CircularProgressIndicator()))
+                              : SizedBox(),
+                          fees != null
+                              ? Container(
+                                  margin: EdgeInsets.only(top: 10, bottom: 10),
+                                  child: Center(
+                                      child: Text(
+                                    "رسوم الخدمة : $fees",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Theme.of(context).primaryColor),
+                                  )))
+                              : SizedBox(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              MaterialButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50)),
+                                onPressed: () {
+                                  return showbottommenu(context,
+                                      addImageCameratwo, addImageGallerytwo);
+                                },
+                                child: Text("صورة الرخصة"),
+                                color: filetwo == null
+                                    ? Theme.of(context).primaryColor
+                                    : Colors.green,
+                                textColor: Colors.white,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 5),
+                              ),
+                              MaterialButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50)),
+                                  color: file == null
+                                      ? Theme.of(context).primaryColor
+                                      : Colors.green,
+                                  textColor: Colors.white,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 5),
+                                  onPressed: () {
+                                    return showbottommenu(context,
+                                        addImageCamera, addImageGallery);
+                                  },
+                                  child: Text("صورة الهوية")),
+                            ],
+                          ),
+                          SizedBox(height: 20),
                           MaterialButton(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),
                             onPressed: () {
-                              return showbottommenu(context, addImageCameratwo,
-                                  addImageGallerytwo);
+                              addOrdersService();
                             },
-                            child: Text("صورة الرخصة"),
+                            child: Text("اضافة الطلب"),
                             color: Theme.of(context).primaryColor,
                             textColor: Colors.white,
                             padding: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 5),
+                                horizontal: 60, vertical: 5),
                           ),
-                          MaterialButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50)),
-                              color: Theme.of(context).primaryColor,
-                              textColor: Colors.white,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 5),
-                              onPressed: () {
-                                return showbottommenu(
-                                    context, addImageCamera, addImageGallery);
-                              },
-                              child: Text("صورة الهوية")),
                         ],
-                      ),
-                      SizedBox(height: 20),
-                      MaterialButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50)),
-                        onPressed: () {},
-                        child: Text("اضافة الطلب"),
-                        color: Theme.of(context).primaryColor,
-                        textColor: Colors.white,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 60, vertical: 5),
-                      ),
-                    ],
-                  ))
+                      ))
                 ],
               ),
       ),
@@ -294,13 +309,14 @@ class _AddOrdersState extends State<AddOrders> {
           if (type == "username")
             return validInput(val, 2, 100, "يكون اسم المستخدم");
           if (type == "phone")
-            return validInput(val, 7, 12, "يكون اسم المستخدم", "phone");
+            return validInput(val, 7, 12, "يكون رقم الهاتف", "phone");
           if (type == "address")
             return validInput(val, 2, 100, "يكون العنوان  ");
           if (type == "against")
             return validInput(val, 2, 100, "يكون المطالب ضده");
           return null;
         },
+          keyboardType:type == "phone" ? TextInputType.number : TextInputType.text , 
         decoration: InputDecoration(
             contentPadding: EdgeInsets.all(1),
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:moj/component/myrequest.dart';
+import 'package:moj/component/valid.dart';
 import 'package:moj/pages/home/home.dart';
 import 'package:moj/pages/linkapi.dart';
 import 'package:path/path.dart';
@@ -17,7 +18,6 @@ class AddOrderCourse extends StatefulWidget {
 }
 
 class _AddOrderCourseState extends State<AddOrderCourse> {
-  
   File file;
 
   String courseback = "0";
@@ -38,11 +38,15 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
     setState(() {});
   }
 
-  @override
-  void initState() {
+  initalDataTextForm() {
     username.text = sharedPrefs.getString("username");
     email.text = sharedPrefs.getString("email");
     phone.text = sharedPrefs.getString("phone");
+  }
+
+  @override
+  void initState() {
+    initalDataTextForm();
     super.initState();
   }
 
@@ -69,20 +73,16 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
       var response = await addRequestWithImageOne(linkOrdersCourse, data, file);
 
       if (response['status'] == "success") {
-         
-         Navigator.of(context).push(MaterialPageRoute(builder: (context){
-              return HomePage(initialpage: 2,) ; 
-         })) ; 
-     
-      }else{
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+          return HomePage(
+            initialpage: 2,
+          );
+        }));
+      } else {
+        if (Navigator.of(context).canPop()) Navigator.of(context).pop();
 
-        if (Navigator.of(context).canPop()) Navigator.of(context).pop() ; 
-
-        showAlertOneChoose(context, "error", "خطأ", "حاول مره اخرى") ; 
-
-
+        showAlertOneChoose(context, "error", "خطأ", "حاول مره اخرى");
       }
-
     } else {
       print("Not Vaild");
     }
@@ -103,14 +103,14 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
                 key: formstate,
                 child: Column(
                   children: [
-                    buildTextForm(
-                        "ادخل الاسم ", Icons.person_add_alt, username),
+                    buildTextForm("ادخل الاسم ", Icons.person_add_alt, username,
+                        "username"),
                     SizedBox(height: 10),
-                    buildTextForm(
-                        "ادخل البريد الالكتروني", Icons.mail_outline, email),
+                    buildTextForm("ادخل البريد الالكتروني", Icons.mail_outline,
+                        email, "email"),
                     SizedBox(height: 10),
                     buildTextForm("ادخل رقم الهاتف",
-                        Icons.phone_bluetooth_speaker_outlined, phone),
+                        Icons.phone_bluetooth_speaker_outlined, phone, "phone"),
                     SizedBox(height: 10),
                     Text("هل سبق ان دخلت مثل هذه الدورة "),
                     Row(
@@ -143,7 +143,7 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
                       onPressed: () {
-                       return  showbottommenu(
+                        return showbottommenu(
                             context, addImageCamera, addImageGallery);
                       },
                       child: Text("صورة الهوية "),
@@ -173,11 +173,18 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
     );
   }
 
-  buildTextForm(labeltext, icon, mycontroller) {
+  buildTextForm(labeltext, icon, mycontroller, type) {
     return TextFormField(
       validator: (val) {
+        if (type == "email")
+          return validInput(val, 2, 100, "يكون البريد الالكتروني", "email");
+        if (type == "username")
+          return validInput(val, 2, 100, "يكون اسم المستخدم");
+        if (type == "phone")
+          return validInput(val, 7, 12, "يكون رقم الهاتف", "phone");
         return null;
       },
+      keyboardType: type == "phone" ? TextInputType.number : TextInputType.text,
       controller: mycontroller,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(1),
