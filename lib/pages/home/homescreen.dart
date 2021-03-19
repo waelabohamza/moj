@@ -19,10 +19,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
-  
-  var email = sharedPrefs.getString("email") ; 
+  var email = sharedPrefs.getString("email");
 
-  var username = sharedPrefs.getString("username") ; 
+  var username = sharedPrefs.getString("username");
 
   Crud crud = new Crud();
 
@@ -97,7 +96,6 @@ class _HomeScreenState extends State<HomeScreen>
     listHomeDataQuestions.clear();
     listHomeDataServicesCommon.clear();
     listHomeDataExperts.clear();
-
     super.dispose();
   }
 
@@ -221,21 +219,15 @@ class _HomeScreenState extends State<HomeScreen>
                     "القضايا",
                     style: TextStyle(fontSize: 16, color: Colors.black),
                   )),
-              // ListBottom(mdw: mdw, list: listHomeDataCategories),
-              // Container(
-              //   height: 160,
-              //   child: PageView.builder(
-              //       controller: pageController,
-              //       itemCount: listHomeDataCategories.length,
-              //       itemBuilder: (context, i) {
-              //         return carousal(listHomeDataCategories, i, mdw);
-              //       }),
-              // ),
-
               SizedBox(height: 30),
             ],
           );
   }
+
+
+
+
+
   Widget carousal(list, i, mdw) {
     return InkWell(
       onTap: () {
