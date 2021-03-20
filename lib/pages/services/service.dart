@@ -1,10 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:moj/const.dart';
 // import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:moj/pages/linkapi.dart';
 import 'package:moj/component/ApiPdfProvider.dart';
 import 'package:moj/pages/orders/addorderservice.dart';
 import 'package:moj/pages/services/pdfview.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Service extends StatefulWidget {
   final list;
@@ -198,19 +201,45 @@ class _ServiceState extends State<Service> {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Divider(color: Colors.grey),
               ),
+              SizedBox(height: 20),
+              MaterialButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50)),
+                onPressed: () async {
+                  String text = "اريد الاستفسار من اجل خدمات تطبيقاتكم";
+                  String url =
+                      'https://api.whatsapp.com/send/?phone=$phonewhatsapp&text=$text&app_absent=0';
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  } else {
+                    throw 'Could not launch $url';
+                  }
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text("تواصل بطريقة اخرى"),
+                    SizedBox(width: 10),
+                    FaIcon(FontAwesomeIcons.whatsapp),
+                  ],
+                ),
+                color: Colors.green,
+                textColor: Colors.white,
+                padding: EdgeInsets.symmetric(horizontal: 60, vertical: 5),
+              ),
+              SizedBox(height: 20),
               MaterialButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50)),
                 padding: EdgeInsets.symmetric(horizontal: 40),
                 color: Theme.of(context).primaryColor,
                 textColor: Colors.white,
-                onPressed:(){
+                onPressed: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) {
                     return AddOrdersService(
                         servicesid: list['services_id'],
-                        typeprice: list['services_typeprice']
-                        );
+                        typeprice: list['services_typeprice']);
                   }));
                 },
                 child: Text("طلب مذكرة"),

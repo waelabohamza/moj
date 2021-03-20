@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:dropdown_search/dropdownSearch.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:moj/component/alert.dart';
 import 'package:moj/component/chooseimage.dart';
 import 'package:moj/component/crud.dart';
@@ -239,7 +240,14 @@ class _AddOrdersState extends State<AddOrdersService> {
                           throw 'Could not launch $url';
                         }
                       },
-                      child: Text("تواصل واتس اب"),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text("تواصل بطريقة اخرى"),
+                          SizedBox(width: 10),
+                          FaIcon(FontAwesomeIcons.whatsapp),
+                        ],
+                      ),
                       color: Colors.green,
                       textColor: Colors.white,
                       padding:

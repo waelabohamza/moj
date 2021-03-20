@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:moj/const.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Question extends StatefulWidget {
   final list ; 
@@ -164,6 +166,32 @@ class _QuestionsState extends State<Question> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Divider(color: Colors.grey),
+              ),
+                 SizedBox(height: 20),
+              MaterialButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50)),
+                onPressed: () async {
+                  String text = "اريد الاستفسار من اجل خدمات تطبيقاتكم";
+                  String url =
+                      'https://api.whatsapp.com/send/?phone=$phonewhatsapp&text=$text&app_absent=0';
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  } else {
+                    throw 'Could not launch $url';
+                  }
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text("تواصل بطريقة اخرى"),
+                    SizedBox(width: 10),
+                    FaIcon(FontAwesomeIcons.whatsapp),
+                  ],
+                ),
+                color: Colors.green,
+                textColor: Colors.white,
+                padding: EdgeInsets.symmetric(horizontal: 60, vertical: 5),
               ),
               // RaisedButton(
               //   padding: EdgeInsets.symmetric(horizontal: 40),

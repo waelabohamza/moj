@@ -1,11 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:moj/const.dart';
 import 'package:moj/pages/orders/addordercourse.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Course extends StatefulWidget {
   final list;
-  Course({Key key, this.list  }) : super(key: key);
+  Course({Key key, this.list}) : super(key: key);
   @override
   _CourseState createState() => _CourseState();
 }
@@ -24,8 +26,7 @@ class _CourseState extends State<Course> {
   GlobalKey<ScaffoldState> scaffoldkey = new GlobalKey<ScaffoldState>();
 
   @override
-  Widget build(BuildContext context){
-
+  Widget build(BuildContext context) {
     var list = widget.list;
     return Scaffold(
       appBar: AppBar(
@@ -154,17 +155,44 @@ class _CourseState extends State<Course> {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Divider(color: Colors.grey),
               ),
+              SizedBox(height: 20),
               MaterialButton(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50)
+                    borderRadius: BorderRadius.circular(50)),
+                onPressed: () async {
+                  String text = "اريد الاستفسار من اجل خدمات تطبيقاتكم";
+                  String url =
+                      'https://api.whatsapp.com/send/?phone=$phonewhatsapp&text=$text&app_absent=0';
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  } else {
+                    throw 'Could not launch $url';
+                  }
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text("تواصل بطريقة اخرى"),
+                    SizedBox(width: 10),
+                    FaIcon(FontAwesomeIcons.whatsapp),
+                  ],
                 ),
+                color: Colors.green,
+                textColor: Colors.white,
+                padding: EdgeInsets.symmetric(horizontal: 60, vertical: 5),
+              ),
+              SizedBox(height: 20),
+              MaterialButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50)),
                 padding: EdgeInsets.symmetric(horizontal: 40),
                 color: Colors.red,
                 textColor: Colors.white,
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                    return AddOrderCourse(courseid: list['courses_id']) ; 
-                  })); 
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return AddOrderCourse(courseid: list['courses_id']);
+                  }));
                 },
                 child: Text("طلب انتساب"),
               )
@@ -175,8 +203,6 @@ class _CourseState extends State<Course> {
     );
   }
 }
-
-
 
 /*
 طلب المذكرة 
