@@ -4,7 +4,6 @@ import 'package:moj/component/applocal.dart';
 import 'package:moj/component/changecolor.dart';
 import 'package:moj/pages/auth/login.dart';
 import 'package:moj/pages/home/home.dart';
-import 'package:moj/pages/test.dart';
 import 'package:moj/routes.dart';
 // import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:provider/provider.dart';
@@ -38,8 +37,8 @@ class MyApp extends StatelessWidget {
         primaryColor: changeColor.mainColor,
         fontFamily: 'Cairo',
       ),
-      // home: userid == null ? Login() : HomePage(),
-      home: Test() ,
+      home: userid == null ? Login() : HomePage(),
+      // home: Test() ,
       routes: routes,
       localizationsDelegates: [
         AppLocale.delegate,

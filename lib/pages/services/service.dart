@@ -97,10 +97,27 @@ class _ServiceState extends State<Service> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(15),
-                    child: Text("${list['services_desc']}"
-                        // "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
+                    // child: Text("${list['services_document']}"),
+                    child: InkWell(
+                      child: Container(
+                        child: Text(
+                          "PDf Files",
+                          style: TextStyle(color: Colors.white),
                         ),
-                  )
+                        color: Theme.of(context).primaryColor,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+                      ),
+                      onTap: () async {
+                        final file = await PDFApi.loadNetwork(
+                            "$linkRootPdf/${list['services_desc']}");
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return PDFViewerPage(file: file);
+                        }));
+                      },
+                    ),
+                  ),
                 ],
               ),
               Padding(
@@ -155,18 +172,10 @@ class _ServiceState extends State<Service> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(15),
-                    // child: Text("${list['services_document']}"),
-                    child: InkWell(
-                      child: Text("PDF"),
-                      onTap: () async {
-                        final file = await PDFApi.loadNetwork(linkRootPdf);
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return PDFViewerPage(file: file);
-                        }));
-                      },
-                    ),
-                  ),
+                    child: Text("${list['services_desc']}"
+                        // "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
+                        ),
+                  )
                 ],
               ),
               Padding(
