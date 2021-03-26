@@ -96,6 +96,7 @@ class _HomeScreenState extends State<HomeScreen>
     listHomeDataQuestions.clear();
     listHomeDataServicesCommon.clear();
     listHomeDataExperts.clear();
+    pageController.dispose()  ; 
     super.dispose();
   }
 

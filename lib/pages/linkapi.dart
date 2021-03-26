@@ -59,12 +59,17 @@ const String  linkQuestions    = "$serverName/api/questions/questions.php" ;
 
 // Root Image 
 
-const String  linkRootImage     = "$serverName/api/upload" ;  
+const String  linkRootImage    = "$serverName/api/upload" ;  
 
 
 // Root File Pdf
 
-const String  linkRootPdf     = "$serverName/api/upload/pdfviewservices" ;  
+const String  linkRootPdf       = "$serverName/api/upload/pdfviewservices" ;  
+
+// Settings 
+
+const String  linkSettings      = "$serverName/api/settings/editinfoprofile.php" ;  
+
 
 
 // Orders 
