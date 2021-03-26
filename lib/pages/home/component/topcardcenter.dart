@@ -98,7 +98,7 @@ class TopCardCenter extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20)),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                     return Services(categories: listcat) ; 
+                     return Services(categories: listcat , favorite: "yes",) ; 
                 }))  ; 
               },
               color: Theme.of(context).primaryColor,

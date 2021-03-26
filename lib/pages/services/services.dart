@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:moj/component/crud.dart';
-import 'package:moj/const.dart';
 import 'package:moj/pages/linkapi.dart';
 import 'package:moj/pages/services/service.dart';
 
 class Services extends StatefulWidget {
+
   final categories;
+  final favorite;
   final index;
   final catid;
-  Services({Key key, this.categories, this.index, this.catid})
+
+  Services({Key key, this.categories, this.index, this.catid, this.favorite})
       : super(key: key);
   @override
   _ServicesState createState() => _ServicesState();
@@ -30,19 +32,18 @@ class _ServicesState extends State<Services>
 
   @override
   void initState() {
-    idcat = widget.catid == null
-        ? widget.categories[0]['categories_id']
-        : widget.catid;
+    idcat = widget.catid == null ? "all" : widget.catid;
     tc = new TabController(
-        length: widget.categories.length,
+        length: widget.categories.length + 1,
         vsync: this,
-        initialIndex: widget.index ?? 0);
+        initialIndex: widget.index == null ? 0 : widget.index + 1);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     List categories = widget.categories;
+    var favorite = widget.favorite != null ? "yes" :  "no" ; 
     return Scaffold(
       appBar: AppBar(
         shape: Border.all(width: 0, color: Theme.of(context).primaryColor),
@@ -58,10 +59,27 @@ class _ServicesState extends State<Services>
             // Get Id For All Categories for Filter Body base on id categories
             setState(() {
               isLoading = true;
-              idcat = categories[indextab]['categories_id'];
+              if (indextab == 0) {
+                idcat = "all";
+              } else {
+                idcat = categories[indextab - 1]['categories_id'];
+                // -1 بسبب انو فيه كل الخدمات وهي مانها محسوبة من الاقسام
+              }
             });
           },
           tabs: [
+            Tab(
+              iconMargin: EdgeInsets.only(bottom: 0),
+              child: Text(
+                "كل  الخدمات",
+                style: TextStyle(fontSize: 13),
+              ),
+              icon: Icon(
+                Icons.medical_services_outlined,
+                size: 25,
+                color: Colors.white,
+              ),
+            ),
             ...List.generate(
                 widget.categories.length,
                 (index) => Tab(
@@ -112,7 +130,7 @@ class _ServicesState extends State<Services>
             ),
             FutureBuilder(
                 future: crud.writeData(linkServices,
-                    {"id": idcat.toString(), "search": search.toString()}),
+                    {"id": idcat.toString(), "search": search.toString() , "favorite" : favorite.toString() }),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Container(
@@ -150,7 +168,7 @@ class _ServicesState extends State<Services>
   }
 }
 
-class ListServices extends StatelessWidget{
+class ListServices extends StatelessWidget {
   final services;
   const ListServices({Key key, this.services}) : super(key: key);
   @override
@@ -160,16 +178,19 @@ class ListServices extends StatelessWidget{
       child: Row(
         children: [
           Text("${services['services_name']}"),
-          Spacer(), 
+          Spacer(),
           InkWell(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                       return Service(list: services) ; 
-              })) ; 
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return Service(list: services);
+              }));
             },
             child: Column(children: [
-              Icon(Icons.help_outline_outlined, size: 25, color: Theme.of(context).primaryColor),
-              Text("معلومات", style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 13))
+              Icon(Icons.help_outline_outlined,
+                  size: 25, color: Theme.of(context).primaryColor),
+              Text("معلومات",
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor, fontSize: 13))
             ]),
           ),
           SizedBox(width: 20),
