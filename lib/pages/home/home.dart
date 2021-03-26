@@ -33,8 +33,9 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> widgetsBottombar = [
     HomeScreen(),
+    MyOrders(),
     ThemeColors(),
-    MyOrders()
+
     //  Services()
   ];
 
@@ -106,25 +107,25 @@ class _HomePageState extends State<HomePage> {
           BubbleBottomBarItem(
               backgroundColor: Theme.of(context).primaryColor,
               icon: Icon(
-                Icons.theater_comedy,
+                Icons.addchart_sharp,
                 color: Colors.black,
               ),
               activeIcon: Icon(
-                Icons.theater_comedy,
+                Icons.addchart_sharp,
                 color: Theme.of(context).primaryColor,
               ),
-              title: Text("الثيم")),
+              title: Text("الطلبات")),
           BubbleBottomBarItem(
               backgroundColor: Theme.of(context).primaryColor,
               icon: Icon(
-                Icons.addchart_sharp,
+                Icons.theater_comedy,
                 color: Colors.black,
               ),
               activeIcon: Icon(
-                Icons.addchart_sharp,
+                Icons.theater_comedy,
                 color: Theme.of(context).primaryColor,
               ),
-              title: Text("الطلبات"))
+              title: Text("الاعدادات")),
         ],
       ),
       drawer: MyDrawer(),
@@ -132,5 +133,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
- 

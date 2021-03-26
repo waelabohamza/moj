@@ -65,7 +65,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 throw 'Could not launch $url';
               }
             },
-            title: Text("اتصل بنا"),
+            title: Text("طلب تواصل"),
             leading: Icon(Icons.contact_phone_outlined),
           ),
           ListTile(
