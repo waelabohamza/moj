@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:moj/const.dart';
 import 'package:moj/main.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyDrawer extends StatefulWidget {
   MyDrawer({Key key}) : super(key: key);
-
   @override
   _MyDrawerState createState() => _MyDrawerState();
 }
-
 class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
@@ -56,7 +55,16 @@ class _MyDrawerState extends State<MyDrawer> {
             leading: Icon(Icons.help_center_outlined),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () async {
+              String text = "اريد التواصل مع الدعم الفني";
+              String url =
+                  'https://api.whatsapp.com/send/?phone=$phonewhatsapp&text=$text&app_absent=0';
+              if (await canLaunch(url)) {
+                await launch(url);
+              } else {
+                throw 'Could not launch $url';
+              }
+            },
             title: Text("اتصل بنا"),
             leading: Icon(Icons.contact_phone_outlined),
           ),
@@ -66,7 +74,10 @@ class _MyDrawerState extends State<MyDrawer> {
             leading: Icon(Icons.settings),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              sharedPrefs.clear();
+              Navigator.of(context).pushReplacementNamed("login");
+            },
             title: Text("تسجيل الخروج"),
             leading: Icon(Icons.exit_to_app),
           ),
