@@ -56,6 +56,20 @@ class _SignUpState extends State<SignUp> {
     }
   }
 
+
+  @override
+  void dispose() {
+
+     email.dispose()  ;
+     username.dispose();  
+     phone.dispose()  ; 
+     password.dispose() ; 
+     repassword.dispose() ; 
+     confirmPassword.dispose() ; 
+     
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

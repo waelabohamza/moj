@@ -56,9 +56,9 @@ class _HomeScreenState extends State<HomeScreen>
     print("==================");
     print(listHomeDataExperts);
     print("==================");
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   startAnimate();
-    // });
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      startAnimate();
+    });
     if (this.mounted) {
       setState(() {
         isLoading = false;
@@ -219,14 +219,20 @@ class _HomeScreenState extends State<HomeScreen>
                     "القضايا",
                     style: TextStyle(fontSize: 16, color: Colors.black),
                   )),
+              SizedBox(height: 10),
+              Container(
+                height: 150,
+                child: PageView.builder(
+                    controller: pageController,
+                    itemCount: listHomeDataCategories.length,
+                    itemBuilder: (context, i) {
+                      return carousal(listHomeDataCategories, i, mdw);
+                    }),
+              ),
               SizedBox(height: 30),
             ],
           );
   }
-
-
-
-
 
   Widget carousal(list, i, mdw) {
     return InkWell(
