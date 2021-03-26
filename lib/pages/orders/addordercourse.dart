@@ -90,6 +90,14 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
   }
 
   @override
+  void dispose() { 
+    username.dispose()  ; 
+    email.dispose();  
+    phone.dispose() ; 
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

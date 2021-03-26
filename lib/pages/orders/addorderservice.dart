@@ -133,6 +133,16 @@ class _AddOrdersState extends State<AddOrdersService> {
   }
 
   @override
+  void dispose() {
+    username.dispose();
+    email.dispose();
+    phone.dispose();
+    address.dispose();
+    aganist.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
