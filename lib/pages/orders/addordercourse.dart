@@ -3,7 +3,6 @@ import 'package:moj/component/myrequest.dart';
 import 'package:moj/component/valid.dart';
 import 'package:moj/pages/home/home.dart';
 import 'package:moj/pages/linkapi.dart';
-import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:moj/component/alert.dart';
 import 'package:moj/component/chooseimage.dart';

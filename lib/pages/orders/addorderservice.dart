@@ -34,7 +34,6 @@ class _AddOrdersState extends State<AddOrdersService> {
   TextEditingController phone = new TextEditingController();
   TextEditingController address = new TextEditingController();
   TextEditingController aganist = new TextEditingController();
-
   GlobalKey<FormState> formstate = new GlobalKey<FormState>();
 
   List listprice = [];
