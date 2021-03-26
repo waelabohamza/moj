@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:moj/main.dart';
 
 class Settings extends StatefulWidget {
   Settings({Key key}) : super(key: key);
@@ -8,11 +10,37 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  GlobalKey<ScaffoldState> scaffoldkey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
+      key: scaffoldkey,
       appBar: AppBar(
-        title: Text('Title'),
+        titleSpacing: 0,
+        systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.red),
+        shape: Border.all(width: 0, color: Theme.of(context).primaryColor),
+        toolbarHeight: 50,
+        elevation: 0,
+        backgroundColor: Theme.of(context).primaryColor,
+        title: Text(
+          "اجراءات",
+          style: TextStyle(fontSize: 16),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.segment),
+          onPressed: () {
+            scaffoldkey.currentState.openDrawer();
+          },
+        ),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.exit_to_app_outlined),
+              onPressed: () {
+                sharedPrefs.clear();
+                Navigator.of(context).pushReplacementNamed("login");
+              }),
+        ],
       ),
       body: Container(),
     );
