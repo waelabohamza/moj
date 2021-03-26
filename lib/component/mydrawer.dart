@@ -45,7 +45,9 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+                    Navigator.of(context).pushNamed("services") ; 
+            },
             title: Text("الخدمات"),
             leading: Icon(Icons.home_repair_service_sharp),
           ),
@@ -69,7 +71,9 @@ class _MyDrawerState extends State<MyDrawer> {
             leading: Icon(Icons.contact_phone_outlined),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+                Navigator.of(context).pushNamed("settings") ; 
+            },
             title: Text("الاعدادات"),
             leading: Icon(Icons.settings),
           ),

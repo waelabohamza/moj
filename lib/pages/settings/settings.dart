@@ -27,20 +27,8 @@ class _SettingsState extends State<Settings> {
           "اجراءات",
           style: TextStyle(fontSize: 16),
         ),
-        leading: IconButton(
-          icon: Icon(Icons.segment),
-          onPressed: () {
-            scaffoldkey.currentState.openDrawer();
-          },
-        ),
-        actions: [
-          IconButton(
-              icon: Icon(Icons.exit_to_app_outlined),
-              onPressed: () {
-                sharedPrefs.clear();
-                Navigator.of(context).pushReplacementNamed("login");
-              }),
-        ],
+ 
+   
       ),
       body: Container(),
     );
