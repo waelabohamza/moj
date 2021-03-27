@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // FlutterStatusbarcolor.setStatusBarColor(Colors.red);
     var changeColor = Provider.of<ChangeColorTheme>(context);
+    var changeLocale = Provider.of<ChangeLocal>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Moj',
@@ -40,14 +41,29 @@ class MyApp extends StatelessWidget {
       home: userid == null ? Login() : HomePage(),
       // home: Test() ,
       routes: routes,
+
       localizationsDelegates: [
         AppLocale.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: [Locale('en', ''), Locale('ar', '')],
-      locale: Locale("ar", ""),
+      locale: changeLocale.lang,
     );
   }
 }
-class ChangeLocal with ChangeNotifier {}
+
+class ChangeLocal with ChangeNotifier {
+  Locale lang = sharedPrefs.getString("lang") == "en"
+      ? Locale("en", "")
+      : Locale("ar", "");
+  changeLocal(Locale newlang) {
+    if (newlang == Locale("ar", "")) {
+      sharedPrefs.setString("lang", "ar");
+    } else {
+      sharedPrefs.setString("lang", "en");
+    }
+    lang = newlang;
+    notifyListeners();
+  }
+}

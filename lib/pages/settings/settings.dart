@@ -4,6 +4,7 @@ import 'package:moj/component/alert.dart';
 import 'package:moj/component/crud.dart';
 import 'package:moj/main.dart';
 import 'package:moj/pages/linkapi.dart';
+import 'package:provider/provider.dart';
 
 class Settings extends StatefulWidget {
   Settings({Key key}) : super(key: key);
@@ -29,6 +30,7 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
+    var changelocal = Provider.of<ChangeLocal>(context);
     return Scaffold(
       key: scaffoldkey,
       appBar: AppBar(
@@ -77,6 +79,14 @@ class _SettingsState extends State<Settings> {
                       color: Theme.of(context).primaryColor, fontSize: 18))),
           Card(
               child: ListTile(
+            onTap: (){
+                        var currentlang = sharedPrefs.getString("lang");
+                        if (currentlang == "ar") {
+                          changelocal.changeLocal(Locale("en", ""));
+                        } else {
+                          changelocal.changeLocal(Locale("ar", ""));
+                        }
+            },
             title: Text("تغيير اللغة"),
             trailing: Icon(Icons.arrow_forward_ios_sharp),
           ))
@@ -108,6 +118,7 @@ class _SettingsState extends State<Settings> {
           }
           if (type == "password") {
             if (password.text.length > 3) {
+              showLoading(context) ; 
               var response = await crud.writeData(linkSettings, {
                 "password": password.text,
                 "id": sharedPrefs.getString("id")
