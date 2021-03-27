@@ -6,6 +6,7 @@ import 'package:moj/component/valid.dart';
 import 'package:moj/const.dart';
 import 'package:moj/main.dart';
 import 'package:moj/pages/linkapi.dart';
+import 'package:show_up_animation/show_up_animation.dart';
 
 class Login extends StatefulWidget {
   Login({Key key}) : super(key: key);
@@ -50,8 +51,8 @@ class _LoginState extends State<Login> {
 
   @override
   void dispose() {
-    email.dispose() ; 
-    password.dispose() ; 
+    email.dispose();
+    password.dispose();
     super.dispose();
   }
 
@@ -63,58 +64,109 @@ class _LoginState extends State<Login> {
         padding: EdgeInsets.all(20),
         child: ListView(
           children: [
-            Center(
-              child: Image.asset(
-                "images/avatar.png",
-                height: 120,
-                width: 120,
+            ShowUpAnimation(
+              delayStart: Duration(milliseconds: 0),
+              animationDuration: Duration(seconds: 1),
+              curve: Curves.bounceIn,
+              direction: Direction.horizontal,
+              offset: 1,
+              child: Center(
+                child: Image.asset(
+                  "images/avatar.png",
+                  height: 120,
+                  width: 120,
+                ),
               ),
             ),
-            Center(
-              child: Stack(
-                children: [
-                  Text(
-                    "I J R A A' T",
-                    style: TextStyle(fontSize: 30),
-                  ),
-                ],
+            ShowUpAnimation(
+              delayStart: Duration(seconds: 3),
+              animationDuration: Duration(seconds: 2),
+              curve: Curves.bounceIn,
+              direction: Direction.vertical,
+              offset: -0.3,
+              child: Center(
+                child: Stack(
+                  children: [
+                    Text(
+                      "I J R A A' T",
+                      style: TextStyle(fontSize: 30),
+                    ),
+                  ],
+                ),
               ),
             ),
             Form(
                 key: formstate,
                 child: Column(children: [
                   SizedBox(height: 20),
-                  bulidTextForm("البريد الالكتروني", Icons.email_outlined,
-                      email, "email"),
+                  ShowUpAnimation(
+                    delayStart: Duration(seconds: 1),
+                    animationDuration: Duration(seconds: 1),
+                    curve: Curves.bounceIn,
+                    direction: Direction.horizontal,
+                    offset: 1,
+                    child: bulidTextForm("البريد الالكتروني",
+                        Icons.email_outlined, email, "email"),
+                  ),
                   SizedBox(height: 10),
-                  bulidTextForm("كلمة المرور", Icons.lock_open_outlined,
-                      password, "password"),
+                  ShowUpAnimation(
+                    delayStart: Duration(milliseconds: 1600),
+                    animationDuration: Duration(seconds: 1),
+                    curve: Curves.bounceIn,
+                    direction: Direction.horizontal,
+                    offset: 1,
+                    child: bulidTextForm("كلمة المرور",
+                        Icons.lock_open_outlined, password, "password"),
+                  ),
                   SizedBox(height: 30),
-                  FlatButton(
-                    color: Colors.grey[50],
-                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                        side: BorderSide(
-                            color: Theme.of(context).primaryColor, width: 2)),
-                    onPressed: () {
-                      signIn();
-                    },
-                    child: Text("تسجيل الدخول"),
+                  ShowUpAnimation(
+                    delayStart: Duration(seconds: 2),
+                    animationDuration: Duration(seconds: 1),
+                    curve: Curves.bounceIn,
+                    direction: Direction.horizontal,
+                    offset: -1,
+                    child: MaterialButton(
+                      elevation: 0.0,
+                      color: Colors.grey[50],
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+                          side: BorderSide(
+                              color: Theme.of(context).primaryColor, width: 2)),
+                      onPressed: () {
+                        signIn();
+                      },
+                      child: Text("تسجيل الدخول"),
+                    ),
                   ),
                   SizedBox(height: 20),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).pushNamed("forgetPassword");
-                    },
-                    child: Text("هل نسيت كلمة المرور"),
+                  ShowUpAnimation(
+                    delayStart: Duration(seconds: 2),
+                    animationDuration: Duration(seconds: 2),
+                    curve: Curves.bounceIn,
+                    direction: Direction.vertical,
+                    offset: -1,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed("signup");
+                      },
+                      child: Text("انشاء حساب جديد"),
+                    ),
                   ),
                   SizedBox(height: 20),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).pushNamed("signup");
-                    },
-                    child: Text("انشاء حساب جديد"),
+                  ShowUpAnimation(
+                    delayStart: Duration(seconds: 2),
+                    animationDuration: Duration(seconds: 2),
+                    curve: Curves.bounceIn,
+                    direction: Direction.vertical,
+                    offset: -1,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed("forgetPassword");
+                      },
+                      child: Text("هل نسيت كلمة المرور"),
+                    ),
                   ),
                 ]))
           ],

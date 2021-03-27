@@ -46,7 +46,6 @@ dependencies:
   dropdown_search: ^0.1.9
   flutter_pdfview: ^1.0.4
   image_picker: ^0.7.2+1
-  animations: ^2.0.0
   show_up_animation: ^1.0.2
 
 

@@ -222,7 +222,7 @@ class _HomeScreenState extends State<HomeScreen>
                   )),
               SizedBox(height: 10),
               Container(
-                height: 150,
+                height: 170,
                 child: PageView.builder(
                     controller: pageController,
                     itemCount: listHomeDataCategories.length,
