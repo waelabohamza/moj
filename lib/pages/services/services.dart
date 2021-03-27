@@ -1,10 +1,11 @@
+import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
+import 'package:moj/component/animatelist.dart';
 import 'package:moj/component/crud.dart';
 import 'package:moj/pages/linkapi.dart';
 import 'package:moj/pages/services/service.dart';
 
 class Services extends StatefulWidget {
-
   final categories;
   final favorite;
   final index;
@@ -43,7 +44,7 @@ class _ServicesState extends State<Services>
   @override
   Widget build(BuildContext context) {
     List categories = widget.categories;
-    var favorite = widget.favorite != null ? "yes" :  "no" ; 
+    var favorite = widget.favorite != null ? "yes" : "no";
     return Scaffold(
       appBar: AppBar(
         shape: Border.all(width: 0, color: Theme.of(context).primaryColor),
@@ -129,8 +130,11 @@ class _ServicesState extends State<Services>
                   border: InputBorder.none),
             ),
             FutureBuilder(
-                future: crud.writeData(linkServices,
-                    {"id": idcat.toString(), "search": search.toString() , "favorite" : favorite.toString() }),
+                future: crud.writeData(linkServices, {
+                  "id": idcat.toString(),
+                  "search": search.toString(),
+                  "favorite": favorite.toString()
+                }),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Container(
@@ -146,18 +150,45 @@ class _ServicesState extends State<Services>
                         child: Text("Not Services"),
                       );
                     }
-                    return ListView.separated(
-                        separatorBuilder: (context, i) {
-                          return Divider();
-                        },
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: snapshot.data.length,
-                        itemBuilder: (context, i) {
-                          return ListServices(
-                            services: snapshot.data[i],
-                          );
-                        });
+                    return LiveList.options(
+                      separatorBuilder: (context, i) {
+                        return Divider();
+                      },
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      options: options,
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (BuildContext context, int index,
+                          Animation<double> animation) {
+                        return FadeTransition(
+                          opacity: Tween<double>(
+                            begin: 0,
+                            end: 1,
+                          ).animate(animation),
+                          // And slide transition
+                          child: SlideTransition(
+                              position: Tween<Offset>(
+                                begin: Offset(0, 1),
+                                end: Offset.zero,
+                              ).animate(animation),
+                              // Paste you Widget
+                              child:
+                                  ListServices(services: snapshot.data[index])),
+                        );
+                      },
+                    );
+                    // return ListView.separated(
+                    // separatorBuilder: (context, i) {
+                    //   return Divider();
+                    // },
+                    //     shrinkWrap: true,
+                    //     physics: NeverScrollableScrollPhysics(),
+                    //     itemCount: snapshot.data.length,
+                    //     itemBuilder: (context, i) {
+                    //       return ListServices(
+                    //         services: snapshot.data[i],
+                    //       );
+                    //     });
                   }
                   return Center(child: CircularProgressIndicator());
                 })
