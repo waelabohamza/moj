@@ -23,7 +23,7 @@ class _QuestionsState extends State<Expert> {
   Icon icon6 = Icon(Icons.add);
 
   TextStyle liststyleservice = TextStyle(
-      color: Colors.grey[800], fontWeight: FontWeight.bold, fontSize: 18);
+      color: Colors.grey[800], fontWeight: FontWeight.bold, fontSize: 15);
 
   GlobalKey<ScaffoldState> scaffoldkey = new GlobalKey<ScaffoldState>();
 
@@ -164,7 +164,7 @@ class _QuestionsState extends State<Expert> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text("تواصل بطريقة اخرى"),
+                    Text("$textcontactwhatsapp"),
                     SizedBox(width: 10),
                     FaIcon(FontAwesomeIcons.whatsapp),
                   ],
