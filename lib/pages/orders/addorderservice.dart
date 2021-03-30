@@ -24,6 +24,7 @@ class AddOrdersService extends StatefulWidget {
 class _AddOrdersState extends State<AddOrdersService> {
   File file;
   File filetwo;
+  File filethree;
   Crud crud = new Crud();
   var servicename;
 
@@ -71,6 +72,16 @@ class _AddOrdersState extends State<AddOrdersService> {
 
   addImageCameratwo() async {
     filetwo = await myChooseCamera();
+    setState(() {});
+  }
+
+  addImageGallerythree() async {
+    filethree = await myChooseGallery();
+    setState(() {});
+  }
+
+  addImageCamerathree() async {
+    filethree = await myChooseCamera();
     setState(() {});
   }
 
@@ -267,8 +278,22 @@ class _AddOrdersState extends State<AddOrdersService> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
                       onPressed: () async {
-                        await addOrdersService();
+                        return showbottommenu(
+                            context, addImageCamerathree, addImageGallerythree);
                       },
+                      child: Text("اضافة مستند غير الزامي"),
+                      color: filethree == null
+                          ? Theme.of(context).primaryColor
+                          : Colors.green,
+                      textColor: Colors.white,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 60, vertical: 5),
+                    ),
+                    SizedBox(height: 20),
+                    MaterialButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
+                      onPressed: () async {},
                       child: Text("اضافة الطلب"),
                       color: Theme.of(context).primaryColor,
                       textColor: Colors.white,
