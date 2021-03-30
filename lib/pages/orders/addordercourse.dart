@@ -161,7 +161,7 @@ class _AddOrderCourseState extends State<AddOrderCourse> {
                           throw 'Could not launch $url';
                         }
                       },
-                      child: Text("تواصل واتس اب"),
+                      child: Text("$textcontactwhatsapp"),
                       color: Colors.green,
                       textColor: Colors.white,
                       padding:
