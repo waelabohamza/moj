@@ -54,9 +54,10 @@ class MyApp extends StatelessWidget {
 }
 
 class ChangeLocal with ChangeNotifier {
+
   Locale lang = sharedPrefs.getString("lang") == "en"
       ? Locale("en", "")
-      : Locale("ar", "");
+      : Locale("ar", "") ;
   changeLocal(Locale newlang) {
     if (newlang == Locale("ar", "")) {
       sharedPrefs.setString("lang", "ar");
@@ -66,4 +67,5 @@ class ChangeLocal with ChangeNotifier {
     lang = newlang;
     notifyListeners();
   }
+  
 }

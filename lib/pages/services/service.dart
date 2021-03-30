@@ -227,7 +227,7 @@ class _ServiceState extends State<Service> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text("تواصل بطريقة اخرى"),
+                    Text("$textcontactwhatsapp"),
                     SizedBox(width: 10),
                     FaIcon(FontAwesomeIcons.whatsapp),
                   ],

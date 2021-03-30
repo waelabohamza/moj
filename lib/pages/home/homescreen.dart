@@ -9,6 +9,7 @@ import 'package:moj/pages/home/component/topcardcenter.dart';
 import 'package:moj/pages/linkapi.dart';
 import 'package:moj/pages/questions/questions.dart';
 import 'package:moj/pages/services/services.dart';
+import 'package:show_up_animation/show_up_animation.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -96,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen>
     listHomeDataQuestions.clear();
     listHomeDataServicesCommon.clear();
     listHomeDataExperts.clear();
-    pageController.dispose()  ; 
+    pageController.dispose();
     super.dispose();
   }
 
@@ -109,38 +110,61 @@ class _HomeScreenState extends State<HomeScreen>
         : ListView(
             // controller: scrollController,
             children: [
-              TopCardCenter(
-                  mdw: mdw,
-                  list: listHomeDataServicesFavorite,
-                  listcat: listHomeDataCategories),
-              Container(
-                  margin: EdgeInsets.only(top: 30),
-                  padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
-                  child: Row(
-                    children: [
-                      Text(
-                        "الخدمات الشائعة",
-                        style: TextStyle(fontSize: 16, color: Colors.black),
-                      ),
-                      Spacer(),
-                      InkWell(
-                          child: Text(
-                            "رؤية الجميع",
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Theme.of(context).primaryColor),
-                          ),
-                          onTap: () {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) {
-                              return Services(
-                                  categories: listHomeDataCategories);
-                            }));
-                          })
-                    ],
-                  )),
-              ListHorzintal(
-                  mdw: mdw, list: listHomeDataServicesCommon, type: "service"),
+              ShowUpAnimation(
+                delayStart: Duration(microseconds: 0),
+                animationDuration: Duration(seconds: 1),
+                curve: Curves.bounceIn,
+                direction: Direction.vertical,
+                offset: -1,
+                child: TopCardCenter(
+                    mdw: mdw,
+                    list: listHomeDataServicesFavorite,
+                    listcat: listHomeDataCategories),
+              ),
+              ShowUpAnimation(
+                delayStart: Duration(microseconds: 1),
+                animationDuration: Duration(seconds: 1),
+                curve: Curves.bounceIn,
+                direction: Direction.horizontal,
+                offset: -1,
+                child: Container(
+                    margin: EdgeInsets.only(top: 30),
+                    padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
+                    child: Row(
+                      children: [
+                        Text(
+                          "الخدمات الشائعة",
+                          style: TextStyle(fontSize: 16, color: Colors.black),
+                        ),
+                        Spacer(),
+                        InkWell(
+                            child: Text(
+                              "رؤية الجميع",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Theme.of(context).primaryColor),
+                            ),
+                            onTap: () {
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return Services(
+                                    categories: listHomeDataCategories);
+                              }));
+                            })
+                      ],
+                    )),
+              ),
+              ShowUpAnimation(
+                delayStart: Duration(microseconds: 1),
+                animationDuration: Duration(seconds: 1),
+                curve: Curves.bounceIn,
+                direction: Direction.vertical,
+                offset: -1,
+                child: ListHorzintal(
+                    mdw: mdw,
+                    list: listHomeDataServicesCommon,
+                    type: "service"),
+              ),
               Container(
                   margin: EdgeInsets.only(top: 10),
                   padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
