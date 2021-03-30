@@ -235,8 +235,11 @@ class _HomeScreenState extends State<HomeScreen>
                           })
                     ],
                   )),
+
               ListExperts(mdw: mdw, list: listHomeDataExperts),
+
               SizedBox(height: 10),
+
               Container(
                   margin: EdgeInsets.only(top: 20),
                   padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
@@ -244,7 +247,9 @@ class _HomeScreenState extends State<HomeScreen>
                     "القضايا",
                     style: TextStyle(fontSize: 16, color: Colors.black),
                   )),
+
               SizedBox(height: 10),
+              
               Container(
                 height: 170,
                 child: PageView.builder(
@@ -304,7 +309,7 @@ class _HomeScreenState extends State<HomeScreen>
                         textColor: Colors.white,
                         onPressed: () {},
                         child: Text(
-                          "ابدا الخدمة",
+                          "عرض",
                           style: TextStyle(fontSize: 12),
                         ),
                       ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:moj/component/animatelist.dart';
 import 'package:moj/component/crud.dart';
 import 'package:moj/pages/linkapi.dart';
+import 'package:moj/pages/orders/addorderservice.dart';
 import 'package:moj/pages/services/service.dart';
 
 class Services extends StatefulWidget {
@@ -226,7 +227,13 @@ class ListServices extends StatelessWidget {
           ),
           SizedBox(width: 20),
           InkWell(
-            onTap: () {},
+            onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return AddOrdersService(
+                    servicesid: services['services_id'],
+                    typeprice: services['services_typeprice']);
+              }));
+            },
             child: Column(children: [
               Icon(Icons.download_done_sharp, size: 25, color: Colors.green),
               Text("ابدا ", style: TextStyle(color: Colors.green, fontSize: 13))

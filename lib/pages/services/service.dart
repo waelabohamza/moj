@@ -245,7 +245,7 @@ class _ServiceState extends State<Service> {
                 textColor: Colors.white,
                 onPressed: () {
                   Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
+                      .push(MaterialPageRoute(builder:(context){
                     return AddOrdersService(
                         servicesid: list['services_id'],
                         typeprice: list['services_typeprice']);
