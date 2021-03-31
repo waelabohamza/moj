@@ -114,13 +114,14 @@ class _AddOrdersState extends State<AddOrdersService> {
         "userid": sharedPrefs.get("id")
       };
       var responsebody;
-      if (filetwo == null && filethree == null ) {
+      if (filetwo == null && filethree == null) {
         showLoading(context);
         responsebody =
             await addRequestWithImageOne(linkAddOrdersService, data, file);
       } else if (filetwo != null && filethree != null) {
-        responsebody =
-            await addRequestAndImageThree(linkAddOrdersService, data, file , filetwo , filethree);
+        showLoading(context);
+        responsebody = await addRequestAndImageThree(
+            linkAddOrdersService, data, file, filetwo, filethree);
       } else {
         showLoading(context);
         responsebody = await addRequestAndImageTwo(
@@ -132,7 +133,6 @@ class _AddOrdersState extends State<AddOrdersService> {
         if (Navigator.of(context).canPop()) {
           Navigator.of(context).pop();
         }
-
         showAlertOneChoose(context, "error", "خطا", "الرجاء المحاولة مره اخرى");
       }
     }
