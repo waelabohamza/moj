@@ -151,6 +151,7 @@ class _AddOrdersState extends State<AddOrdersService> {
     aganist.dispose();
     super.dispose();
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -293,7 +294,9 @@ class _AddOrdersState extends State<AddOrdersService> {
                     MaterialButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
-                      onPressed: () async {},
+                      onPressed: () async {
+                        await   addOrdersService()  ; 
+                      },
                       child: Text("اضافة الطلب"),
                       color: Theme.of(context).primaryColor,
                       textColor: Colors.white,
