@@ -172,7 +172,7 @@ class _ServiceState extends State<Service> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(15),
-                    child: Text("${list['services_desc']}"
+                    child: Text("${list['services_document']}"
                         // "كن لا بد أن أوضح لك أن كل هذه الأفكار المغلوطة حول استنكار  النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب الشعور بالسعادة، ",
                         ),
                   )
