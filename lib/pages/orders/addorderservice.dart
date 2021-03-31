@@ -114,10 +114,13 @@ class _AddOrdersState extends State<AddOrdersService> {
         "userid": sharedPrefs.get("id")
       };
       var responsebody;
-      if (filetwo == null) {
+      if (filetwo == null && filethree == null ) {
         showLoading(context);
         responsebody =
             await addRequestWithImageOne(linkAddOrdersService, data, file);
+      } else if (filetwo != null && filethree != null) {
+        responsebody =
+            await addRequestAndImageThree(linkAddOrdersService, data, file , filetwo , filethree);
       } else {
         showLoading(context);
         responsebody = await addRequestAndImageTwo(
@@ -151,7 +154,6 @@ class _AddOrdersState extends State<AddOrdersService> {
     aganist.dispose();
     super.dispose();
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -295,7 +297,7 @@ class _AddOrdersState extends State<AddOrdersService> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
                       onPressed: () async {
-                        await   addOrdersService()  ; 
+                        await addOrdersService();
                       },
                       child: Text("اضافة الطلب"),
                       color: Theme.of(context).primaryColor,
