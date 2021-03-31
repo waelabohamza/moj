@@ -90,18 +90,14 @@ class _AddOrdersState extends State<AddOrdersService> {
     email.text = sharedPrefs.getString("email");
     phone.text = sharedPrefs.getString("phone");
   }
-
   addOrdersService() async {
     if (file == null)
       return showAlertOneChoose(
           context, "error", "خطأ", "الرجاءادخال صورة الهوية");
-
     if (int.parse(widget.typeprice.toString()) == 1 && fees == null)
       return showAlertOneChoose(
           context, "error", "خطأ", "الرجاء اختيار السعر اولا");
-
     var formdata = formstate.currentState;
-
     if (formdata.validate()) {
       var data = {
         "username": username.text.toString(),
