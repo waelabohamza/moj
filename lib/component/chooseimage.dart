@@ -3,19 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 myChooseGallery() async {
-  final myfile = await ImagePicker().getImage(source: ImageSource.gallery);
+  final myfile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      imageQuality: 70,
+      maxHeight: 600.0,
+      maxWidth: 600.0);
   // For Show Image Direct in Page Current witout Reload Page
   if (myfile != null) {
     return File(myfile.path);
   }
   return null;
- 
 }
 
 myChooseCamera() async {
-  final myfile = await ImagePicker().getImage(source: ImageSource.camera);
-  print("====================== file ===========================================================") ; 
-  print(myfile) ; 
+  final myfile = await ImagePicker().getImage(
+      source: ImageSource.camera,
+      imageQuality: 70,
+      maxHeight: 600.0,
+      maxWidth: 600.0);
+  print(
+      "====================== file ===========================================================");
+  print(myfile);
   // For Show Image Direct in Page Current witout Reload Page
   if (myfile != null) {
     return File(myfile.path);

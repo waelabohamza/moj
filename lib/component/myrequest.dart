@@ -82,16 +82,39 @@ Future addRequestAndImageTwo(
 }
 
  
+ Future addRequestAndImageThree(
+    String url, Map data, File image, File imagetwo , File imagethree) async {
 
-Future editRequestWithoutImage(String url, Map data) async {
+  var stream = new http.ByteStream(image.openRead());
+  stream.cast();
+  var streamtwo = new http.ByteStream(imagetwo.openRead());
+  streamtwo.cast();
+  var streamthree = new http.ByteStream(imagetwo.openRead());
+  streamthree.cast();
+
+  var length = await image.length();
+  var lengthtwo = await imagetwo.length();
+  var lengththree = await imagethree.length();
+
   var uri = Uri.parse(url);
+
   var request = new http.MultipartRequest("POST", uri);
   request.headers.addAll(myheaders);
 
+  var multipartFile = new http.MultipartFile("file", stream, length,
+      filename: basename(image.path));
+  var multipartFileTwo = new http.MultipartFile("filetwo", streamtwo, lengthtwo,
+      filename: basename(imagetwo.path));
+    var multipartFileThree = new http.MultipartFile("filethree", streamthree, lengththree,
+      filename: basename(imagethree.path));
   // add Data to request
   data.forEach((key, value) {
     request.fields[key] = value;
   });
+  // add Data to request
+  request.files.add(multipartFile);
+  request.files.add(multipartFileTwo);
+  request.files.add(multipartFileThree);
   // Send Request
   var myrequest = await request.send();
   // For get Response Body
@@ -104,3 +127,7 @@ Future editRequestWithoutImage(String url, Map data) async {
     return jsonDecode(response.body);
   }
 }
+
+ 
+
+ 
