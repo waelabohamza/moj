@@ -121,39 +121,32 @@ class _HomeScreenState extends State<HomeScreen>
                     list: listHomeDataServicesFavorite,
                     listcat: listHomeDataCategories),
               ),
-              ShowUpAnimation(
-                delayStart: Duration(microseconds: 1),
-                animationDuration: Duration(seconds: 1),
-                curve: Curves.bounceIn,
-                direction: Direction.horizontal,
-                offset: -1,
-                child: Container(
-                    margin: EdgeInsets.only(top: 30),
-                    padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
-                    child: Row(
-                      children: [
-                        Text(
-                          "الخدمات الشائعة",
-                          style: TextStyle(fontSize: 16, color: Colors.black),
-                        ),
-                        Spacer(),
-                        InkWell(
-                            child: Text(
-                              "رؤية الجميع",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Theme.of(context).primaryColor),
-                            ),
-                            onTap: () {
-                              Navigator.of(context)
-                                  .push(MaterialPageRoute(builder: (context) {
-                                return Services(
-                                    categories: listHomeDataCategories);
-                              }));
-                            })
-                      ],
-                    )),
-              ),
+              Container(
+                  margin: EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
+                  child: Row(
+                    children: [
+                      Text(
+                        "الخدمات الشائعة",
+                        style: TextStyle(fontSize: 16, color: Colors.black),
+                      ),
+                      Spacer(),
+                      InkWell(
+                          child: Text(
+                            "رؤية الجميع",
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Theme.of(context).primaryColor),
+                          ),
+                          onTap: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return Services(
+                                  categories: listHomeDataCategories);
+                            }));
+                          })
+                    ],
+                  )),
               ShowUpAnimation(
                 delayStart: Duration(microseconds: 1),
                 animationDuration: Duration(seconds: 1),
@@ -235,11 +228,8 @@ class _HomeScreenState extends State<HomeScreen>
                           })
                     ],
                   )),
-
               ListExperts(mdw: mdw, list: listHomeDataExperts),
-
               SizedBox(height: 10),
-
               Container(
                   margin: EdgeInsets.only(top: 20),
                   padding: EdgeInsets.only(right: mdw / 14, left: mdw / 14),
@@ -247,9 +237,7 @@ class _HomeScreenState extends State<HomeScreen>
                     "القضايا",
                     style: TextStyle(fontSize: 16, color: Colors.black),
                   )),
-
               SizedBox(height: 10),
-              
               Container(
                 height: 170,
                 child: PageView.builder(

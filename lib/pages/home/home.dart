@@ -6,6 +6,7 @@ import 'package:moj/main.dart';
 import 'package:moj/pages/home/homescreen.dart';
 import 'package:moj/pages/home/themecolors.dart';
 import 'package:moj/pages/orders/myorders.dart';
+import 'package:show_up_animation/show_up_animation.dart';
 
 class HomePage extends StatefulWidget {
   final initialpage;
@@ -70,13 +71,19 @@ class _HomePageState extends State<HomePage> {
               }),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).pushNamed("addorders");
-        },
-        child: Icon(Icons.add),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
+      floatingActionButton: ShowUpAnimation(
+          delayStart: Duration(microseconds: 500),
+          animationDuration: Duration(seconds: 3),
+          curve: Curves.bounceIn,
+          direction: Direction.vertical,
+          offset: -20,
+          child: FloatingActionButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed("addorders");
+            },
+            child: Icon(Icons.add),
+            backgroundColor: Theme.of(context).primaryColor,
+          )),
       floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
       bottomNavigationBar: BubbleBottomBar(
         hasNotch: true,
