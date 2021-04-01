@@ -19,6 +19,7 @@ class AddOrders extends StatefulWidget {
 }
 
 class _AddOrdersState extends State<AddOrders> {
+  File filethree;
   File file;
   File filetwo;
 
@@ -100,6 +101,16 @@ class _AddOrdersState extends State<AddOrders> {
     setState(() {});
   }
 
+  addImageGallerythree() async {
+    filethree = await myChooseGallery();
+    setState(() {});
+  }
+
+  addImageCamerathree() async {
+    filethree = await myChooseCamera();
+    setState(() {});
+  }
+
   addOrdersService() async {
     if (file == null)
       return showAlertOneChoose(
@@ -123,10 +134,14 @@ class _AddOrdersState extends State<AddOrders> {
         "userid": sharedPrefs.get("id")
       };
       var responsebody;
-      if (filetwo == null) {
+      if (filetwo == null && filethree == null) {
         showLoading(context);
         responsebody =
             await addRequestWithImageOne(linkAddOrdersService, data, file);
+      } else if (filetwo != null && filethree != null) {
+        showLoading(context);
+        responsebody = await addRequestAndImageThree(
+            linkAddOrdersService, data, file, filetwo, filethree);
       } else {
         showLoading(context);
         responsebody = await addRequestAndImageTwo(
@@ -279,6 +294,22 @@ class _AddOrdersState extends State<AddOrders> {
                                   },
                                   child: Text("صورة الهوية")),
                             ],
+                          ),
+                          SizedBox(height: 20),
+                          MaterialButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
+                            onPressed: () async {
+                              return showbottommenu(context,
+                                  addImageCamerathree, addImageGallerythree);
+                            },
+                            child: Text("اضافة مستند غير الزامي"),
+                            color: filethree == null
+                                ? Theme.of(context).primaryColor
+                                : Colors.green,
+                            textColor: Colors.white,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 60, vertical: 5),
                           ),
                           SizedBox(height: 20),
                           MaterialButton(
