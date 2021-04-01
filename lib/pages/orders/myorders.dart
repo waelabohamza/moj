@@ -28,7 +28,7 @@ class _MyOrdersState extends State<MyOrders> {
       // print("2222222") ;
     }
     if (responsebody['ordersservice'].toString() != "0") {
-      orderscourses.addAll(responsebody['ordersservice']);
+      ordersservices.addAll(responsebody['ordersservice']);
     }
 
     setState(() {});
@@ -67,21 +67,32 @@ class _MyOrdersState extends State<MyOrders> {
                                     orderscourses[index]['orderscourse_id'],
                                     orderscourses[index]['courses_name'],
                                     orderscourses[index]['orderscourse_status'],
-                                    "courses"));
+                                    "courses")
+                                    );
                           },
                         )
                   : (ordersservices.isEmpty || ordersservices == null)
                       ? Center(child: Text("Not Orders Services"))
-                      : ListView.builder(
+                      : LiveList.options(
                           shrinkWrap: true,
+                          options: options,
                           itemCount: ordersservices.length,
-                          itemBuilder: (context, i) {
-                            return buildOrders(
-                                ordersservices[i]['ordersservice_id'],
-                                ordersservices[i]['services_name'],
-                                ordersservices[i]['ordersservice_status'],
-                                "services");
-                          })),
+                          itemBuilder: (BuildContext context, int index,
+                              Animation<double> animation) {
+                            return SlideTransition(
+                                position: Tween<Offset>(
+                                  begin: Offset(1, 0),
+                                  end: Offset.zero,
+                                ).animate(animation),
+                                // Paste you Widget
+                                child: buildOrders(
+                                    ordersservices[index]['ordersservice_id'],
+                                    ordersservices[index]['services_name'],
+                                    ordersservices[index]
+                                        ['ordersservice_status'],
+                                    "services"));
+                          },
+                        )),
           Row(
             children: [
               Expanded(
