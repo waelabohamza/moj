@@ -181,7 +181,10 @@ class _LoginState extends State<Login> {
       controller: control,
       validator: (val) {
         if (type == "email") {
-          return validInput(val, 2, 60, "يكون البريد الالكتروني");
+          return validInput(val, minEmail, maxEmail, "يكون البريد الالكتروني");
+        }
+        if (type == "password") {
+          return validInput(val, minPassword, maxPassword, "يكون كلمة المرور");
         }
         return null;
       },
